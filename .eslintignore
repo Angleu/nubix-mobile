@@ -1,0 +1,4 @@
+node_modules/
+.expo/
+app.json
+babel.config.js
