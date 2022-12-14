@@ -1,5 +1,6 @@
 export const colorPallet = {
   primary: {
+    lighter: '#8A978C',
     light: '#E6F6F4',
     normal: '#00A991',
     dark: '#007F6D',
