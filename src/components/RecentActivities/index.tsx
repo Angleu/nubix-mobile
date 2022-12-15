@@ -1,12 +1,12 @@
 import { FlatList, HStack, Text, VStack } from 'native-base';
 import React from 'react';
 
-import { activities } from '../../utils';
+import { activitiesMock } from '../../utils';
 import ActivityCard from './_ActivityCard';
 
 const RecentActivities = () => {
   return (
-    <VStack mt={6}>
+    <VStack mt={6} flex={1}>
       <HStack justifyContent="space-between">
         <Text color="#373737" fontWeight="semibold">
           Recent Activity
@@ -17,7 +17,7 @@ const RecentActivities = () => {
       </HStack>
 
       <FlatList
-        data={activities}
+        data={activitiesMock}
         mt={3}
         renderItem={({ item }) => <ActivityCard item={item} />}
       />

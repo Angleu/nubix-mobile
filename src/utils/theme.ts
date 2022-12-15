@@ -1,19 +1,20 @@
 import { extendTheme } from 'native-base';
 
 export const colorPallet = {
-  primary: {
+  _primary: {
     50: '#8A978C',
     100: '#E6F6F4',
     200: '#00A991',
     300: '#007F6D',
     400: '#003B33',
+    500: '#3F5857',
   },
-  secondary: {
+  _secondary: {
     50: '#B2BBC6',
     100: '#546881',
     200: '#1D242D',
   },
-  neutral: {
+  _neutral: {
     50: '#fff',
     100: '#EBEBEB',
     200: '#373737',
@@ -24,9 +25,7 @@ export const colorPallet = {
 };
 
 const theme = extendTheme({
-  colors: {
-    brand: colorPallet,
-  },
+  colors: colorPallet,
 });
 
 export type ThemeType = typeof theme;

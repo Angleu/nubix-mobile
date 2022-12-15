@@ -1,102 +1,88 @@
 import {
   Avatar,
   Box,
-  Container,
+  Center,
   FlatList,
-  Heading,
   HStack,
   Input,
   Text,
   VStack,
 } from 'native-base';
-import { ArrowCircleLeft, PaperPlaneTilt } from 'phosphor-react-native';
+import { MagnifyingGlass } from 'phosphor-react-native';
 import React from 'react';
 
-const activities = [
-  {
-    name: 'Keisha Levronka',
-    number: '923688612',
-    profilePic: 'https://randomuser.me/api/portraits/women/39.jpg',
-  },
-  {
-    name: 'Ember Domanic',
-    number: '923688612',
-    profilePic: 'https://randomuser.me/api/portraits/women/40.jpg',
-  },
-  {
-    name: 'Angleu Silva',
-    number: '923688612',
-    profilePic: 'https://randomuser.me/api/portraits/women/40.jpg',
-  },
-];
+import Container from '../components/layout/Container';
+import Header from '../components/layout/Header';
+import { contactsMock } from '../utils';
+import { colorPallet } from '../utils/theme';
 
 export default function Transfer() {
   return (
     <Container>
-      <HStack pt={5} justifyContent="space-between" alignItems="center">
-        <ArrowCircleLeft size={32} />
-        <Heading fontSize="xl" color="neutral.normal" fontWeight="bold">
-          Transfer
-        </Heading>
-        {/* <QrCode color={colorPallet.primary.dark} size={42} /> */}
-      </HStack>
-      <VStack my={4} space={4}>
-        <VStack space={3} alignItems="center">
-          <Text color="primary.normal" fontSize="2xl" fontWeight="light">
-            Total Balance
-          </Text>
-          <Text color="primary.normal" fontWeight="bold" fontSize="lg">
-            $ 188,290.90
-          </Text>
-        </VStack>
+      <Header heading="Transfer" />
+
+      <Center my={8}>
+        <Text color="_primary.500" fontSize="2xl" mb={2}>
+          Total Balance
+        </Text>
+        <Text
+          color="_primary.500"
+          fontWeight="bold"
+          fontSize="lg"
+          style={{
+            textShadowColor: 'rgba(0, 0, 0, 0.25)',
+            textShadowOffset: { width: 0, height: 4 },
+            textShadowRadius: 10,
+          }}
+        >
+          $ 188,290.90
+        </Text>
+      </Center>
+
+      <Center>
+        <Text mb={6} fontSize="lg" fontWeight="bold" color="_neutral.200">
+          Contacts
+        </Text>
         <Input
           py="3"
+          borderRadius="xl"
+          borderColor="_primary.500"
           placeholder="Search"
-          w="100%"
-          // InputLeftElement={
-          //   <MagnifyingGlass size={24} color={colorPallet.secondary.light} />
-          // }
+          InputLeftElement={
+            <Box ml={3}>
+              <MagnifyingGlass size={24} color={colorPallet._primary[500]} />
+            </Box>
+          }
         />
-        <VStack mt={6}>
-          <HStack justifyContent="space-between">
-            <Text color="#373737" fontWeight="semibold">
-              Contacts
-            </Text>
-            <Text color="#3F5857" fontWeight="bold">
-              See All
-            </Text>
-          </HStack>
-          <FlatList
-            data={activities}
-            mt={3}
-            renderItem={({ item }) => (
-              <HStack justifyContent="space-between" mb={4} alignItems="center">
-                <HStack space={3} alignItems="center">
-                  {item.profilePic ? (
-                    <Avatar
-                      source={{ uri: item.profilePic }}
-                      bg="white"
-                      p={1}
-                      mx={1}
-                      shadow={4}
-                    />
-                  ) : (
-                    <Box p={1} shadow={4} mx={2}>
-                      <PaperPlaneTilt color="#3F5857" size={32} />
-                    </Box>
-                  )}
-                  <VStack>
-                    <Text fontWeight="bold" color="#373737">
-                      {item.name}
-                    </Text>
-                    <Text color="#373737">{item.number}</Text>
-                  </VStack>
-                </HStack>
-              </HStack>
-            )}
-          />
-        </VStack>
-      </VStack>
+      </Center>
+
+      <FlatList
+        mt={6}
+        data={contactsMock}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <Box
+            bg="_neutral.50"
+            mb="6"
+            px="8"
+            py="4"
+            rounded="3xl"
+            style={{
+              shadowColor: '#00000009',
+              shadowOffset: { width: 0, height: 4 },
+              shadowRadius: 10,
+            }}
+          >
+            <HStack space={4} alignItems="center">
+              <Avatar source={{ uri: item.profilePic }} bg="_secondary.50" />
+              <VStack>
+                <Text>{item.name}</Text>
+                <Text>{item.phoneNumber}</Text>
+              </VStack>
+            </HStack>
+          </Box>
+        )}
+      />
     </Container>
   );
 }
