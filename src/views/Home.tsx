@@ -8,7 +8,6 @@ import HomeLink from '../components/HomeLink';
 import Container from '../components/layout/Container';
 import HomeHeader from '../components/layout/HomeHeader';
 import RecentActivities from '../components/RecentActivities';
-import { RoutesEnum } from '../constants/routes';
 
 export default function Home() {
   return (
@@ -20,22 +19,22 @@ export default function Home() {
           <HomeLink
             icon={<Swap size={28} color="#3F5857" />}
             text="Transfer"
-            to={RoutesEnum.Transfer}
+            to="transfer"
           />
           <HomeLink
             icon={<Tray size={28} color="#3F5857" />}
             text="Deposit"
-            to={RoutesEnum.Transfer}
+            to="deposit"
           />
           <HomeLink
             icon={<CreditCard size={28} color="#3F5857" />}
             text="Pay"
-            to={RoutesEnum.Transfer}
+            to="pay"
           />
           <HomeLink
             icon={<Swap size={28} color="#3F5857" />}
             text="Receive"
-            to={RoutesEnum.Transfer}
+            to="receive"
           />
         </HStack>
         <RecentActivities />

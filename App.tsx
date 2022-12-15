@@ -4,7 +4,7 @@ import { NativeBaseProvider } from 'native-base';
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { RootStackParamListType, RoutesEnum } from './src/constants/routes';
+import { RootStackParamListType } from './src/constants/routes';
 import theme from './src/utils/theme';
 import { Home, Transfer } from './src/views';
 
@@ -16,11 +16,11 @@ export default function App() {
       <SafeAreaProvider>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName={RoutesEnum.Home}
+            initialRouteName="home"
             screenOptions={{ headerShown: false }}
           >
-            <Stack.Screen name={RoutesEnum.Home} component={Home} />
-            <Stack.Screen name={RoutesEnum.Transfer} component={Transfer} />
+            <Stack.Screen name="home" component={Home} />
+            <Stack.Screen name="transfer" component={Transfer} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaProvider>
