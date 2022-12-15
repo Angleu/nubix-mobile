@@ -19,7 +19,7 @@ import {
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import Container from '../../components/layout/Container';
+import Container from '../components/layout/Container';
 
 const activities = [
   {

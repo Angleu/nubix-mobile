@@ -1,6 +1,7 @@
 import {
   Avatar,
   Box,
+  Container,
   FlatList,
   Heading,
   HStack,
@@ -8,16 +9,8 @@ import {
   Text,
   VStack,
 } from 'native-base';
-import {
-  ArrowCircleLeft,
-  MagnifyingGlass,
-  PaperPlaneTilt,
-  QrCode,
-} from 'phosphor-react-native';
+import { ArrowCircleLeft, PaperPlaneTilt } from 'phosphor-react-native';
 import React from 'react';
-
-import Container from '../../../components/layout/Container';
-import { colorPallet } from '../../../utils/theme';
 
 const activities = [
   {
@@ -45,7 +38,7 @@ export default function Transfer() {
         <Heading fontSize="xl" color="neutral.normal" fontWeight="bold">
           Transfer
         </Heading>
-        <QrCode color={colorPallet.primary.dark} size={42} />
+        {/* <QrCode color={colorPallet.primary.dark} size={42} /> */}
       </HStack>
       <VStack my={4} space={4}>
         <VStack space={3} alignItems="center">
@@ -60,9 +53,9 @@ export default function Transfer() {
           py="3"
           placeholder="Search"
           w="100%"
-          InputLeftElement={
-            <MagnifyingGlass size={24} color={colorPallet.secondary.light} />
-          }
+          // InputLeftElement={
+          //   <MagnifyingGlass size={24} color={colorPallet.secondary.light} />
+          // }
         />
         <VStack mt={6}>
           <HStack justifyContent="space-between">

@@ -1,17 +1,16 @@
-import Home from '../views/Home';
-import Transfer from '../views/Home/Transfer';
+import { Home, Transfer } from '../views';
 
 export enum RoutesEnum {
   Home = 'home',
   Transfer = 'transfer',
 }
 
-export const Views: Record<RoutesEnum, () => JSX.Element> = {
+export const views: Record<RoutesEnum, () => JSX.Element> = {
   home: Home,
   transfer: Transfer,
 };
 
-export type RootStackParamList = {
+export type RootStackParamListType = {
   home: undefined;
   transfer: undefined;
 };

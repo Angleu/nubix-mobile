@@ -4,10 +4,14 @@ import { NativeBaseProvider } from 'native-base';
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { RootStackParamList, RoutesEnum, Views } from './src/constants/routes';
+import {
+  RootStackParamListType,
+  RoutesEnum,
+  views,
+} from './src/constants/routes';
 import theme from './src/utils/theme';
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator<RootStackParamListType>();
 
 export default function App() {
   return (
@@ -20,11 +24,11 @@ export default function App() {
           >
             <Stack.Screen
               name={RoutesEnum.Home}
-              component={Views[RoutesEnum.Home]}
+              component={views[RoutesEnum.Home]}
             />
             <Stack.Screen
               name={RoutesEnum.Transfer}
-              component={Views[RoutesEnum.Transfer]}
+              component={views[RoutesEnum.Transfer]}
             />
           </Stack.Navigator>
         </NavigationContainer>
