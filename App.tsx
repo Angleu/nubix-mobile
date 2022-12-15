@@ -4,12 +4,9 @@ import { NativeBaseProvider } from 'native-base';
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import {
-  RootStackParamListType,
-  RoutesEnum,
-  views,
-} from './src/constants/routes';
+import { RootStackParamListType, RoutesEnum } from './src/constants/routes';
 import theme from './src/utils/theme';
+import { Home, Transfer } from './src/views';
 
 const Stack = createNativeStackNavigator<RootStackParamListType>();
 
@@ -22,14 +19,8 @@ export default function App() {
             initialRouteName={RoutesEnum.Home}
             screenOptions={{ headerShown: false }}
           >
-            <Stack.Screen
-              name={RoutesEnum.Home}
-              component={views[RoutesEnum.Home]}
-            />
-            <Stack.Screen
-              name={RoutesEnum.Transfer}
-              component={views[RoutesEnum.Transfer]}
-            />
+            <Stack.Screen name={RoutesEnum.Home} component={Home} />
+            <Stack.Screen name={RoutesEnum.Transfer} component={Transfer} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaProvider>
