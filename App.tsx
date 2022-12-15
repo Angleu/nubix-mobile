@@ -1,13 +1,12 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { extendTheme, NativeBaseProvider } from 'native-base';
+import { NativeBaseProvider } from 'native-base';
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { RootStackParamList, RoutesEnum, Views } from './src/constants/routes';
-import { colorPallet } from './src/utils/theme';
+import theme from './src/utils/theme';
 
-const theme = extendTheme({ colors: colorPallet });
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
