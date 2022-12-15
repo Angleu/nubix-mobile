@@ -3,7 +3,8 @@ import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { colorPallet } from './src/utils/theme';
-import Home from './src/views/Home';
+// import Home from './src/views/Home';
+import Transfer from './src/views/Home/Transfer';
 
 const theme = extendTheme({ colors: colorPallet });
 
@@ -11,7 +12,7 @@ export default function App() {
   return (
     <NativeBaseProvider theme={theme}>
       <SafeAreaView>
-        <Home />
+        <Transfer />
       </SafeAreaView>
     </NativeBaseProvider>
   );

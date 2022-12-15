@@ -39,6 +39,12 @@ const activities = [
     ammount: '+253.9 USD',
     profilePic: undefined,
   },
+  {
+    name: 'Angleu Silva',
+    date: '21 Sep 2021',
+    ammount: '-100.9 USD',
+    profilePic: 'https://randomuser.me/api/portraits/women/40.jpg',
+  },
 ];
 
 export default function Home() {

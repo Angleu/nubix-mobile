@@ -6,7 +6,7 @@ type Props = {
 };
 
 const Container: FC<Props> = ({ children }) => {
-  return <VStack px={10}>{children}</VStack>;
+  return <VStack px={7}>{children}</VStack>;
 };
 
 export default Container;
