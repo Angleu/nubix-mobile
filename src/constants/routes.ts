@@ -6,7 +6,12 @@ export enum RoutesEnum {
   Transfer = 'transfer',
 }
 
-export const Views = {
+export const Views: Record<RoutesEnum, () => JSX.Element> = {
   home: Home,
   transfer: Transfer,
+};
+
+export type RootStackParamList = {
+  home: undefined;
+  transfer: undefined;
 };

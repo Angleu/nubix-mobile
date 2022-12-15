@@ -4,11 +4,11 @@ import { extendTheme, NativeBaseProvider } from 'native-base';
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { RoutesEnum, Views } from './src/constants/routes';
+import { RootStackParamList, RoutesEnum, Views } from './src/constants/routes';
 import { colorPallet } from './src/utils/theme';
 
 const theme = extendTheme({ colors: colorPallet });
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
