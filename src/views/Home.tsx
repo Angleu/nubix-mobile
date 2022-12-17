@@ -1,5 +1,4 @@
 import { HStack } from 'native-base';
-import { CreditCard, Swap, Tray } from 'phosphor-react-native';
 import React from 'react';
 
 import Card from '../components/Card';
@@ -13,27 +12,11 @@ export default function Home() {
     <Container>
       <HomeHeader />
       <Card />
-      <HStack mt="12" justifyContent="space-between">
-        <HomeLink
-          icon={<Swap size={28} color="#3F5857" />}
-          text="Transfer"
-          to="transfer"
-        />
-        <HomeLink
-          icon={<Tray size={28} color="#3F5857" />}
-          text="Deposit"
-          to="deposit"
-        />
-        <HomeLink
-          icon={<CreditCard size={28} color="#3F5857" />}
-          text="Pay"
-          to="pay"
-        />
-        <HomeLink
-          icon={<Swap size={28} color="#3F5857" />}
-          text="Receive"
-          to="receive"
-        />
+      <HStack mt="12" justifyContent="center" space="12">
+        <HomeLink iconName="bank-transfer-out" text="Transfer" to="transfer" />
+        <HomeLink iconName="inbox" text="Deposit" to="deposit" />
+        <HomeLink iconName="credit-card-outline" text="Pay" to="pay" />
+        <HomeLink iconName="bank-transfer-in" text="Receive" to="receive" />
       </HStack>
       <RecentActivities />
     </Container>

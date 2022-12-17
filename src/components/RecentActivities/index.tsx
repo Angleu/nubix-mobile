@@ -1,25 +1,38 @@
-import { FlatList, HStack, Text, VStack } from 'native-base';
+import { Button, FlatList, HStack, Text, VStack } from 'native-base';
 import React from 'react';
 
 import { activitiesMock } from '../../utils';
-import ActivityCard from './_ActivityCard';
+import ActivityItem from './_ActivityItem';
 
 const RecentActivities = () => {
   return (
-    <VStack mt={6} flex={1}>
-      <HStack justifyContent="space-between">
-        <Text color="#373737" fontWeight="semibold">
+    <VStack mt={12} flex={1}>
+      <HStack justifyContent="space-between" mb={0}>
+        <Text
+          fontFamily="body"
+          fontWeight="bold"
+          fontSize="lg"
+          color="_neutral.300"
+        >
           Recent Activity
         </Text>
-        <Text color="#3F5857" fontWeight="bold">
+        <Button
+          variant="link"
+          p="0"
+          _text={{
+            fontFamily: 'body',
+            fontWeight: 'bold',
+            fontSize: 'lg',
+            color: '_primary.500',
+          }}
+        >
           See All
-        </Text>
+        </Button>
       </HStack>
-
       <FlatList
         data={activitiesMock}
-        mt={3}
-        renderItem={({ item }) => <ActivityCard item={item} />}
+        mt={8}
+        renderItem={({ item }) => <ActivityItem item={item} />}
       />
     </VStack>
   );
