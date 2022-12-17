@@ -1,4 +1,5 @@
 import { MaterialIcons } from '@expo/vector-icons';
+import { Link } from '@react-navigation/native';
 import {
   Avatar,
   Box,
@@ -48,32 +49,34 @@ const ContactsSearch = () => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <Box bg="_neutral.50" shadow={2} mb="6" mx={1} p={2} rounded="3xl">
-            <HStack space={6} alignItems="center">
-              <Avatar
-                source={{ uri: item.profilePic }}
-                bg="_secondary.50"
-                size="lg"
-              />
-              <VStack>
-                <Text
-                  fontFamily="body"
-                  fontWeight="bold"
-                  fontSize="lg"
-                  color="_neutral.300"
-                >
-                  {item.name}
-                </Text>
-                <Text
-                  fontFamily="body"
-                  fontWeight="normal"
-                  fontSize="md"
-                  color="_neutral.300"
-                  opacity={70}
-                >
-                  {item.phoneNumber}
-                </Text>
-              </VStack>
-            </HStack>
+            <Link to={{ screen: 'transferValue' }}>
+              <HStack space={6} alignItems="center">
+                <Avatar
+                  source={{ uri: item.profilePic }}
+                  bg="_secondary.50"
+                  size="lg"
+                />
+                <VStack>
+                  <Text
+                    fontFamily="body"
+                    fontWeight="bold"
+                    fontSize="lg"
+                    color="_neutral.300"
+                  >
+                    {item.name}
+                  </Text>
+                  <Text
+                    fontFamily="body"
+                    fontWeight="normal"
+                    fontSize="md"
+                    color="_neutral.300"
+                    opacity={70}
+                  >
+                    {item.phoneNumber}
+                  </Text>
+                </VStack>
+              </HStack>
+            </Link>
           </Box>
         )}
       />
