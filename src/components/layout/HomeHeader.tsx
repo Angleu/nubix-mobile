@@ -19,7 +19,7 @@ const HomeHeader = () => {
             uri: 'https://randomuser.me/api/portraits/women/45.jpg',
           }}
         />
-        <BellSimple size={38} color={colorPallet.primary[200]} />
+        <BellSimple size={38} color={colorPallet._primary[200]} />
       </HStack>
     </HStack>
   );

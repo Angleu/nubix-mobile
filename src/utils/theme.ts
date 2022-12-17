@@ -26,6 +26,24 @@ export const colorPallet = {
 
 const theme = extendTheme({
   colors: colorPallet,
+  fontConfig: {
+    Poppins: {
+      400: {
+        normal: 'Poppins_400Regular',
+      },
+      500: {
+        normal: 'Poppins_500Medium',
+      },
+      700: {
+        normal: 'Poppins_700Bold',
+      },
+    },
+    fonts: {
+      heading: 'Poppins',
+      body: 'Poppins',
+      mono: 'Poppins',
+    },
+  },
 });
 
 export type ThemeType = typeof theme;
