@@ -55,6 +55,11 @@ const TransferValue = () => {
 
   const clearValue = () => setValueToTransfer(['0']);
 
+  const onConfirm = () => {
+    const value = '$' + valueToTransfer.join('');
+    console.log(value);
+  };
+
   return (
     <Container>
       <Header heading="Transfer" />
@@ -152,6 +157,7 @@ const TransferValue = () => {
             Add Description
           </Button>
           <Button
+            onPress={onConfirm}
             bgColor="_primary.500"
             rounded="xl"
             shadow={3}
