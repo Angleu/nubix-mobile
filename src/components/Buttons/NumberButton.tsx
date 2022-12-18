@@ -4,11 +4,20 @@ import { FC, ReactNode } from 'react';
 type Props = {
   children: ReactNode;
   isDelete?: boolean;
+  onPress?: () => void;
+  onLongPress?: () => void;
 };
 
-const NumberButton: FC<Props> = ({ children, isDelete = false }) => {
+const NumberButton: FC<Props> = ({
+  children,
+  isDelete = false,
+  onPress,
+  onLongPress,
+}) => {
   return (
     <Button
+      onPress={() => onPress()}
+      onLongPress={onLongPress}
       flex={1}
       variant="outline"
       px={6}

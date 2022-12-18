@@ -8,13 +8,53 @@ import {
   Text,
   VStack,
 } from 'native-base';
-import React from 'react';
+import React, { useState } from 'react';
 
 import NumberButton from '../../components/Buttons/NumberButton';
 import Container from '../../components/layout/Container';
 import Header from '../../components/layout/Header';
 
+type KeyHandlerActionsType =
+  | '1'
+  | '2'
+  | '3'
+  | '4'
+  | '5'
+  | '6'
+  | '7'
+  | '8'
+  | '9'
+  | '0'
+  | '.'
+  | 'del';
+
 const TransferValue = () => {
+  const [valueToTransfer, setValueToTransfer] = useState<
+    KeyHandlerActionsType[]
+  >(['0']);
+
+  const handleValueToTransferChange = (value: KeyHandlerActionsType) => {
+    switch (value) {
+      case 'del':
+        if (valueToTransfer.length > 1)
+          setValueToTransfer((old) => old.slice(0, -1));
+        else setValueToTransfer(['0']);
+        break;
+      case '.':
+        if (!valueToTransfer.includes('.'))
+          setValueToTransfer((old) => [...old, '.']);
+        break;
+      default:
+        if (/\.\d{2}$/g.test(valueToTransfer.join(''))) break;
+        if (valueToTransfer.length !== 1 || valueToTransfer[0] !== '0')
+          setValueToTransfer((old) => [...old, value]);
+        else setValueToTransfer([value]);
+        break;
+    }
+  };
+
+  const clearValue = () => setValueToTransfer(['0']);
+
   return (
     <Container>
       <Header heading="Transfer" />
@@ -40,29 +80,55 @@ const TransferValue = () => {
               textShadowRadius: 10,
             }}
           >
-            $ 500.00
+            $ {valueToTransfer.join('')}
           </Text>
         </Center>
         <VStack space={3} px={10}>
           <HStack space={9}>
-            <NumberButton>1</NumberButton>
-            <NumberButton>2</NumberButton>
-            <NumberButton>3</NumberButton>
+            <NumberButton onPress={() => handleValueToTransferChange('1')}>
+              1
+            </NumberButton>
+            <NumberButton onPress={() => handleValueToTransferChange('2')}>
+              2
+            </NumberButton>
+            <NumberButton onPress={() => handleValueToTransferChange('3')}>
+              3
+            </NumberButton>
           </HStack>
           <HStack space={9}>
-            <NumberButton>4</NumberButton>
-            <NumberButton>5</NumberButton>
-            <NumberButton>6</NumberButton>
+            <NumberButton onPress={() => handleValueToTransferChange('4')}>
+              4
+            </NumberButton>
+            <NumberButton onPress={() => handleValueToTransferChange('5')}>
+              5
+            </NumberButton>
+            <NumberButton onPress={() => handleValueToTransferChange('6')}>
+              6
+            </NumberButton>
           </HStack>
           <HStack space={9}>
-            <NumberButton>7</NumberButton>
-            <NumberButton>8</NumberButton>
-            <NumberButton>9</NumberButton>
+            <NumberButton onPress={() => handleValueToTransferChange('7')}>
+              7
+            </NumberButton>
+            <NumberButton onPress={() => handleValueToTransferChange('8')}>
+              8
+            </NumberButton>
+            <NumberButton onPress={() => handleValueToTransferChange('9')}>
+              9
+            </NumberButton>
           </HStack>
           <HStack space={9}>
-            <NumberButton>.</NumberButton>
-            <NumberButton>0</NumberButton>
-            <NumberButton isDelete>
+            <NumberButton onPress={() => handleValueToTransferChange('.')}>
+              .
+            </NumberButton>
+            <NumberButton onPress={() => handleValueToTransferChange('0')}>
+              0
+            </NumberButton>
+            <NumberButton
+              isDelete
+              onPress={() => handleValueToTransferChange('del')}
+              onLongPress={clearValue}
+            >
               <Icon
                 as={<MaterialIcons />}
                 name="backspace"
