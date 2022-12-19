@@ -1,9 +1,12 @@
+import 'react-native-gesture-handler';
+
 import {
   Poppins_400Regular,
   Poppins_500Medium,
   Poppins_700Bold,
   useFonts,
 } from '@expo-google-fonts/poppins';
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NativeBaseProvider } from 'native-base';
@@ -29,18 +32,20 @@ export default function App() {
 
   return (
     <NativeBaseProvider theme={theme}>
-      <SafeAreaProvider>
-        <NavigationContainer>
-          <Stack.Navigator
-            initialRouteName="home"
-            screenOptions={{ headerShown: false }}
-          >
-            <Stack.Screen name="home" component={Home} />
-            <Stack.Screen name="transfer" component={Transfer} />
-            <Stack.Screen name="transferValue" component={TransferValue} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </SafeAreaProvider>
+      <BottomSheetModalProvider>
+        <SafeAreaProvider>
+          <NavigationContainer>
+            <Stack.Navigator
+              initialRouteName="home"
+              screenOptions={{ headerShown: false }}
+            >
+              <Stack.Screen name="home" component={Home} />
+              <Stack.Screen name="transfer" component={Transfer} />
+              <Stack.Screen name="transferValue" component={TransferValue} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </SafeAreaProvider>
+      </BottomSheetModalProvider>
     </NativeBaseProvider>
   );
 }
