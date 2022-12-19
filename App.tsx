@@ -13,6 +13,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { RootStackParamListType } from './src/constants/routes';
 import theme from './src/utils/theme';
 import { Home, Transfer } from './src/views';
+import ReceiveMoney from './src/views/ReceiveMoney';
 
 const Stack = createNativeStackNavigator<RootStackParamListType>();
 
@@ -37,6 +38,7 @@ export default function App() {
           >
             <Stack.Screen name="home" component={Home} />
             <Stack.Screen name="transfer" component={Transfer} />
+            <Stack.Screen name="receive" component={ReceiveMoney} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaProvider>
