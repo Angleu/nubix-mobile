@@ -20,7 +20,6 @@ const NumberButton: FC<Props> = ({
       onLongPress={onLongPress}
       flex={1}
       variant="outline"
-      px={6}
       py={2}
       borderColor={isDelete ? 'danger.700' : '_primary.500'}
       borderWidth="2"
