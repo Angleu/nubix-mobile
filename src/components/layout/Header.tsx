@@ -8,7 +8,7 @@ type Props = {
 };
 
 const Header: FC<Props> = ({ heading }) => {
-  const { goBack } = useNavigation();
+  const { goBack, navigate } = useNavigation();
   return (
     <HStack pt={5} justifyContent="space-between" alignItems="center">
       <IconButton
@@ -34,6 +34,9 @@ const Header: FC<Props> = ({ heading }) => {
           size: '4xl',
         }}
         // TODO: Add navigation to QR code scanner screen
+        onPress={() => {
+          navigate('scannerQr');
+        }}
       />
     </HStack>
   );
