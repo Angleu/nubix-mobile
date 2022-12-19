@@ -4,7 +4,7 @@ import React from 'react';
 
 const Card = () => {
   return (
-    <Box mt={12} bg="_primary.50" px="10" py="8" rounded="3xl" shadow="8">
+    <Box mt={5} bg="_primary.50" px="10" py="8" rounded="3xl" shadow="8">
       <HStack justifyContent="space-between" mb={8}>
         <VStack>
           <Text

@@ -6,8 +6,8 @@ import ActivityItem from './_ActivityItem';
 
 const RecentActivities = () => {
   return (
-    <VStack mt={12} flex={1}>
-      <HStack justifyContent="space-between" mb={0}>
+    <VStack mt={5} flex={1}>
+      <HStack justifyContent="space-between">
         <Text
           fontFamily="body"
           fontWeight="bold"
@@ -31,7 +31,7 @@ const RecentActivities = () => {
       </HStack>
       <FlatList
         data={activitiesMock}
-        mt={8}
+        mt={2}
         renderItem={({ item }) => <ActivityItem item={item} />}
       />
     </VStack>
