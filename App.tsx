@@ -21,6 +21,7 @@ import {
   ReceiveMoney,
   ScannerQR,
   Transfer,
+  TransferConfirmation,
   TransferValue,
 } from './src/views';
 
@@ -52,6 +53,10 @@ export default function App() {
               <Stack.Screen name="pay" component={Pay} />
               <Stack.Screen name="scannerQr" component={ScannerQR} />
               <Stack.Screen name="receive" component={ReceiveMoney} />
+              <Stack.Screen
+                name="transferConfirmation"
+                component={TransferConfirmation}
+              />
             </Stack.Navigator>
           </NavigationContainer>
         </SafeAreaProvider>
