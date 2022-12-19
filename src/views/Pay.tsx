@@ -60,7 +60,7 @@ const Pay = () => {
             <Icon
               as={<MaterialIcons />}
               name="credit-card"
-              size="5xl"
+              size="2xl"
               color="_neutral.50"
             />
           }
@@ -80,7 +80,7 @@ const Pay = () => {
             <Icon
               as={<MaterialIcons />}
               name="qr-code"
-              size="5xl"
+              size="2xl"
               color="_neutral.50"
             />
           }
