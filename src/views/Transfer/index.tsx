@@ -1,4 +1,5 @@
 import { MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 import { Center, Icon, IconButton, Text } from 'native-base';
 import React from 'react';
 
@@ -7,6 +8,7 @@ import Container from '../../components/layout/Container';
 import Header from '../../components/layout/Header';
 
 export default function Transfer() {
+  const { navigate } = useNavigation();
   return (
     <Container>
       <Header
@@ -18,7 +20,9 @@ export default function Transfer() {
               color: '_primary.500',
               size: '4xl',
             }}
-            // TODO: Add navigation to QR code scanner screen
+            onPress={() => {
+              navigate('scannerQr');
+            }}
           />
         }
       />
