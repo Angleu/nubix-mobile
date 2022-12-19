@@ -12,7 +12,7 @@ export default function Home() {
     <Container>
       <HomeHeader />
       <Card />
-      <HStack mt="12" justifyContent="center" space="12">
+      <HStack mt="5" justifyContent="center" space="12">
         <HomeLink iconName="bank-transfer-out" text="Transfer" to="transfer" />
         <HomeLink iconName="inbox" text="Deposit" to="deposit" />
         <HomeLink iconName="credit-card-outline" text="Pay" to="pay" />
