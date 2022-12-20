@@ -16,6 +16,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { RootStackParamListType } from './src/constants/routes';
 import theme from './src/utils/theme';
 import {
+  Details,
   Home,
   Pay,
   ReceiveMoney,
@@ -52,6 +53,7 @@ export default function App() {
               <Stack.Screen name="pay" component={Pay} />
               <Stack.Screen name="scannerQr" component={ScannerQR} />
               <Stack.Screen name="receive" component={ReceiveMoney} />
+              <Stack.Screen name="details" component={Details} />
             </Stack.Navigator>
           </NavigationContainer>
         </SafeAreaProvider>
