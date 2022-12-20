@@ -1,11 +1,13 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { Icon, Text, View } from 'native-base';
+import { FC } from 'react';
 import { StyleSheet } from 'react-native';
 import {
   PanGestureHandler,
   PanGestureHandlerGestureEvent,
 } from 'react-native-gesture-handler';
 import Animated, {
+  runOnJS,
   useAnimatedGestureHandler,
   useAnimatedStyle,
   useSharedValue,
@@ -16,14 +18,19 @@ import { colorPallet } from '../../utils/theme';
 const BUTTON_WIDTH = 60;
 const CONTAINER_WIDTH = 300;
 
-const SlideButton = () => {
+type Props = {
+  buttonMessage: string;
+  onSwipeComplete: () => void;
+};
+
+const SlideButton: FC<Props> = ({ buttonMessage, onSwipeComplete }) => {
   const buttonWidth = useSharedValue(BUTTON_WIDTH);
 
   const swipeGestureEvent =
     useAnimatedGestureHandler<PanGestureHandlerGestureEvent>({
       onEnd: ({ x }) => {
         if (x < CONTAINER_WIDTH) buttonWidth.value = BUTTON_WIDTH;
-        else console.log('Swipe Complete');
+        else runOnJS(onSwipeComplete)();
       },
       onActive: ({ x }) => {
         if (x > BUTTON_WIDTH && x <= CONTAINER_WIDTH + 1) buttonWidth.value = x;
@@ -37,7 +44,7 @@ const SlideButton = () => {
   return (
     <View style={styles.container}>
       <Text left="2/5" position="absolute" color="_primary.500" opacity="70">
-        Drag to Send
+        {buttonMessage}
       </Text>
       <PanGestureHandler onGestureEvent={swipeGestureEvent}>
         <Animated.View style={[styles.button, animatedButtonStyle]}>

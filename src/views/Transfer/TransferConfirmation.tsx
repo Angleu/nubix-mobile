@@ -1,11 +1,13 @@
-import { Avatar, Box, Center, Heading, Text, VStack } from 'native-base';
-import React from 'react';
+import { Avatar, Box, Center, Heading, Text } from 'native-base';
+import React, { useState } from 'react';
 
 import SlideButton from '../../components/button/SlideButton';
 import Container from '../../components/layout/Container';
 import Header from '../../components/layout/Header';
 
 const TransferConfirmation = () => {
+  const [isConfirmed, setConfirmed] = useState(false);
+
   return (
     <Container>
       <Header heading="" />
@@ -63,19 +65,17 @@ const TransferConfirmation = () => {
             Thanks for lending me the money!
           </Text>
         </Box>
+        {isConfirmed ? (
+          <Heading fontFamily="heading" fontSize="xl" color="_primary.500">
+            Transfer Sent Successfully
+          </Heading>
+        ) : (
+          <SlideButton
+            buttonMessage="Drag to Send"
+            onSwipeComplete={() => setConfirmed(true)}
+          />
+        )}
       </Center>
-      <VStack space="3" alignItems="center">
-        <SlideButton />
-        <Text
-          textAlign="center"
-          fontSize="md"
-          fontWeight="light"
-          fontFamily="body"
-          color="_primary.500"
-        >
-          Drag to Send
-        </Text>
-      </VStack>
     </Container>
   );
 };
