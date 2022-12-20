@@ -6,4 +6,6 @@ export type RootStackParamListType = {
   pay: undefined;
   receive: undefined;
   scannerQr: undefined;
+  transferConfirmation: undefined;
+  details: undefined;
 };

@@ -1,4 +1,5 @@
 import { MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 import {
   Button,
   Center,
@@ -31,6 +32,7 @@ type KeyHandlerActionsType =
   | 'del';
 
 const TransferValue = () => {
+  const { navigate } = useNavigation();
   const { reference, showModal } = useBottomSheetModal();
 
   const [valueToTransfer, setValueToTransfer] = useState<
@@ -63,6 +65,7 @@ const TransferValue = () => {
   const onConfirm = () => {
     const value = '$' + valueToTransfer.join('');
     console.log(value, description);
+    navigate('transferConfirmation');
   };
 
   return (
