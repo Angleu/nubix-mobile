@@ -11,6 +11,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NativeBaseProvider } from 'native-base';
 import React from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { RootStackParamListType } from './src/constants/routes';
@@ -39,28 +40,30 @@ export default function App() {
   }
 
   return (
-    <NativeBaseProvider theme={theme}>
-      <BottomSheetModalProvider>
-        <SafeAreaProvider>
-          <NavigationContainer>
-            <Stack.Navigator
-              initialRouteName="home"
-              screenOptions={{ headerShown: false }}
-            >
-              <Stack.Screen name="home" component={Home} />
-              <Stack.Screen name="transfer" component={Transfer} />
-              <Stack.Screen name="transferValue" component={TransferValue} />
-              <Stack.Screen name="pay" component={Pay} />
-              <Stack.Screen name="scannerQr" component={ScannerQR} />
-              <Stack.Screen name="receive" component={ReceiveMoney} />
-              <Stack.Screen
-                name="transferConfirmation"
-                component={TransferConfirmation}
-              />
-            </Stack.Navigator>
-          </NavigationContainer>
-        </SafeAreaProvider>
-      </BottomSheetModalProvider>
-    </NativeBaseProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <NativeBaseProvider theme={theme}>
+        <BottomSheetModalProvider>
+          <SafeAreaProvider>
+            <NavigationContainer>
+              <Stack.Navigator
+                initialRouteName="home"
+                screenOptions={{ headerShown: false }}
+              >
+                <Stack.Screen name="home" component={Home} />
+                <Stack.Screen name="transfer" component={Transfer} />
+                <Stack.Screen name="transferValue" component={TransferValue} />
+                <Stack.Screen name="pay" component={Pay} />
+                <Stack.Screen name="scannerQr" component={ScannerQR} />
+                <Stack.Screen name="receive" component={ReceiveMoney} />
+                <Stack.Screen
+                  name="transferConfirmation"
+                  component={TransferConfirmation}
+                />
+              </Stack.Navigator>
+            </NavigationContainer>
+          </SafeAreaProvider>
+        </BottomSheetModalProvider>
+      </NativeBaseProvider>
+    </GestureHandlerRootView>
   );
 }

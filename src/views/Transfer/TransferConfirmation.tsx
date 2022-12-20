@@ -1,14 +1,7 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  Center,
-  Heading,
-  Text,
-  VStack,
-} from 'native-base';
+import { Avatar, Box, Center, Heading, Text, VStack } from 'native-base';
 import React from 'react';
 
+import SlideButton from '../../components/button/SlideButton';
 import Container from '../../components/layout/Container';
 import Header from '../../components/layout/Header';
 
@@ -71,8 +64,8 @@ const TransferConfirmation = () => {
           </Text>
         </Box>
       </Center>
-      <VStack space="3">
-        <Button>Send</Button>
+      <VStack space="3" alignItems="center">
+        <SlideButton />
         <Text
           textAlign="center"
           fontSize="md"
