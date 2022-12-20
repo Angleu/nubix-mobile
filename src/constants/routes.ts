@@ -7,4 +7,5 @@ export type RootStackParamListType = {
   receive: undefined;
   scannerQr: undefined;
   transferConfirmation: undefined;
+  details: undefined;
 };

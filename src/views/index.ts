@@ -1,3 +1,4 @@
+export { default as Details } from './Details';
 export { default as Home } from './Home';
 export { default as Pay } from './Pay';
 export { default as ReceiveMoney } from './ReceiveMoney';

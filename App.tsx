@@ -17,6 +17,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { RootStackParamListType } from './src/constants/routes';
 import theme from './src/utils/theme';
 import {
+  Details,
   Home,
   Pay,
   ReceiveMoney,
@@ -59,6 +60,7 @@ export default function App() {
                   name="transferConfirmation"
                   component={TransferConfirmation}
                 />
+              <Stack.Screen name="details" component={Details} />
               </Stack.Navigator>
             </NavigationContainer>
           </SafeAreaProvider>
