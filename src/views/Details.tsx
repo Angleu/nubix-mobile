@@ -1,5 +1,6 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 import {
   Avatar,
   Button,
@@ -17,18 +18,28 @@ import Container from '../components/layout/Container';
 import { PropsRoutes } from '../constants/routes.type';
 
 export default function Details({ route }: PropsRoutes): JSX.Element {
-  //   console.log(route.params.profilePic);
+  const { goBack } = useNavigation();
   return (
     <Container>
-      <VStack alignItems="center">
+      <VStack my={6} space={4} alignItems="center">
         <Heading>Transfer</Heading>
-        <VStack alignItems="center">
-          <Avatar source={{ uri: route.params.profilePic }} size={67} />
-          <Text>{route.params.name}</Text>
-          <Text>{route.params.number}</Text>
+        <VStack space={2} alignItems="center">
+          <Avatar
+            shadow={6}
+            source={{ uri: route.params.profilePic }}
+            size="lg"
+          />
+          <Text fontSize="lg" fontWeight="bold" fontFamily="body">
+            {route.params.name}
+          </Text>
+          <Text fontFamily="body" fontSize="md">
+            {route.params.number}
+          </Text>
         </VStack>
-        <Heading color="_primary.400">{route.params.amount}</Heading>
-        <HStack>
+        <Heading fontFamily="body" color="_primary.400">
+          {route.params.amount}
+        </Heading>
+        <HStack space={4}>
           <IconButton
             icon={<Icon as={MaterialIcons} name="share" size={38} />}
             _icon={{ color: '_primary.400' }}
@@ -46,32 +57,52 @@ export default function Details({ route }: PropsRoutes): JSX.Element {
             // onPress={onShare}
           />
         </HStack>
-        <VStack alignItems="center" width="full">
-          <Text>Detalhes da transação</Text>
+        <VStack space={4} alignItems="center" width="full">
+          <Text fontFamily="body" fontSize="xl" fontWeight="bold">
+            Detalhes da transação
+          </Text>
           <Stack
             space={2}
             width="full"
             borderBottomColor="_primary.50"
             borderBottomWidth={3}
             borderStyle="dashed"
+            py={4}
           >
             <HStack justifyContent="space-between">
-              <Text color="_primary.400" fontSize="lg" fontWeight="bold">
+              <Text
+                fontFamily="body"
+                color="_primary.400"
+                fontSize="lg"
+                fontWeight="bold"
+              >
                 Transfer
               </Text>
-              <Text fontSize="lg">{route.params.number}</Text>
+              <Text fontFamily="body" fontSize="lg">
+                {route.params.amount}
+              </Text>
             </HStack>
             <HStack justifyContent="space-between">
-              <Text color="_primary.400" fontSize="lg" fontWeight="bold">
-                Tax
+              <Text
+                fontFamily="body"
+                color="_primary.400"
+                fontSize="lg"
+                fontWeight="bold"
+              >
+                Cost
               </Text>
               <Text>{0}</Text>
             </HStack>
             <HStack justifyContent="space-between">
-              <Text color="_primary.400" fontSize="lg" fontWeight="bold">
+              <Text
+                fontFamily="body"
+                color="_primary.400"
+                fontSize="lg"
+                fontWeight="bold"
+              >
                 Date Transation
               </Text>
-              <Text>29/02/2022</Text>
+              <Text fontFamily="body">29/02/2022</Text>
             </HStack>
           </Stack>
           {/* {Aqui é outra parte} */}
@@ -81,21 +112,39 @@ export default function Details({ route }: PropsRoutes): JSX.Element {
             borderBottomColor="_primary.50"
             borderBottomWidth={3}
             borderStyle="dashed"
+            py={4}
           >
             <HStack justifyContent="space-between">
-              <Text color="_primary.400" fontSize="lg" fontWeight="bold">
+              <Text
+                fontFamily="body"
+                color="_primary.400"
+                fontSize="lg"
+                fontWeight="bold"
+              >
                 Balance Actual
               </Text>
-              <Text fontSize="lg">{route.params.amount}</Text>
+              <Text fontFamily="body" fontSize="lg">
+                {route.params.amount}
+              </Text>
             </HStack>
             <HStack justifyContent="space-between">
-              <Text color="_primary.400" fontSize="lg" fontWeight="bold">
+              <Text
+                fontFamily="body"
+                color="_primary.400"
+                fontSize="lg"
+                fontWeight="bold"
+              >
                 Reference
               </Text>
               <Text>Some thing here</Text>
             </HStack>
             <HStack justifyContent="space-between">
-              <Text color="_primary.400" fontSize="lg" fontWeight="bold">
+              <Text
+                fontFamily="body"
+                color="_primary.400"
+                fontSize="lg"
+                fontWeight="bold"
+              >
                 Number of transation
               </Text>
               <Text>#2987667</Text>
@@ -111,7 +160,7 @@ export default function Details({ route }: PropsRoutes): JSX.Element {
         fontWeight="bold"
         borderRadius={10}
         shadow="6"
-        //   onPress={}
+        onPress={() => goBack()}
       >
         Done
       </Button>
