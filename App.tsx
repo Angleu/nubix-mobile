@@ -55,7 +55,7 @@ export default function App() {
                 <Stack.Screen name="transferValue" component={TransferValue} />
                 <Stack.Screen name="payment" component={Payment} />
                 <Stack.Screen name="scannerQr" component={ScannerQR} />
-                <Stack.Screen name="receive" component={ReceiveMoney} />
+                <Stack.Screen name="receiveMoney" component={ReceiveMoney} />
                 <Stack.Screen
                   name="transferConfirmation"
                   component={TransferConfirmation}

@@ -1,14 +1,16 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Center, Icon, IconButton, Text } from 'native-base';
 import React from 'react';
 
 import ContactsSearch from '../../components/ContactsSearch';
 import Container from '../../components/layout/Container';
 import Header from '../../components/layout/Header';
+import { RootStackParamListType } from '../../constants/routes';
 
-export default function Transfer() {
-  const { navigate } = useNavigation();
+type Props = NativeStackScreenProps<RootStackParamListType, 'transfer'>;
+
+export default function Transfer({ navigation: { navigate } }: Props) {
   return (
     <Container>
       <Header

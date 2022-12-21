@@ -1,5 +1,5 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import {
   Avatar,
   Button,
@@ -15,12 +15,13 @@ import { Share } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 
 import Container from '../components/layout/Container';
+import { RootStackParamListType } from '../constants/routes';
 import data from '../utils/mocks/activities';
 import { colorPallet } from '../utils/theme';
 
-export default function ReceiveMoney() {
-  const { goBack } = useNavigation();
+type Props = NativeStackScreenProps<RootStackParamListType, 'receiveMoney'>;
 
+export default function ReceiveMoney({ navigation: { goBack } }: Props) {
   const onShare = async () => {
     await Share.share({ url: 'http://www.google.com' });
   };

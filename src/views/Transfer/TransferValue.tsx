@@ -1,5 +1,5 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import {
   Button,
   Center,
@@ -15,6 +15,7 @@ import NumberButton from '../../components/button/NumberButton';
 import Container from '../../components/layout/Container';
 import Header from '../../components/layout/Header';
 import { TransferDescriptionBottomSheet } from '../../components/modal';
+import { RootStackParamListType } from '../../constants/routes';
 import { useBottomSheetModal } from '../../hooks/useBottomSheetModal';
 
 type KeyHandlerActionsType =
@@ -31,8 +32,9 @@ type KeyHandlerActionsType =
   | '.'
   | 'del';
 
-const TransferValue = () => {
-  const { navigate } = useNavigation();
+type Props = NativeStackScreenProps<RootStackParamListType, 'transferValue'>;
+
+const TransferValue = ({ navigation: { navigate } }: Props) => {
   const { reference, showModal } = useBottomSheetModal();
 
   const [valueToTransfer, setValueToTransfer] = useState<

@@ -1,6 +1,5 @@
-import { MaterialIcons } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import {
   Avatar,
   Button,
@@ -15,10 +14,14 @@ import {
 import React from 'react';
 
 import Container from '../components/layout/Container';
-import { PropsRoutes } from '../constants/routes.type';
+import { RootStackParamListType } from '../constants/routes';
 
-export default function Details({ route }: PropsRoutes): JSX.Element {
-  const { goBack } = useNavigation();
+type Props = NativeStackScreenProps<RootStackParamListType, 'details'>;
+
+export default function Details({
+  route,
+  navigation: { goBack },
+}: Props): JSX.Element {
   return (
     <Container>
       <VStack my={6} space={4} alignItems="center">
