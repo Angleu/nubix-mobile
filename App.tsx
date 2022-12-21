@@ -19,13 +19,13 @@ import theme from './src/utils/theme';
 import {
   Details,
   Home,
-  Pay,
   ReceiveMoney,
   ScannerQR,
   Transfer,
   TransferConfirmation,
   TransferValue,
 } from './src/views';
+import Payment from './src/views/Payment';
 
 const Stack = createNativeStackNavigator<RootStackParamListType>();
 
@@ -53,7 +53,7 @@ export default function App() {
                 <Stack.Screen name="home" component={Home} />
                 <Stack.Screen name="transfer" component={Transfer} />
                 <Stack.Screen name="transferValue" component={TransferValue} />
-                <Stack.Screen name="pay" component={Pay} />
+                <Stack.Screen name="payment" component={Payment} />
                 <Stack.Screen name="scannerQr" component={ScannerQR} />
                 <Stack.Screen name="receive" component={ReceiveMoney} />
                 <Stack.Screen
