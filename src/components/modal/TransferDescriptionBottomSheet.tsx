@@ -39,12 +39,12 @@ const TransferDescriptionBottomSheet: FC<Props> = ({
       enablePanDownToClose
     >
       <VStack p={6} space={6}>
-        <Heading textAlign="center">Transfer Description</Heading>
+        <Heading textAlign="center">Descrição da Transferência</Heading>
         <TextArea
           onChangeText={setDescription}
           value={description}
           autoCompleteType=""
-          placeholder="Description"
+          placeholder="Coloque a sua descrição aqui..."
           borderRadius="xl"
           fontFamily="body"
           fontSize="md"

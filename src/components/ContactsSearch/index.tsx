@@ -21,7 +21,7 @@ const ContactsSearch = () => {
     <>
       <Center>
         <Text mb={6} fontSize="lg" fontWeight="bold" color="_neutral.200">
-          Contacts
+          Contactos
         </Text>
         <Input
           py="2"
