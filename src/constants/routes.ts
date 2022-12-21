@@ -3,7 +3,7 @@ export type RootStackParamListType = {
   transfer: undefined;
   transferValue: undefined;
   deposit: undefined;
-  pay: undefined;
+  payment: undefined;
   receive: undefined;
   scannerQr: undefined;
   transferConfirmation: undefined;

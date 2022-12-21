@@ -2,8 +2,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Box, Button, HStack, Icon, Text, VStack } from 'native-base';
 import React from 'react';
 
-import Container from '../components/layout/Container';
-import Header from '../components/layout/Header';
+import Container from '../../components/layout/Container';
+import Header from '../../components/layout/Header';
 
 const Pay = () => {
   return (
