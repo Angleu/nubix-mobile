@@ -12,10 +12,10 @@ const HomeHeader = () => {
           color="_neutral.300"
           fontWeight="bold"
         >
-          Welcome back!
+          Bem Vindo de Volta!
         </Heading>
         <Text fontFamily="body" fontSize="lg" color="_neutral.500">
-          Hi, Zanuar Renaldie
+          Olá, Zanuar Renaldie
         </Text>
       </VStack>
       <HStack alignItems="center" space={5}>

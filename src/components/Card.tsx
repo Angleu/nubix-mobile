@@ -13,7 +13,7 @@ const Card = () => {
             fontSize="sm"
             fontWeight="medium"
           >
-            Total Balance
+            Balanço Total
           </Text>
           <Text
             fontFamily="body"
@@ -21,7 +21,7 @@ const Card = () => {
             fontWeight="bold"
             color="_neutral.50"
           >
-            $ 188,290.90
+            188 290.90 Kzs
           </Text>
         </VStack>
         <Icon
