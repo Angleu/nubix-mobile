@@ -8,8 +8,16 @@ import Header from '../../components/layout/Header';
 const Pay = () => {
   return (
     <Container>
-      <Header heading="Pay" />
-      <Box mt={12} bg="_primary.50" px="10" py="8" rounded="3xl" shadow="8">
+      <Header heading="Pagamento" />
+      <Box
+        mt={12}
+        bg="_primary.50"
+        px="10"
+        py="8"
+        h="40"
+        rounded="3xl"
+        shadow="8"
+      >
         <HStack justifyContent="space-between" mb={8}>
           <VStack>
             <Text
@@ -18,7 +26,7 @@ const Pay = () => {
               fontSize="sm"
               fontWeight="medium"
             >
-              Total Balance
+              Balanço Total
             </Text>
             <Text
               fontFamily="body"
@@ -26,7 +34,7 @@ const Pay = () => {
               fontWeight="bold"
               color="_neutral.50"
             >
-              $ 188,290.90
+              188 290.90 Kzs
             </Text>
           </VStack>
           <Icon
@@ -36,14 +44,6 @@ const Pay = () => {
             color="_neutral.50"
           />
         </HStack>
-        <Text
-          fontFamily="body"
-          fontWeight="medium"
-          fontSize="lg"
-          color="_neutral.50"
-        >
-          New: <Text fontWeight="bold">$ 1,290.74</Text>
-        </Text>
       </Box>
 
       <VStack mt="9" space={9}>
@@ -85,7 +85,7 @@ const Pay = () => {
             />
           }
         >
-          QR Code
+          Código QR
         </Button>
       </VStack>
     </Container>
