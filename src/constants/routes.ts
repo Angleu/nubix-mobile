@@ -1,4 +1,4 @@
-import { User } from '../types/User';
+import { UserType } from '../types/User';
 
 export type RootStackParamListType = {
   home: undefined;
@@ -9,5 +9,5 @@ export type RootStackParamListType = {
   receiveMoney: undefined;
   scannerQr: undefined;
   transferConfirmation: undefined;
-  details: User;
+  details: UserType;
 };
