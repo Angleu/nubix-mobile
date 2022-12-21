@@ -48,9 +48,10 @@ export default function ScannerQR({ navigation: { goBack } }: Props) {
         onPress={() => goBack()}
       />
       <VStack space="1/3" flex={1} alignItems="center" my={'1.5'} px="1">
-        <Heading>Scan QR Code</Heading>
+        <Heading>Ler Código QR</Heading>
         <Text fontFamily={'body'} fontSize="lg" textAlign="center">
-          Scan Qr code to get information of someone to transfer money
+          Leia o código QR para obter a informação da pessoa onde irá transferir
+          o dinheiro
         </Text>
       </VStack>
       <Stack width="full" height="xl" alignItems="center">
