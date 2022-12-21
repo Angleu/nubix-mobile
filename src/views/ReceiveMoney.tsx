@@ -43,7 +43,7 @@ export default function ReceiveMoney({ navigation: { goBack } }: Props) {
           />
         </HStack>
         <Text textAlign="center" fontSize="lg" fontWeight="bold">
-          Read this code to get my information
+          Leia este código para obter o meu terminal bancário
         </Text>
         <Flex alignItems="center">
           <QRCode
@@ -54,19 +54,19 @@ export default function ReceiveMoney({ navigation: { goBack } }: Props) {
           />
         </Flex>
         <Text textAlign="center" fontSize="md" opacity="30">
-          This Information is public you can share them without fair
+          Esta informação é pública. Pode partilhar sem receio
         </Text>
         <Button
           py={4}
           mb={3}
-          background="_primary.400"
+          background="_primary.500"
           fontSize="lg"
           fontWeight="bold"
           borderRadius={10}
           shadow="6"
           onPress={() => goBack()}
         >
-          Done
+          Terminar
         </Button>
       </VStack>
     </Container>

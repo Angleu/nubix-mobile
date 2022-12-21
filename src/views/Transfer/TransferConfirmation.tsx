@@ -14,7 +14,7 @@ const TransferConfirmation = () => {
 
       <Center mt="12">
         <Heading fontFamily="heading" fontSize="xl" color="_primary.500">
-          You`re Going To Transfer
+          Irá Transferir
         </Heading>
         <Avatar mt="5" />
         <Text
@@ -49,7 +49,7 @@ const TransferConfirmation = () => {
           $ 500.00
         </Text>
         <Text fontFamily="body" fontSize="xl" color="_primary.500">
-          With Message
+          Com a mensagem
         </Text>
         <Box
           mt="7"
@@ -62,16 +62,17 @@ const TransferConfirmation = () => {
           shadow={2}
         >
           <Text color="_neutral.50" fontFamily="body" fontSize="md">
-            Thanks for lending me the money!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet,
+            ut?
           </Text>
         </Box>
         {isConfirmed ? (
           <Heading fontFamily="heading" fontSize="xl" color="_primary.500">
-            Transfer Sent Successfully
+            Transferência Efetuada com Sucesso
           </Heading>
         ) : (
           <SlideButton
-            buttonMessage="Drag to Send"
+            buttonMessage="Arraste para enviar"
             onSwipeComplete={() => setConfirmed(true)}
           />
         )}

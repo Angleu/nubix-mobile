@@ -14,7 +14,7 @@ const RecentActivities = () => {
           fontSize="lg"
           color="_neutral.300"
         >
-          Recent Activity
+          Atividades Recentes
         </Text>
         <Button
           variant="link"
@@ -26,7 +26,7 @@ const RecentActivities = () => {
             color: '_primary.500',
           }}
         >
-          See All
+          Ver tudo
         </Button>
       </HStack>
       <FlatList

@@ -25,7 +25,7 @@ export default function Details({
   return (
     <Container>
       <VStack my={6} space={4} alignItems="center">
-        <Heading>Transfer</Heading>
+        <Heading>Detalhes</Heading>
         <VStack space={2} alignItems="center">
           <Avatar
             shadow={6}

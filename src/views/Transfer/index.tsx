@@ -14,7 +14,7 @@ export default function Transfer({ navigation: { navigate } }: Props) {
   return (
     <Container>
       <Header
-        heading="Transfer"
+        heading="Transferência"
         LeftIcon={
           <IconButton
             icon={<Icon as={<MaterialIcons name="qr-code" />} />}
@@ -37,7 +37,7 @@ export default function Transfer({ navigation: { navigate } }: Props) {
           fontSize="2xl"
           mb={6}
         >
-          Total Balance
+          Balanço Total
         </Text>
         <Text
           fontFamily="body"
@@ -50,7 +50,7 @@ export default function Transfer({ navigation: { navigate } }: Props) {
             textShadowRadius: 10,
           }}
         >
-          $ 188,290.90
+          188 290.90 Kzs
         </Text>
       </Center>
 

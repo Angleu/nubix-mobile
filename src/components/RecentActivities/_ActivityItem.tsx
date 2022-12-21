@@ -1,5 +1,4 @@
 import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
 import { Avatar, HStack, Icon, Pressable, Text, VStack } from 'native-base';
 import React, { FC } from 'react';
 
@@ -13,9 +12,8 @@ type Props = {
 };
 
 const ActivityItem: FC<Props> = ({ item }) => {
-  const { navigate } = useNavigation();
   return (
-    <Pressable onPress={() => navigate('details', { ...item })}>
+    <Pressable>
       <HStack justifyContent="space-between" mb={6} alignItems="center">
         <HStack space={6} alignItems="center">
           {item.profilePic ? (

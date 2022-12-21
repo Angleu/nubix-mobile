@@ -73,7 +73,7 @@ const TransferValue = ({ navigation: { navigate } }: Props) => {
   return (
     <>
       <Container>
-        <Header heading="Transfer" />
+        <Header heading="Transferência" />
         <ScrollView>
           <Center mt={11} mb={12}>
             <Text
@@ -83,7 +83,7 @@ const TransferValue = ({ navigation: { navigate } }: Props) => {
               fontSize="xl"
               color="_primary.500"
             >
-              Value to Transfer
+              Valor a Transferir
             </Text>
             <Text
               fontFamily="body"
@@ -166,7 +166,7 @@ const TransferValue = ({ navigation: { navigate } }: Props) => {
                 color: '_primary.500',
               }}
             >
-              Add Description
+              Adicionar Descrição
             </Button>
             <Button
               onPress={onConfirm}
@@ -183,7 +183,7 @@ const TransferValue = ({ navigation: { navigate } }: Props) => {
                 color: '_neutral.50',
               }}
             >
-              Confirm
+              Confirmar
             </Button>
           </VStack>
         </ScrollView>
