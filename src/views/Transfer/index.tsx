@@ -16,7 +16,7 @@ export default function Transfer({
     <Container>
       <Header
         heading="Transferência"
-        LeftIcon={
+        RightIcon={
           <IconButton
             icon={<Icon as={<MaterialIcons name="qr-code" />} />}
             _icon={{

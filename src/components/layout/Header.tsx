@@ -5,10 +5,10 @@ import React, { FC } from 'react';
 
 type Props = {
   heading: string;
-  LeftIcon?: JSX.Element;
+  RightIcon?: JSX.Element;
 };
 
-const Header: FC<Props> = ({ heading, LeftIcon }) => {
+const Header: FC<Props> = ({ heading, RightIcon }) => {
   const { goBack } = useNavigation();
   return (
     <HStack pt={5} justifyContent="space-between" alignItems="center">
@@ -28,7 +28,7 @@ const Header: FC<Props> = ({ heading, LeftIcon }) => {
       >
         {heading}
       </Heading>
-      {LeftIcon ?? <Box width={12}></Box>}
+      {RightIcon ?? <Box width={12}></Box>}
     </HStack>
   );
 };

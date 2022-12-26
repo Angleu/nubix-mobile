@@ -4,10 +4,11 @@ import React from 'react';
 
 import Container from '../../components/layout/Container';
 import Header from '../../components/layout/Header';
+import { ScreenProps } from '../../constants/routes';
 import { formatMoney } from '../../utils/formatter';
 import { userLoggedIn } from '../../utils/mocks/users';
 
-const Payment = () => {
+const Payment = ({ navigation }: ScreenProps<'payment'>) => {
   return (
     <Container>
       <Header heading="Pagamento" />
@@ -53,6 +54,7 @@ const Payment = () => {
 
       <VStack mt="9" space={9}>
         <Button
+          onPress={() => navigation.push('nfcPayment')}
           bg="_primary.500"
           rounded="xl"
           shadow={6}
