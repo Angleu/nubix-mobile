@@ -1,5 +1,4 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import {
   Button,
   Center,
@@ -15,7 +14,7 @@ import NumberButton from '../../components/button/NumberButton';
 import Container from '../../components/layout/Container';
 import Header from '../../components/layout/Header';
 import { TransferDescriptionBottomSheet } from '../../components/modal';
-import { RootStackParamListType } from '../../constants/routes';
+import { TransferValueScreenProps } from '../../constants/routes';
 import { useBottomSheetModal } from '../../hooks/useBottomSheetModal';
 
 type KeyHandlerActionsType =
@@ -32,9 +31,12 @@ type KeyHandlerActionsType =
   | '.'
   | 'del';
 
-type Props = NativeStackScreenProps<RootStackParamListType, 'transferValue'>;
+const TransferValue = ({
+  navigation: { navigate },
+  route,
+}: TransferValueScreenProps) => {
+  const { destination } = route.params;
 
-const TransferValue = ({ navigation: { navigate } }: Props) => {
   const { reference, showModal } = useBottomSheetModal();
 
   const [valueToTransfer, setValueToTransfer] = useState<
@@ -65,9 +67,12 @@ const TransferValue = ({ navigation: { navigate } }: Props) => {
   const clearValue = () => setValueToTransfer(['0']);
 
   const onConfirm = () => {
-    const value = '$' + valueToTransfer.join('');
-    console.log(value, description);
-    navigate('transferConfirmation');
+    const transferAmount = '$' + valueToTransfer.join('');
+    navigate('transferConfirmation', {
+      destination,
+      transferAmount,
+      message: description,
+    });
   };
 
   return (

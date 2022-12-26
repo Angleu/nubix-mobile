@@ -15,7 +15,7 @@ export type RootStackParamListType = {
   scannerQr: undefined;
   transferConfirmation: {
     destination: UserInfoType;
-    transferAmount: number;
+    transferAmount: string;
     message?: string;
   };
   details: {
@@ -31,4 +31,19 @@ export type HomeScreenProp = NativeStackScreenProps<
 export type DetailsScreenProp = NativeStackScreenProps<
   RootStackParamListType,
   'details'
+>;
+
+export type TransferScreenProps = NativeStackScreenProps<
+  RootStackParamListType,
+  'transfer'
+>;
+
+export type TransferValueScreenProps = NativeStackScreenProps<
+  RootStackParamListType,
+  'transferValue'
+>;
+
+export type TransferConfirmationScreenProps = NativeStackScreenProps<
+  RootStackParamListType,
+  'transferConfirmation'
 >;

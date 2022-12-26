@@ -1,5 +1,5 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import { Link } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import {
   Avatar,
   Box,
@@ -8,15 +8,18 @@ import {
   HStack,
   Icon,
   Input,
+  Pressable,
   Text,
   VStack,
 } from 'native-base';
 import React from 'react';
 
-import { contactsMock } from '../../utils';
+import { TransferScreenProps } from '../../constants/routes';
+import contactsMock from '../../utils/mocks/users';
 
 // TODO: Make search form functional
 const ContactsSearch = () => {
+  const { navigation } = useNavigation<TransferScreenProps>();
   return (
     <>
       <Center>
@@ -49,10 +52,16 @@ const ContactsSearch = () => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <Box bg="_neutral.50" shadow={2} mb="6" mx={1} p={2} rounded="3xl">
-            <Link to={{ screen: 'transferValue' }}>
+            <Pressable
+              onPress={() =>
+                navigation.push('transferValue', {
+                  destination: item,
+                })
+              }
+            >
               <HStack space={6} alignItems="center">
                 <Avatar
-                  source={{ uri: item.profilePic }}
+                  source={{ uri: item.profilePictureURL }}
                   bg="_secondary.50"
                   size="lg"
                 />
@@ -76,7 +85,7 @@ const ContactsSearch = () => {
                   </Text>
                 </VStack>
               </HStack>
-            </Link>
+            </Pressable>
           </Box>
         )}
       />
