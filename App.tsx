@@ -26,6 +26,7 @@ import {
   TransferValue,
 } from './src/views';
 import Payment from './src/views/Payment';
+import NFCPayment from './src/views/Payment/NFCPayment';
 
 const Stack = createNativeStackNavigator<RootStackParamListType>();
 
@@ -61,6 +62,7 @@ export default function App() {
                   component={TransferConfirmation}
                 />
                 <Stack.Screen name="details" component={Details} />
+                <Stack.Screen name="nfcPayment" component={NFCPayment} />
               </Stack.Navigator>
             </NavigationContainer>
           </SafeAreaProvider>

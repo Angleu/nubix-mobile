@@ -1,4 +1,7 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import {
+  NativeStackNavigationProp,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
 
 import { TransactionType } from '../models/Transaction';
 import { UserInfoType } from '../models/User';
@@ -21,29 +24,11 @@ export type RootStackParamListType = {
   details: {
     transaction: TransactionType;
   };
+  nfcPayment: undefined;
 };
 
-export type HomeScreenProp = NativeStackScreenProps<
-  RootStackParamListType,
-  'home'
->;
+export type ScreenProps<T extends keyof RootStackParamListType> =
+  NativeStackScreenProps<RootStackParamListType, T>;
 
-export type DetailsScreenProp = NativeStackScreenProps<
-  RootStackParamListType,
-  'details'
->;
-
-export type TransferScreenProps = NativeStackScreenProps<
-  RootStackParamListType,
-  'transfer'
->;
-
-export type TransferValueScreenProps = NativeStackScreenProps<
-  RootStackParamListType,
-  'transferValue'
->;
-
-export type TransferConfirmationScreenProps = NativeStackScreenProps<
-  RootStackParamListType,
-  'transferConfirmation'
->;
+export type NavigationProps<T extends keyof RootStackParamListType> =
+  NativeStackNavigationProp<RootStackParamListType, T>;
