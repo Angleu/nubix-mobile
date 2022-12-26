@@ -1,5 +1,6 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
   Avatar,
   Box,
@@ -14,12 +15,15 @@ import {
 } from 'native-base';
 import React from 'react';
 
-import { TransferScreenProps } from '../../constants/routes';
+import { RootStackParamListType } from '../../constants/routes';
 import contactsMock from '../../utils/mocks/users';
 
 // TODO: Make search form functional
 const ContactsSearch = () => {
-  const { navigation } = useNavigation<TransferScreenProps>();
+  const { push } =
+    useNavigation<
+      NativeStackNavigationProp<RootStackParamListType, 'transfer'>
+    >();
   return (
     <>
       <Center>
@@ -54,7 +58,7 @@ const ContactsSearch = () => {
           <Box bg="_neutral.50" shadow={2} mb="6" mx={1} p={2} rounded="3xl">
             <Pressable
               onPress={() =>
-                navigation.push('transferValue', {
+                push('transferValue', {
                   destination: item,
                 })
               }

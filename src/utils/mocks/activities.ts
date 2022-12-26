@@ -109,7 +109,7 @@ const allActivities: TransactionType[] = [
     transactionDate: '04/07/2022',
     message:
       'sit amet consectetuer adipiscing elit proin interdum mauris non ligula pellentesque ultrices',
-    origin: users[7],
+    origin: users[6],
   },
   {
     type: 'receive',
@@ -127,7 +127,7 @@ const allActivities: TransactionType[] = [
     transactionDate: '10/01/2022',
     message:
       'in quam fringilla rhoncus mauris enim leo rhoncus sed vestibulum sit amet cursus id turpis integer aliquet massa id lobortis',
-    destination: users[7],
+    destination: users[6],
   },
 ];
 

@@ -6,6 +6,7 @@ import ContactsSearch from '../../components/ContactsSearch';
 import Container from '../../components/layout/Container';
 import Header from '../../components/layout/Header';
 import { TransferScreenProps } from '../../constants/routes';
+import { formatMoney } from '../../utils/formatter';
 import { userLoggedIn } from '../../utils/mocks/users';
 
 export default function Transfer({
@@ -50,7 +51,10 @@ export default function Transfer({
             textShadowRadius: 10,
           }}
         >
-          {userLoggedIn.accounts[0].balance} Kzs
+          {formatMoney(
+            userLoggedIn.accounts[0].balance,
+            userLoggedIn.accounts[0].currency
+          )}
         </Text>
       </Center>
 

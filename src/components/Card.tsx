@@ -2,6 +2,7 @@ import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { Box, HStack, Icon, IconButton, Text, VStack } from 'native-base';
 import React from 'react';
 
+import { formatMoney } from '../utils/formatter';
 import { userLoggedIn } from '../utils/mocks/users';
 
 const Card = () => {
@@ -23,7 +24,10 @@ const Card = () => {
             fontWeight="bold"
             color="_neutral.50"
           >
-            {userLoggedIn.accounts[0].balance} Kzs
+            {formatMoney(
+              userLoggedIn.accounts[0].balance,
+              userLoggedIn.accounts[0].currency
+            )}
           </Text>
         </VStack>
         <Icon

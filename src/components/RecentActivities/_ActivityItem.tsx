@@ -1,154 +1,86 @@
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Avatar, HStack, Icon, Pressable, Text, VStack } from 'native-base';
 import React, { FC } from 'react';
 
-import { HomeScreenProp } from '../../constants/routes';
+import { RootStackParamListType } from '../../constants/routes';
 import { TransactionType } from '../../models/Transaction';
+import { formatMoney } from '../../utils/formatter';
 
 type Props = {
   activity: TransactionType;
 };
 
 const ActivityItem: FC<Props> = ({ activity }) => {
-  const { navigation } = useNavigation<HomeScreenProp>();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamListType, 'home'>>();
 
-  let componentToRender: JSX.Element;
-
-  switch (activity.type) {
-    case 'payment':
-      componentToRender = (
-        <>
-          <Icon
-            as={<MaterialIcons />}
-            name="payments"
-            color="_primary.500"
-            size="3xl"
-            mx="2.5"
-          />
-          <VStack space={2}>
-            <Text
-              fontFamily="body"
-              fontWeight="bold"
-              fontSize="lg"
-              color="_neutral.300"
-            >
-              {activity.entityName}
-            </Text>
-            <Text
-              fontFamily="body"
-              fontWeight="normal"
-              fontSize="lg"
-              color="_neutral.300"
-            >
-              {activity.transactionDate}
-            </Text>
-          </VStack>
-          <Text
-            fontFamily="body"
-            fontWeight="bold"
-            fontSize="lg"
-            color="_neutral.600"
-          >
-            {activity.amount}
-          </Text>
-        </>
-      );
-      break;
-    case 'receive':
-      componentToRender = (
-        <>
-          <Avatar
-            source={{ uri: activity.origin.profilePictureURL }}
-            bg="_neutral.50"
-            p={2}
-            mx={1}
-            shadow={4}
-          />
-          <VStack space={2}>
-            <Text
-              fontFamily="body"
-              fontWeight="bold"
-              fontSize="lg"
-              color="_neutral.300"
-            >
-              {activity.origin.name}
-            </Text>
-            <Text
-              fontFamily="body"
-              fontWeight="normal"
-              fontSize="lg"
-              color="_neutral.300"
-            >
-              {activity.transactionDate}
-            </Text>
-          </VStack>
-          <Text
-            fontFamily="body"
-            fontWeight="bold"
-            fontSize="lg"
-            color="_neutral.600"
-          >
-            {activity.amount}
-          </Text>
-        </>
-      );
-      break;
-    case 'send':
-      componentToRender = (
-        <>
-          <Icon
-            as={<Ionicons />}
-            name="paper-plane"
-            color="_primary.500"
-            size="3xl"
-            mx="2.5"
-          />
-          <VStack space={2}>
-            <Text
-              fontFamily="body"
-              fontWeight="bold"
-              fontSize="lg"
-              color="_neutral.300"
-            >
-              {activity.destination.name}
-            </Text>
-            <Text
-              fontFamily="body"
-              fontWeight="normal"
-              fontSize="lg"
-              color="_neutral.300"
-            >
-              {activity.transactionDate}
-            </Text>
-          </VStack>
-          <Text
-            fontFamily="body"
-            fontWeight="bold"
-            fontSize="lg"
-            color="_neutral.600"
-          >
-            {activity.amount}
-          </Text>
-        </>
-      );
-      break;
-    default:
-      componentToRender = undefined;
-  }
+  const displayName =
+    activity.type === 'receive'
+      ? activity.origin.name
+      : activity.type === 'payment'
+      ? activity.entityName
+      : activity.destination.name;
 
   return (
     <Pressable
       onPress={() => {
-        navigation.navigate('details', {
+        navigation.push('details', {
           transaction: activity,
         });
       }}
     >
       <HStack justifyContent="space-between" mb={6} alignItems="center">
         <HStack space={6} alignItems="center">
-          {componentToRender}
+          {activity.type === 'receive' ? (
+            <>
+              <Avatar
+                source={{ uri: activity.origin.profilePictureURL }}
+                bg="_neutral.50"
+                p={2}
+                mx={1}
+                shadow={4}
+              />
+            </>
+          ) : (
+            <Icon
+              as={
+                activity.type === 'payment' ? <MaterialIcons /> : <Ionicons />
+              }
+              name={activity.type === 'payment' ? 'payments' : 'paper-plane'}
+              color="_primary.500"
+              size="3xl"
+              mx="2.5"
+            />
+          )}
+          <VStack space={2}>
+            <Text
+              fontFamily="body"
+              fontWeight="bold"
+              fontSize="lg"
+              color="_neutral.300"
+            >
+              {displayName}
+            </Text>
+            <Text
+              fontFamily="body"
+              fontWeight="normal"
+              fontSize="lg"
+              color="_neutral.300"
+            >
+              {activity.transactionDate}
+            </Text>
+          </VStack>
         </HStack>
+        <Text
+          fontFamily="body"
+          fontWeight="bold"
+          fontSize="lg"
+          color="_neutral.600"
+        >
+          {formatMoney(activity.amount, activity.currency)}
+        </Text>
       </HStack>
     </Pressable>
   );

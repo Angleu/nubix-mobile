@@ -1,5 +1,8 @@
-import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import {
+  Ionicons,
+  MaterialCommunityIcons,
+  MaterialIcons,
+} from '@expo/vector-icons';
 import {
   Avatar,
   Button,
@@ -14,33 +17,64 @@ import {
 import React from 'react';
 
 import Container from '../components/layout/Container';
-import { RootStackParamListType } from '../constants/routes';
-
-type Props = NativeStackScreenProps<RootStackParamListType, 'details'>;
+import { DetailsScreenProp } from '../constants/routes';
+import { formatMoney } from '../utils/formatter';
+import { userLoggedIn } from '../utils/mocks/users';
 
 export default function Details({
   route,
   navigation: { goBack },
-}: Props): JSX.Element {
+}: DetailsScreenProp): JSX.Element {
+  const { transaction } = route.params;
+  const transactionType = transaction.type;
+
   return (
     <Container>
       <VStack my={6} space={4} alignItems="center">
         <Heading>Detalhes</Heading>
         <VStack space={2} alignItems="center">
-          <Avatar
-            shadow={6}
-            source={{ uri: route.params.profilePic }}
-            size="lg"
-          />
+          {transactionType === 'receive' ? (
+            <>
+              <Avatar
+                source={{ uri: transaction.origin.profilePictureURL }}
+                bg="_neutral.50"
+                p={2}
+                mx={1}
+                shadow={4}
+              />
+            </>
+          ) : (
+            <Icon
+              as={
+                transaction.type === 'payment' ? (
+                  <MaterialIcons />
+                ) : (
+                  <Ionicons />
+                )
+              }
+              name={transaction.type === 'payment' ? 'payments' : 'paper-plane'}
+              color="_primary.500"
+              size="3xl"
+              mx="2.5"
+            />
+          )}
           <Text fontSize="lg" fontWeight="bold" fontFamily="body">
-            {route.params.name}
+            {transactionType === 'payment'
+              ? transaction.entityName
+              : transactionType === 'receive'
+              ? transaction.origin.name
+              : transaction.destination.name}
           </Text>
-          <Text fontFamily="body" fontSize="md">
-            {route.params.number}
-          </Text>
+          {transactionType !== 'payment' && (
+            <Text fontFamily="body" fontSize="md">
+              {transactionType === 'receive'
+                ? transaction.origin.phoneNumber
+                : transaction.destination.phoneNumber}
+            </Text>
+          )}
         </VStack>
         <Heading fontFamily="body" color="_primary.400">
-          {route.params.amount}
+          {formatMoney(transaction.amount, transaction.currency)}
         </Heading>
         <HStack space={4}>
           <IconButton
@@ -79,10 +113,10 @@ export default function Details({
                 fontSize="lg"
                 fontWeight="bold"
               >
-                Transfer
+                Valor da Transferência
               </Text>
               <Text fontFamily="body" fontSize="lg">
-                {route.params.amount}
+                {formatMoney(transaction.amount, transaction.currency)}
               </Text>
             </HStack>
             <HStack justifyContent="space-between">
@@ -92,9 +126,9 @@ export default function Details({
                 fontSize="lg"
                 fontWeight="bold"
               >
-                Cost
+                Custo
               </Text>
-              <Text>{0}</Text>
+              <Text>{formatMoney(0, transaction.currency)}</Text>
             </HStack>
             <HStack justifyContent="space-between">
               <Text
@@ -103,12 +137,11 @@ export default function Details({
                 fontSize="lg"
                 fontWeight="bold"
               >
-                Date Transation
+                Data da Transação
               </Text>
               <Text fontFamily="body">29/02/2022</Text>
             </HStack>
           </Stack>
-          {/* {Aqui é outra parte} */}
           <Stack
             space={2}
             width="full"
@@ -124,10 +157,13 @@ export default function Details({
                 fontSize="lg"
                 fontWeight="bold"
               >
-                Balance Actual
+                Balanço Atual
               </Text>
               <Text fontFamily="body" fontSize="lg">
-                {route.params.amount}
+                {formatMoney(
+                  userLoggedIn.accounts[0].balance,
+                  userLoggedIn.accounts[0].currency
+                )}
               </Text>
             </HStack>
             <HStack justifyContent="space-between">
@@ -137,7 +173,7 @@ export default function Details({
                 fontSize="lg"
                 fontWeight="bold"
               >
-                Reference
+                Referencia
               </Text>
               <Text>Some thing here</Text>
             </HStack>
@@ -148,7 +184,7 @@ export default function Details({
                 fontSize="lg"
                 fontWeight="bold"
               >
-                Number of transation
+                Número da Transação
               </Text>
               <Text>#2987667</Text>
             </HStack>
@@ -165,7 +201,7 @@ export default function Details({
         shadow="6"
         onPress={() => goBack()}
       >
-        Done
+        Fechar
       </Button>
     </Container>
   );
