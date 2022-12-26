@@ -1,16 +1,17 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Center, Icon, IconButton, Text } from 'native-base';
 import React from 'react';
 
 import ContactsSearch from '../../components/ContactsSearch';
 import Container from '../../components/layout/Container';
 import Header from '../../components/layout/Header';
-import { RootStackParamListType } from '../../constants/routes';
+import { TransferScreenProps } from '../../constants/routes';
+import { formatMoney } from '../../utils/formatter';
+import { userLoggedIn } from '../../utils/mocks/users';
 
-type Props = NativeStackScreenProps<RootStackParamListType, 'transfer'>;
-
-export default function Transfer({ navigation: { navigate } }: Props) {
+export default function Transfer({
+  navigation: { navigate },
+}: TransferScreenProps) {
   return (
     <Container>
       <Header
@@ -50,7 +51,10 @@ export default function Transfer({ navigation: { navigate } }: Props) {
             textShadowRadius: 10,
           }}
         >
-          188 290.90 Kzs
+          {formatMoney(
+            userLoggedIn.accounts[0].balance,
+            userLoggedIn.accounts[0].currency
+          )}
         </Text>
       </Center>
 

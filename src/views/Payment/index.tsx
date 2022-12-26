@@ -4,6 +4,8 @@ import React from 'react';
 
 import Container from '../../components/layout/Container';
 import Header from '../../components/layout/Header';
+import { formatMoney } from '../../utils/formatter';
+import { userLoggedIn } from '../../utils/mocks/users';
 
 const Pay = () => {
   return (
@@ -34,7 +36,10 @@ const Pay = () => {
               fontWeight="bold"
               color="_neutral.50"
             >
-              188 290.90 Kzs
+              {formatMoney(
+                userLoggedIn.accounts[0].balance,
+                userLoggedIn.accounts[0].currency
+              )}
             </Text>
           </VStack>
           <Icon

@@ -4,8 +4,11 @@ import React, { useState } from 'react';
 import SlideButton from '../../components/button/SlideButton';
 import Container from '../../components/layout/Container';
 import Header from '../../components/layout/Header';
+import { TransferConfirmationScreenProps } from '../../constants/routes';
 
-const TransferConfirmation = () => {
+const TransferConfirmation = ({ route }: TransferConfirmationScreenProps) => {
+  const { destination, transferAmount, message } = route.params;
+
   const [isConfirmed, setConfirmed] = useState(false);
 
   return (
@@ -24,7 +27,7 @@ const TransferConfirmation = () => {
           fontWeight="bold"
           color="_neutral.300"
         >
-          Keisha Levronka
+          {destination.name}
         </Text>
         <Text
           fontFamily="body"
@@ -32,7 +35,7 @@ const TransferConfirmation = () => {
           fontWeight="light"
           color="_neutral.300"
         >
-          9245888444
+          {destination.phoneNumber}
         </Text>
         <Text
           my="12"
@@ -46,26 +49,29 @@ const TransferConfirmation = () => {
             textShadowRadius: 10,
           }}
         >
-          $ 500.00
+          {transferAmount}
         </Text>
-        <Text fontFamily="body" fontSize="xl" color="_primary.500">
-          Com a mensagem
-        </Text>
-        <Box
-          mt="7"
-          mb="12"
-          bg="_primary.50"
-          w="full"
-          rounded="2xl"
-          p="4"
-          minH="32"
-          shadow={2}
-        >
-          <Text color="_neutral.50" fontFamily="body" fontSize="md">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet,
-            ut?
-          </Text>
-        </Box>
+        {message && (
+          <>
+            <Text fontFamily="body" fontSize="xl" color="_primary.500">
+              Com a mensagem
+            </Text>
+            <Box
+              mt="7"
+              mb="12"
+              bg="_primary.50"
+              w="full"
+              rounded="2xl"
+              p="4"
+              minH="32"
+              shadow={2}
+            >
+              <Text color="_neutral.50" fontFamily="body" fontSize="md">
+                {message}
+              </Text>
+            </Box>
+          </>
+        )}
         {isConfirmed ? (
           <Heading fontFamily="heading" fontSize="xl" color="_primary.500">
             Transferência Efetuada com Sucesso
