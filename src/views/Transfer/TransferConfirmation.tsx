@@ -4,9 +4,11 @@ import React, { useState } from 'react';
 import SlideButton from '../../components/button/SlideButton';
 import Container from '../../components/layout/Container';
 import Header from '../../components/layout/Header';
-import { TransferConfirmationScreenProps } from '../../constants/routes';
+import { ScreenProps } from '../../constants/routes';
 
-const TransferConfirmation = ({ route }: TransferConfirmationScreenProps) => {
+const TransferConfirmation = ({
+  route,
+}: ScreenProps<'transferConfirmation'>) => {
   const { destination, transferAmount, message } = route.params;
 
   const [isConfirmed, setConfirmed] = useState(false);

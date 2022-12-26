@@ -5,13 +5,13 @@ import React from 'react';
 import ContactsSearch from '../../components/ContactsSearch';
 import Container from '../../components/layout/Container';
 import Header from '../../components/layout/Header';
-import { TransferScreenProps } from '../../constants/routes';
+import { ScreenProps } from '../../constants/routes';
 import { formatMoney } from '../../utils/formatter';
 import { userLoggedIn } from '../../utils/mocks/users';
 
 export default function Transfer({
   navigation: { navigate },
-}: TransferScreenProps) {
+}: ScreenProps<'transfer'>) {
   return (
     <Container>
       <Header

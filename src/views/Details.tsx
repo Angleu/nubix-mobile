@@ -17,14 +17,14 @@ import {
 import React from 'react';
 
 import Container from '../components/layout/Container';
-import { DetailsScreenProp } from '../constants/routes';
+import { ScreenProps } from '../constants/routes';
 import { formatMoney } from '../utils/formatter';
 import { userLoggedIn } from '../utils/mocks/users';
 
 export default function Details({
   route,
   navigation: { goBack },
-}: DetailsScreenProp): JSX.Element {
+}: ScreenProps<'details'>): JSX.Element {
   const { transaction } = route.params;
   const transactionType = transaction.type;
 

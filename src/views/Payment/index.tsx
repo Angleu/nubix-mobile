@@ -7,7 +7,7 @@ import Header from '../../components/layout/Header';
 import { formatMoney } from '../../utils/formatter';
 import { userLoggedIn } from '../../utils/mocks/users';
 
-const Pay = () => {
+const Payment = () => {
   return (
     <Container>
       <Header heading="Pagamento" />
@@ -97,4 +97,4 @@ const Pay = () => {
   );
 };
 
-export default Pay;
+export default Payment;

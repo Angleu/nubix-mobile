@@ -14,7 +14,7 @@ import NumberButton from '../../components/button/NumberButton';
 import Container from '../../components/layout/Container';
 import Header from '../../components/layout/Header';
 import { TransferDescriptionBottomSheet } from '../../components/modal';
-import { TransferValueScreenProps } from '../../constants/routes';
+import { ScreenProps } from '../../constants/routes';
 import { useBottomSheetModal } from '../../hooks/useBottomSheetModal';
 
 type KeyHandlerActionsType =
@@ -34,7 +34,7 @@ type KeyHandlerActionsType =
 const TransferValue = ({
   navigation: { navigate },
   route,
-}: TransferValueScreenProps) => {
+}: ScreenProps<'transferValue'>) => {
   const { destination } = route.params;
 
   const { reference, showModal } = useBottomSheetModal();

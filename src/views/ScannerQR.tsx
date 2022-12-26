@@ -1,15 +1,14 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { Heading, Icon, IconButton, Stack, Text, VStack } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
 
-import { RootStackParamListType } from '../constants/routes';
+import { ScreenProps } from '../constants/routes';
 
-type Props = NativeStackScreenProps<RootStackParamListType, 'scannerQr'>;
-
-export default function ScannerQR({ navigation: { goBack } }: Props) {
+export default function ScannerQR({
+  navigation: { goBack },
+}: ScreenProps<'scannerQr'>) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   useEffect(() => {
