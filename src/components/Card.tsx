@@ -2,6 +2,8 @@ import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { Box, HStack, Icon, IconButton, Text, VStack } from 'native-base';
 import React from 'react';
 
+import { userLoggedIn } from '../utils/mocks/users';
+
 const Card = () => {
   return (
     <Box mt={5} bg="_primary.50" px="10" py="8" rounded="3xl" shadow="8">
@@ -21,7 +23,7 @@ const Card = () => {
             fontWeight="bold"
             color="_neutral.50"
           >
-            188 290.90 Kzs
+            {userLoggedIn.accounts[0].balance} Kzs
           </Text>
         </VStack>
         <Icon

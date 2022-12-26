@@ -1,7 +1,7 @@
 import { Button, FlatList, HStack, Text, VStack } from 'native-base';
 import React from 'react';
 
-import { activitiesMock } from '../../utils';
+import activitiesMock from '../../utils/mocks/activities';
 import ActivityItem from './_ActivityItem';
 
 const RecentActivities = () => {
@@ -32,7 +32,7 @@ const RecentActivities = () => {
       <FlatList
         data={activitiesMock}
         mt={2}
-        renderItem={({ item }) => <ActivityItem item={item} />}
+        renderItem={({ item }) => <ActivityItem activity={item} />}
       />
     </VStack>
   );
