@@ -7,23 +7,18 @@ import { userLoggedIn } from '../utils/mocks/users';
 
 const Card = () => {
   return (
-    <Box mt={5} bg="_primary.50" px="10" py="8" rounded="3xl" shadow="8">
+    <Box mt={5} bg="primary.50" px="10" py="8" rounded="3xl" shadow="8">
       <HStack justifyContent="space-between" mb={8}>
         <VStack>
           <Text
             fontFamily="body"
-            color="_neutral.50"
+            color="white"
             fontSize="sm"
             fontWeight="medium"
           >
             Balanço Total
           </Text>
-          <Text
-            fontFamily="body"
-            fontSize="xl"
-            fontWeight="bold"
-            color="_neutral.50"
-          >
+          <Text fontFamily="body" fontSize="xl" fontWeight="bold" color="white">
             {formatMoney(
               userLoggedIn.accounts[0].balance,
               userLoggedIn.accounts[0].currency
@@ -34,7 +29,7 @@ const Card = () => {
           as={<MaterialIcons />}
           name="credit-card"
           size="5xl"
-          color="_neutral.50"
+          color="white"
         />
       </HStack>
       <HStack justifyContent="flex-end">
@@ -47,7 +42,7 @@ const Card = () => {
               name="share-variant-outline"
             />
           }
-          _icon={{ color: '_neutral.50', size: '2xl' }}
+          _icon={{ color: 'white', size: '2xl' }}
         />
       </HStack>
     </Box>

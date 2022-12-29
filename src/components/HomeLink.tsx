@@ -4,12 +4,12 @@ import { Icon, VStack } from 'native-base';
 import React, { FC } from 'react';
 import { Text } from 'react-native';
 
-import { RootStackParamListType } from '../constants/routes';
+import { MainStackParamListType } from '../routes/types';
 
 type Props = {
   iconName: string;
   text: string;
-  to: keyof RootStackParamListType;
+  to: keyof MainStackParamListType;
 };
 
 const HomeLink: FC<Props> = ({ iconName, text, to }) => {
@@ -19,7 +19,7 @@ const HomeLink: FC<Props> = ({ iconName, text, to }) => {
         <Icon
           as={<MaterialCommunityIcons />}
           name={iconName}
-          color="_primary.500"
+          color="primary.100"
           size="3xl"
         />
         <Text>{text}</Text>

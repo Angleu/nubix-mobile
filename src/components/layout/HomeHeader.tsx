@@ -11,12 +11,12 @@ const HomeHeader = () => {
         <Heading
           fontFamily="heading"
           fontSize="xl"
-          color="_neutral.300"
+          color="coolGray.700"
           fontWeight="bold"
         >
           Bem Vindo de Volta!
         </Heading>
-        <Text fontFamily="body" fontSize="lg" color="_neutral.500">
+        <Text fontFamily="body" fontSize="lg" color="dark.50">
           Olá, {userLoggedIn.name}
         </Text>
       </VStack>
@@ -30,7 +30,7 @@ const HomeHeader = () => {
           as={<MaterialCommunityIcons />}
           name="bell-outline"
           size="4xl"
-          color="_neutral.200"
+          color="gray.700"
         />
       </HStack>
     </HStack>

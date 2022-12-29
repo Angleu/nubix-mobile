@@ -49,21 +49,21 @@ const TransferDescriptionBottomSheet: FC<Props> = ({
           fontFamily="body"
           fontSize="md"
           h="24"
-          borderColor="_primary.500"
+          borderColor="primary.100"
           _focus={{
             borderColor: '_primary.400',
-            bg: '_neutral.50',
+            bg: 'white',
           }}
         />
         <VStack space={3}>
           <Button
             onPress={() => dismiss()}
             variant="outline"
-            borderColor="_primary.500"
+            borderColor="primary.100"
             _text={{
               fontFamily: 'body',
               fontSize: 'md',
-              color: '_primary.500',
+              color: 'primary.100',
             }}
           >
             Cancelar
@@ -74,14 +74,14 @@ const TransferDescriptionBottomSheet: FC<Props> = ({
               radius: 10,
             }}
             _pressed={{
-              bg: '_primary.50',
+              bg: 'primary.50',
             }}
             variant="solid"
-            bg="_primary.500"
+            bg="primary.100"
             _text={{
               fontFamily: 'body',
               fontSize: 'md',
-              color: '_neutral.50',
+              color: 'white',
             }}
           >
             Confirmar

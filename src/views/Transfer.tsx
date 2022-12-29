@@ -2,16 +2,16 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Center, Icon, IconButton, Text } from 'native-base';
 import React from 'react';
 
-import ContactsSearch from '../../components/ContactsSearch';
-import Container from '../../components/layout/Container';
-import Header from '../../components/layout/Header';
-import { ScreenProps } from '../../constants/routes';
-import { formatMoney } from '../../utils/formatter';
-import { userLoggedIn } from '../../utils/mocks/users';
+import ContactsSearch from '../components/ContactsSearch';
+import Container from '../components/layout/Container';
+import Header from '../components/layout/Header';
+import { MainStackScreenProps } from '../routes/types';
+import { formatMoney } from '../utils/formatter';
+import { userLoggedIn } from '../utils/mocks/users';
 
 export default function Transfer({
   navigation: { navigate },
-}: ScreenProps<'transfer'>) {
+}: MainStackScreenProps<'Transfer'>) {
   return (
     <Container>
       <Header
@@ -20,12 +20,10 @@ export default function Transfer({
           <IconButton
             icon={<Icon as={<MaterialIcons name="qr-code" />} />}
             _icon={{
-              color: '_primary.500',
+              color: 'primary.100',
               size: '4xl',
             }}
-            onPress={() => {
-              navigate('scannerQr');
-            }}
+            onPress={() => navigate('QRScanner')}
           />
         }
       />
@@ -34,7 +32,7 @@ export default function Transfer({
         <Text
           fontFamily="body"
           fontWeight="medium"
-          color="_primary.500"
+          color="primary.100"
           fontSize="2xl"
           mb={6}
         >
@@ -42,7 +40,7 @@ export default function Transfer({
         </Text>
         <Text
           fontFamily="body"
-          color="_primary.500"
+          color="primary.100"
           fontWeight="bold"
           fontSize="xl"
           style={{

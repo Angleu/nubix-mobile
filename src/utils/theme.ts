@@ -1,27 +1,9 @@
 import { extendTheme } from 'native-base';
 
 export const colorPallet = {
-  _primary: {
+  primary: {
     50: '#8A978C',
-    100: '#E6F6F4',
-    200: '#00A991',
-    300: '#007F6D',
-    400: '#003B33',
-    500: '#3F5857',
-  },
-  _secondary: {
-    50: '#B2BBC6',
-    100: '#546881',
-    200: '#1D242D',
-  },
-  _neutral: {
-    50: '#fff',
-    100: '#EBEBEB',
-    200: '#3a3a3a',
-    300: '#373737',
-    400: '#292929',
-    500: '#131313',
-    600: '#000',
+    100: '#3F5857',
   },
 };
 
@@ -40,8 +22,8 @@ const theme = extendTheme({
       },
     },
     fonts: {
-      heading: 'Poppins',
       body: 'Poppins',
+      heading: 'Poppins',
       mono: 'Poppins',
     },
   },

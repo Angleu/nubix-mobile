@@ -16,15 +16,11 @@ export default function Home() {
         <HomeLink
           iconName="bank-transfer-out"
           text="Transferir"
-          to="transfer"
+          to="Transfer"
         />
-        <HomeLink iconName="inbox" text="Depositar" to="deposit" />
-        <HomeLink iconName="credit-card-outline" text="Pagar" to="payment" />
-        <HomeLink
-          iconName="bank-transfer-in"
-          text="Receber"
-          to="receiveMoney"
-        />
+        <HomeLink iconName="inbox" text="Depositar" to="Deposit" />
+        <HomeLink iconName="credit-card-outline" text="Pagar" to="Payment" />
+        <HomeLink iconName="bank-transfer-in" text="Receber" to="Receive" />
       </HStack>
       <RecentActivities />
     </Container>

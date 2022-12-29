@@ -4,13 +4,14 @@ import { Heading, Icon, IconButton, Stack, Text, VStack } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
 
-import { ScreenProps } from '../constants/routes';
+import { MainStackScreenProps } from '../routes/types';
 
 export default function ScannerQR({
   navigation: { goBack },
-}: ScreenProps<'scannerQr'>) {
+}: MainStackScreenProps<'QRScanner'>) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();

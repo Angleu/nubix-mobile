@@ -1,6 +1,5 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
   Avatar,
   Box,
@@ -15,35 +14,32 @@ import {
 } from 'native-base';
 import React from 'react';
 
-import { RootStackParamListType } from '../../constants/routes';
+import { MainStackNavigationProps } from '../../routes/types';
 import contactsMock from '../../utils/mocks/users';
 
 // TODO: Make search form functional
 const ContactsSearch = () => {
-  const { push } =
-    useNavigation<
-      NativeStackNavigationProp<RootStackParamListType, 'transfer'>
-    >();
+  const { push } = useNavigation<MainStackNavigationProps<'Transfer'>>();
   return (
     <>
       <Center>
-        <Text mb={6} fontSize="lg" fontWeight="bold" color="_neutral.200">
+        <Text mb={6} fontSize="lg" fontWeight="bold" color="gray.700">
           Contactos
         </Text>
         <Input
           py="2"
           borderRadius="xl"
-          borderColor="_primary.500"
+          borderColor="primary.100"
           placeholder="Search"
           _focus={{
-            bg: '_neutral.50',
+            bg: 'white',
             borderColor: '_primary.200',
           }}
           InputLeftElement={
             <Icon
               as={<MaterialIcons />}
               name="search"
-              color="_primary.500"
+              color="primary.100"
               size="2xl"
               ml={3}
             />
@@ -55,10 +51,10 @@ const ContactsSearch = () => {
         data={contactsMock}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <Box bg="_neutral.50" shadow={2} mb="6" mx={1} p={2} rounded="3xl">
+          <Box bg="white" shadow={2} mb="6" mx={1} p={2} rounded="3xl">
             <Pressable
               onPress={() =>
-                push('transferValue', {
+                push('TransferValue', {
                   destination: item,
                 })
               }
@@ -74,7 +70,7 @@ const ContactsSearch = () => {
                     fontFamily="body"
                     fontWeight="bold"
                     fontSize="lg"
-                    color="_neutral.300"
+                    color="coolGray.700"
                   >
                     {item.name}
                   </Text>
@@ -82,7 +78,7 @@ const ContactsSearch = () => {
                     fontFamily="body"
                     fontWeight="normal"
                     fontSize="md"
-                    color="_neutral.300"
+                    color="coolGray.700"
                     opacity={70}
                   >
                     {item.phoneNumber}

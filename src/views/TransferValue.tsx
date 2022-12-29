@@ -10,12 +10,12 @@ import {
 } from 'native-base';
 import React, { useState } from 'react';
 
-import NumberButton from '../../components/button/NumberButton';
-import Container from '../../components/layout/Container';
-import Header from '../../components/layout/Header';
-import { TransferDescriptionBottomSheet } from '../../components/modal';
-import { ScreenProps } from '../../constants/routes';
-import { useBottomSheetModal } from '../../hooks/useBottomSheetModal';
+import NumberButton from '../components/button/NumberButton';
+import Container from '../components/layout/Container';
+import Header from '../components/layout/Header';
+import { TransferDescriptionBottomSheet } from '../components/modal';
+import { useBottomSheetModal } from '../hooks/useBottomSheetModal';
+import { MainStackScreenProps } from '../routes/types';
 
 type KeyHandlerActionsType =
   | '1'
@@ -34,7 +34,7 @@ type KeyHandlerActionsType =
 const TransferValue = ({
   navigation: { navigate },
   route,
-}: ScreenProps<'transferValue'>) => {
+}: MainStackScreenProps<'TransferValue'>) => {
   const { destination } = route.params;
 
   const { reference, showModal } = useBottomSheetModal();
@@ -68,7 +68,7 @@ const TransferValue = ({
 
   const onConfirm = () => {
     const transferAmount = '$' + valueToTransfer.join('');
-    navigate('transferConfirmation', {
+    navigate('TransferConfirmation', {
       destination,
       transferAmount,
       message: description,
@@ -86,7 +86,7 @@ const TransferValue = ({
               fontFamily="body"
               fontWeight="medium"
               fontSize="xl"
-              color="_primary.500"
+              color="primary.100"
             >
               Valor a Transferir
             </Text>
@@ -94,7 +94,7 @@ const TransferValue = ({
               fontFamily="body"
               fontWeight="bold"
               fontSize="4xl"
-              color="_primary.500"
+              color="primary.100"
               style={{
                 textShadowColor: 'rgba(0, 0, 0, 0.25)',
                 textShadowOffset: { width: 0, height: 4 },
@@ -168,14 +168,14 @@ const TransferValue = ({
                 fontFamily: 'body',
                 fontWeight: 'bold',
                 fontSize: 'sm',
-                color: '_primary.500',
+                color: 'primary.100',
               }}
             >
               Adicionar Descrição
             </Button>
             <Button
               onPress={onConfirm}
-              bgColor="_primary.500"
+              bgColor="primary.100"
               rounded="xl"
               shadow={3}
               android_ripple={{
@@ -185,7 +185,7 @@ const TransferValue = ({
                 fontFamily: 'body',
                 fontWeight: 'bold',
                 fontSize: 'lg',
-                color: '_neutral.50',
+                color: 'white',
               }}
             >
               Confirmar

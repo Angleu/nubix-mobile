@@ -15,7 +15,7 @@ const Header: FC<Props> = ({ heading, RightIcon }) => {
       <IconButton
         icon={<Icon as={<Ionicons name="arrow-back-circle-outline" />} />}
         _icon={{
-          color: '_neutral.500',
+          color: 'dark.50',
           size: '4xl',
         }}
         onPress={goBack}
@@ -23,7 +23,7 @@ const Header: FC<Props> = ({ heading, RightIcon }) => {
       <Heading
         fontFamily="heading"
         fontSize="xl"
-        color="_neutral.500"
+        color="dark.50"
         fontWeight="bold"
       >
         {heading}

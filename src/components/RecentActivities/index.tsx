@@ -12,7 +12,7 @@ const RecentActivities = () => {
           fontFamily="body"
           fontWeight="bold"
           fontSize="lg"
-          color="_neutral.300"
+          color="coolGray.700"
         >
           Atividades Recentes
         </Text>
@@ -23,7 +23,7 @@ const RecentActivities = () => {
             fontFamily: 'body',
             fontWeight: 'bold',
             fontSize: 'lg',
-            color: '_primary.500',
+            color: 'primary.100',
           }}
         >
           Ver tudo

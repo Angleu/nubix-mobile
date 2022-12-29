@@ -2,19 +2,19 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Box, Button, HStack, Icon, Text, VStack } from 'native-base';
 import React from 'react';
 
-import Container from '../../components/layout/Container';
-import Header from '../../components/layout/Header';
-import { ScreenProps } from '../../constants/routes';
-import { formatMoney } from '../../utils/formatter';
-import { userLoggedIn } from '../../utils/mocks/users';
+import Container from '../components/layout/Container';
+import Header from '../components/layout/Header';
+import { MainStackScreenProps } from '../routes/types';
+import { formatMoney } from '../utils/formatter';
+import { userLoggedIn } from '../utils/mocks/users';
 
-const Payment = ({ navigation }: ScreenProps<'payment'>) => {
+const Payment = ({ navigation }: MainStackScreenProps<'Payment'>) => {
   return (
     <Container>
       <Header heading="Pagamento" />
       <Box
         mt={12}
-        bg="_primary.50"
+        bg="primary.50"
         px="10"
         py="8"
         h="40"
@@ -25,7 +25,7 @@ const Payment = ({ navigation }: ScreenProps<'payment'>) => {
           <VStack>
             <Text
               fontFamily="body"
-              color="_neutral.50"
+              color="white"
               fontSize="sm"
               fontWeight="medium"
             >
@@ -35,7 +35,7 @@ const Payment = ({ navigation }: ScreenProps<'payment'>) => {
               fontFamily="body"
               fontSize="xl"
               fontWeight="bold"
-              color="_neutral.50"
+              color="white"
             >
               {formatMoney(
                 userLoggedIn.accounts[0].balance,
@@ -47,15 +47,15 @@ const Payment = ({ navigation }: ScreenProps<'payment'>) => {
             as={<MaterialIcons />}
             name="credit-card"
             size="5xl"
-            color="_neutral.50"
+            color="white"
           />
         </HStack>
       </Box>
 
       <VStack mt="9" space={9}>
         <Button
-          onPress={() => navigation.push('nfcPayment')}
-          bg="_primary.500"
+          onPress={() => navigation.push('NFCPayment')}
+          bg="primary.100"
           rounded="xl"
           shadow={6}
           _text={{
@@ -68,14 +68,14 @@ const Payment = ({ navigation }: ScreenProps<'payment'>) => {
               as={<MaterialIcons />}
               name="credit-card"
               size="2xl"
-              color="_neutral.50"
+              color="white"
             />
           }
         >
           NFC
         </Button>
         <Button
-          bg="_primary.500"
+          bg="primary.100"
           rounded="xl"
           shadow={6}
           _text={{
@@ -88,7 +88,7 @@ const Payment = ({ navigation }: ScreenProps<'payment'>) => {
               as={<MaterialIcons />}
               name="qr-code"
               size="2xl"
-              color="_neutral.50"
+              color="white"
             />
           }
         >

@@ -1,14 +1,14 @@
 import { Avatar, Box, Center, Heading, Text } from 'native-base';
 import React, { useState } from 'react';
 
-import SlideButton from '../../components/button/SlideButton';
-import Container from '../../components/layout/Container';
-import Header from '../../components/layout/Header';
-import { ScreenProps } from '../../constants/routes';
+import SlideButton from '../components/button/SlideButton';
+import Container from '../components/layout/Container';
+import Header from '../components/layout/Header';
+import { MainStackScreenProps } from '../routes/types';
 
 const TransferConfirmation = ({
   route,
-}: ScreenProps<'transferConfirmation'>) => {
+}: MainStackScreenProps<'TransferConfirmation'>) => {
   const { destination, transferAmount, message } = route.params;
 
   const [isConfirmed, setConfirmed] = useState(false);
@@ -18,7 +18,7 @@ const TransferConfirmation = ({
       <Header heading="" />
 
       <Center mt="12">
-        <Heading fontFamily="heading" fontSize="xl" color="_primary.500">
+        <Heading fontFamily="heading" fontSize="xl" color="primary.100">
           Irá Transferir
         </Heading>
         <Avatar mt="5" />
@@ -27,7 +27,7 @@ const TransferConfirmation = ({
           fontFamily="body"
           fontSize="lg"
           fontWeight="bold"
-          color="_neutral.300"
+          color="coolGray.700"
         >
           {destination.name}
         </Text>
@@ -35,7 +35,7 @@ const TransferConfirmation = ({
           fontFamily="body"
           fontSize="lg"
           fontWeight="light"
-          color="_neutral.300"
+          color="coolGray.700"
         >
           {destination.phoneNumber}
         </Text>
@@ -44,7 +44,7 @@ const TransferConfirmation = ({
           fontFamily="body"
           fontWeight="bold"
           fontSize="4xl"
-          color="_primary.500"
+          color="primary.100"
           style={{
             textShadowColor: 'rgba(0, 0, 0, 0.25)',
             textShadowOffset: { width: 0, height: 4 },
@@ -55,27 +55,27 @@ const TransferConfirmation = ({
         </Text>
         {message && (
           <>
-            <Text fontFamily="body" fontSize="xl" color="_primary.500">
+            <Text fontFamily="body" fontSize="xl" color="primary.100">
               Com a mensagem
             </Text>
             <Box
               mt="7"
               mb="12"
-              bg="_primary.50"
+              bg="primary.50"
               w="full"
               rounded="2xl"
               p="4"
               minH="32"
               shadow={2}
             >
-              <Text color="_neutral.50" fontFamily="body" fontSize="md">
+              <Text color="white" fontFamily="body" fontSize="md">
                 {message}
               </Text>
             </Box>
           </>
         )}
         {isConfirmed ? (
-          <Heading fontFamily="heading" fontSize="xl" color="_primary.500">
+          <Heading fontFamily="heading" fontSize="xl" color="primary.100">
             Transferência Efetuada com Sucesso
           </Heading>
         ) : (

@@ -17,14 +17,14 @@ import {
 import React from 'react';
 
 import Container from '../components/layout/Container';
-import { ScreenProps } from '../constants/routes';
+import { MainStackScreenProps } from '../routes/types';
 import { formatMoney } from '../utils/formatter';
 import { userLoggedIn } from '../utils/mocks/users';
 
 export default function Details({
   route,
   navigation: { goBack },
-}: ScreenProps<'details'>): JSX.Element {
+}: MainStackScreenProps<'Details'>): JSX.Element {
   const { transaction } = route.params;
   const transactionType = transaction.type;
 
@@ -37,7 +37,7 @@ export default function Details({
             <>
               <Avatar
                 source={{ uri: transaction.origin.profilePictureURL }}
-                bg="_neutral.50"
+                bg="white"
                 p={2}
                 mx={1}
                 shadow={4}
@@ -53,7 +53,7 @@ export default function Details({
                 )
               }
               name={transaction.type === 'payment' ? 'payments' : 'paper-plane'}
-              color="_primary.500"
+              color="primary.100"
               size="3xl"
               mx="2.5"
             />
@@ -101,7 +101,7 @@ export default function Details({
           <Stack
             space={2}
             width="full"
-            borderBottomColor="_primary.50"
+            borderBottomColor="primary.50"
             borderBottomWidth={3}
             borderStyle="dashed"
             py={4}
@@ -145,7 +145,7 @@ export default function Details({
           <Stack
             space={2}
             width="full"
-            borderBottomColor="_primary.50"
+            borderBottomColor="primary.50"
             borderBottomWidth={3}
             borderStyle="dashed"
             py={4}
@@ -194,7 +194,7 @@ export default function Details({
       <Button
         py={4}
         mb={3}
-        background="_primary.400"
+        background="primary.100"
         fontSize="lg"
         fontWeight="bold"
         borderRadius={10}

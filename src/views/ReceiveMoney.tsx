@@ -14,12 +14,12 @@ import { Share } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 
 import Container from '../components/layout/Container';
-import { ScreenProps } from '../constants/routes';
+import { MainStackScreenProps } from '../routes/types';
 import { colorPallet } from '../utils/theme';
 
 export default function ReceiveMoney({
   navigation: { goBack },
-}: ScreenProps<'receiveMoney'>) {
+}: MainStackScreenProps<'Receive'>) {
   const onShare = async () => {
     await Share.share({ url: 'http://www.google.com' });
   };
@@ -47,7 +47,7 @@ export default function ReceiveMoney({
           <QRCode
             value="http://www.google.com"
             logoBackgroundColor="#fff"
-            color={colorPallet._primary[500]}
+            color={colorPallet.primary[100]}
             size={340}
           />
         </Flex>
@@ -57,7 +57,7 @@ export default function ReceiveMoney({
         <Button
           py={4}
           mb={3}
-          background="_primary.500"
+          background="primary.100"
           fontSize="lg"
           fontWeight="bold"
           borderRadius={10}

@@ -21,11 +21,11 @@ const NumberButton: FC<Props> = ({
       flex={1}
       variant="outline"
       py={2}
-      borderColor={isDelete ? 'danger.700' : '_primary.500'}
+      borderColor={isDelete ? 'danger.700' : 'primary.100'}
       borderWidth="2"
       borderRadius="3xl"
       _text={{
-        color: '_neutral.600',
+        color: 'black',
         fontFamily: 'body',
         fontSize: '4xl',
         fontWeight: 'medium',

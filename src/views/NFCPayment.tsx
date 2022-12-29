@@ -3,8 +3,8 @@ import LottieView from 'lottie-react-native';
 import { Heading, Icon, IconButton, Text, VStack } from 'native-base';
 import React, { useEffect, useRef } from 'react';
 
-import Container from '../../components/layout/Container';
-import Header from '../../components/layout/Header';
+import Container from '../components/layout/Container';
+import Header from '../components/layout/Header';
 
 const NFCPayment = () => {
   const animation = useRef<LottieView>(null);
@@ -24,7 +24,7 @@ const NFCPayment = () => {
                 as={Entypo}
                 name="dots-three-horizontal"
                 size="xl"
-                color="_neutral.600"
+                color="black"
               />
             }
             borderRadius="full"
@@ -37,14 +37,14 @@ const NFCPayment = () => {
           fontFamily="body"
           fontWeight="bold"
           fontSize="2xl"
-          color="_primary.500"
+          color="primary.100"
         >
           CONTACTLESS
         </Heading>
         <Icon
           as={MaterialCommunityIcons}
           name="contactless-payment"
-          color="_primary.500"
+          color="primary.100"
           size="lg"
         />
       </VStack>
@@ -53,12 +53,13 @@ const NFCPayment = () => {
         autoPlay
         loop
         ref={animation}
+        speed={0.6}
         style={{
           width: 200,
           height: 200,
           backgroundColor: '#fff',
         }}
-        source={require('../../../assets/animation/contactless-payment.json')}
+        source={require('../../assets/animation/contactless-payment.json')}
       />
 
       <Text
@@ -67,7 +68,7 @@ const NFCPayment = () => {
         fontFamily="body"
         fontWeight="normal"
         fontSize="lg"
-        color="_primary.500"
+        color="primary.100"
       >
         APROXIME O TELEFONE AO TPA
       </Text>

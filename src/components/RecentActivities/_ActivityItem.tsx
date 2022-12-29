@@ -1,11 +1,10 @@
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Avatar, HStack, Icon, Pressable, Text, VStack } from 'native-base';
 import React, { FC } from 'react';
 
-import { RootStackParamListType } from '../../constants/routes';
 import { TransactionType } from '../../models/Transaction';
+import { MainStackNavigationProps } from '../../routes/types';
 import { formatMoney } from '../../utils/formatter';
 
 type Props = {
@@ -13,8 +12,7 @@ type Props = {
 };
 
 const ActivityItem: FC<Props> = ({ activity }) => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamListType, 'home'>>();
+  const navigation = useNavigation<MainStackNavigationProps<'HomeTab'>>();
 
   const displayName =
     activity.type === 'receive'
@@ -26,7 +24,7 @@ const ActivityItem: FC<Props> = ({ activity }) => {
   return (
     <Pressable
       onPress={() => {
-        navigation.push('details', {
+        navigation.push('Details', {
           transaction: activity,
         });
       }}
@@ -37,7 +35,7 @@ const ActivityItem: FC<Props> = ({ activity }) => {
             <>
               <Avatar
                 source={{ uri: activity.origin.profilePictureURL }}
-                bg="_neutral.50"
+                bg="white"
                 p={2}
                 mx={1}
                 shadow={4}
@@ -49,7 +47,7 @@ const ActivityItem: FC<Props> = ({ activity }) => {
                 activity.type === 'payment' ? <MaterialIcons /> : <Ionicons />
               }
               name={activity.type === 'payment' ? 'payments' : 'paper-plane'}
-              color="_primary.500"
+              color="primary.100"
               size="3xl"
               mx="2.5"
             />
@@ -59,7 +57,7 @@ const ActivityItem: FC<Props> = ({ activity }) => {
               fontFamily="body"
               fontWeight="bold"
               fontSize="lg"
-              color="_neutral.300"
+              color="coolGray.700"
             >
               {displayName}
             </Text>
@@ -67,18 +65,13 @@ const ActivityItem: FC<Props> = ({ activity }) => {
               fontFamily="body"
               fontWeight="normal"
               fontSize="lg"
-              color="_neutral.300"
+              color="coolGray.700"
             >
               {activity.transactionDate}
             </Text>
           </VStack>
         </HStack>
-        <Text
-          fontFamily="body"
-          fontWeight="bold"
-          fontSize="lg"
-          color="_neutral.600"
-        >
+        <Text fontFamily="body" fontWeight="bold" fontSize="lg" color="black">
           {formatMoney(activity.amount, activity.currency)}
         </Text>
       </HStack>
