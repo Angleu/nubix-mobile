@@ -1,10 +1,14 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Link } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { Icon, VStack } from 'native-base';
 import React, { FC } from 'react';
 import { Text } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-import { MainStackParamListType } from '../routes/types';
+import {
+  MainStackNavigationProps,
+  MainStackParamListType,
+} from '../routes/types';
 
 type Props = {
   iconName: string;
@@ -13,8 +17,10 @@ type Props = {
 };
 
 const HomeLink: FC<Props> = ({ iconName, text, to }) => {
+  const { push } = useNavigation<MainStackNavigationProps<'HomeTab'>>();
+
   return (
-    <Link to={{ screen: to }}>
+    <TouchableOpacity onPress={() => push(to)}>
       <VStack alignItems="center">
         <Icon
           as={<MaterialCommunityIcons />}
@@ -24,7 +30,7 @@ const HomeLink: FC<Props> = ({ iconName, text, to }) => {
         />
         <Text>{text}</Text>
       </VStack>
-    </Link>
+    </TouchableOpacity>
   );
 };
 
