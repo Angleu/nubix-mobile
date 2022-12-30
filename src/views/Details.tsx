@@ -73,16 +73,24 @@ export default function Details({
             </Text>
           )}
         </VStack>
-        <Heading fontFamily="body" color="_primary.400">
+        <Heading fontFamily="body" color="primary.100">
           {formatMoney(transaction.amount, transaction.currency)}
         </Heading>
         <HStack space={4}>
           <IconButton
+            borderRadius="full"
+            _pressed={{
+              bg: 'light.50',
+            }}
             icon={<Icon as={MaterialIcons} name="share" size={38} />}
-            _icon={{ color: '_primary.400' }}
+            _icon={{ color: 'primary.100' }}
             // onPress={onShare}
           />
           <IconButton
+            borderRadius="full"
+            _pressed={{
+              bg: 'light.50',
+            }}
             icon={
               <Icon
                 as={MaterialCommunityIcons}
@@ -90,7 +98,7 @@ export default function Details({
                 size={38}
               />
             }
-            _icon={{ color: '_primary.400' }}
+            _icon={{ color: 'primary.100' }}
             // onPress={onShare}
           />
         </HStack>
@@ -109,7 +117,7 @@ export default function Details({
             <HStack justifyContent="space-between">
               <Text
                 fontFamily="body"
-                color="_primary.400"
+                color="primary.100"
                 fontSize="lg"
                 fontWeight="bold"
               >
@@ -122,7 +130,7 @@ export default function Details({
             <HStack justifyContent="space-between">
               <Text
                 fontFamily="body"
-                color="_primary.400"
+                color="primary.100"
                 fontSize="lg"
                 fontWeight="bold"
               >
@@ -133,7 +141,7 @@ export default function Details({
             <HStack justifyContent="space-between">
               <Text
                 fontFamily="body"
-                color="_primary.400"
+                color="primary.100"
                 fontSize="lg"
                 fontWeight="bold"
               >
@@ -153,7 +161,7 @@ export default function Details({
             <HStack justifyContent="space-between">
               <Text
                 fontFamily="body"
-                color="_primary.400"
+                color="primary.100"
                 fontSize="lg"
                 fontWeight="bold"
               >
@@ -169,7 +177,7 @@ export default function Details({
             <HStack justifyContent="space-between">
               <Text
                 fontFamily="body"
-                color="_primary.400"
+                color="primary.100"
                 fontSize="lg"
                 fontWeight="bold"
               >
@@ -180,7 +188,7 @@ export default function Details({
             <HStack justifyContent="space-between">
               <Text
                 fontFamily="body"
-                color="_primary.400"
+                color="primary.100"
                 fontSize="lg"
                 fontWeight="bold"
               >

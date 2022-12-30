@@ -4,6 +4,7 @@ import React, { FC } from 'react';
 
 import { CurrencyLiteral } from '../models/Account';
 import { formatMoney } from '../utils/formatter';
+import { androidRippleEffect } from '../utils/theme/style';
 
 type Props = {
   currency: CurrencyLiteral;
@@ -45,6 +46,10 @@ const Card: FC<Props> = ({ balance, currency, onShare }) => {
               name="share-variant-outline"
             />
           }
+          android_ripple={androidRippleEffect}
+          _pressed={{
+            bg: 'primary.50',
+          }}
           _icon={{ color: 'white', size: '2xl' }}
           onPress={onShare}
         />

@@ -33,8 +33,13 @@ export default function ScannerQR({
   }
 
   return (
+    // TODO: Refactor this
     <VStack flex={1} safeArea>
       <IconButton
+        borderRadius="full"
+        _pressed={{
+          bg: 'light.50',
+        }}
         icon={
           <Icon
             as={MaterialCommunityIcons}

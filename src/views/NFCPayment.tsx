@@ -19,6 +19,9 @@ const NFCPayment = () => {
         heading="Pagamento"
         RightIcon={
           <IconButton
+            _pressed={{
+              bg: 'light.50',
+            }}
             icon={
               <Icon
                 as={Entypo}
