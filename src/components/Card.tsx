@@ -8,9 +8,10 @@ import { formatMoney } from '../utils/formatter';
 type Props = {
   currency: CurrencyLiteral;
   balance: number;
+  onShare: () => void;
 };
 
-const Card: FC<Props> = ({ balance, currency }) => {
+const Card: FC<Props> = ({ balance, currency, onShare }) => {
   return (
     <Box mt={5} mx="2" bg="primary.50" px="10" py="8" rounded="3xl" shadow="8">
       <HStack justifyContent="space-between" mb={8}>
@@ -45,6 +46,7 @@ const Card: FC<Props> = ({ balance, currency }) => {
             />
           }
           _icon={{ color: 'white', size: '2xl' }}
+          onPress={onShare}
         />
       </HStack>
     </Box>

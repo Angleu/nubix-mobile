@@ -1,5 +1,6 @@
 import { Box, HStack } from 'native-base';
 import React from 'react';
+import { Share } from 'react-native';
 import Swiper from 'react-native-swiper';
 
 import Card from '../components/Card';
@@ -22,7 +23,19 @@ export default function Home() {
         bounces
       >
         {userLoggedIn.accounts.map((account) => (
-          <Card {...account} key={account.accountNumber} />
+          <Card
+            {...account}
+            key={account.accountNumber}
+            onShare={() =>
+              Share.share(
+                {
+                  title: 'Detalhes de Conta',
+                  message: `Nome: ${userLoggedIn.name}\nIBAN: ${account.iban}\nNúmero de Telefone: ${userLoggedIn.phoneNumber}`,
+                },
+                { dialogTitle: 'Detalhes de Conta' }
+              )
+            }
+          />
         ))}
       </Swiper>
       <HStack mt="0" justifyContent="center" space="12">
