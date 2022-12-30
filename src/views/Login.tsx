@@ -1,4 +1,5 @@
 import { MaterialIcons } from '@expo/vector-icons';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Button,
   Center,
@@ -12,14 +13,29 @@ import {
   Text,
   VStack,
 } from 'native-base';
-import React from 'react';
+import React, { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 
 import LogoImage from '../../assets/images/logo.png';
 import Container from '../components/layout/Container';
 import { androidRippleEffect } from '../utils/theme/style';
+import loginSchema, { LoginFormType } from '../utils/validation/loginSchema';
 
-// TODO: Add react hook form here
 const Login = () => {
+  const [rememberUser, setRememberUser] = useState();
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormType>({
+    resolver: zodResolver(loginSchema),
+  });
+
+  const onSubmit = (data: LoginFormType) => {
+    console.log(data);
+  };
+
   return (
     <Container>
       <Center>
@@ -34,64 +50,87 @@ const Login = () => {
         </Heading>
       </Center>
 
-      <FormControl isRequired mb="4">
-        <VStack>
-          <FormControl.Label>
-            <Text fontSize="sm" color="light.500">
-              EMAIL
-            </Text>
-          </FormControl.Label>
-          <Input
-            placeholder="example@mail.com"
-            borderColor="primary.100"
-            _focus={{
-              bg: 'light.50',
-              borderColor: 'primary.100',
-            }}
-            leftElement={
-              <Icon
-                name="email"
-                as={MaterialIcons}
-                color="primary.100"
-                ml="3"
-                size="lg"
+      <Controller
+        name="email"
+        control={control}
+        render={({ field: { onChange, value } }) => (
+          <FormControl isRequired isInvalid={!!errors.email} mb="4">
+            <VStack>
+              <FormControl.Label>
+                <Text fontSize="sm" color="light.500">
+                  EMAIL
+                </Text>
+              </FormControl.Label>
+              <Input
+                keyboardType="email-address"
+                value={value}
+                onChangeText={onChange}
+                placeholder="example@mail.com"
+                borderColor="primary.100"
+                _focus={{
+                  bg: 'light.50',
+                  borderColor: 'primary.100',
+                }}
+                leftElement={
+                  <Icon
+                    name="email"
+                    as={MaterialIcons}
+                    color="primary.100"
+                    ml="3"
+                    size="lg"
+                  />
+                }
               />
-            }
-          />
-          <FormControl.ErrorMessage>Email inválido</FormControl.ErrorMessage>
-        </VStack>
-      </FormControl>
-      <FormControl isRequired mb="4">
-        <VStack>
-          <FormControl.Label>
-            <Text fontSize="sm" color="light.500">
-              PASSWORD
-            </Text>
-          </FormControl.Label>
-          <Input
-            secureTextEntry
-            borderColor="primary.100"
-            _focus={{
-              bg: 'light.50',
-              borderColor: 'primary.100',
-            }}
-            leftElement={
-              <Icon
-                name="lock"
-                as={MaterialIcons}
-                color="primary.100"
-                ml="3"
-                size="lg"
+              <FormControl.ErrorMessage>
+                {errors.email && errors.email.message}
+              </FormControl.ErrorMessage>
+            </VStack>
+          </FormControl>
+        )}
+      />
+
+      <Controller
+        name="password"
+        control={control}
+        render={({ field: { onChange, value } }) => (
+          <FormControl isRequired isInvalid={!!errors.password} mb="4">
+            <VStack>
+              <FormControl.Label>
+                <Text fontSize="sm" color="light.500">
+                  PASSWORD
+                </Text>
+              </FormControl.Label>
+              <Input
+                value={value}
+                onChangeText={onChange}
+                secureTextEntry
+                borderColor="primary.100"
+                _focus={{
+                  bg: 'light.50',
+                  borderColor: 'primary.100',
+                }}
+                leftElement={
+                  <Icon
+                    name="lock"
+                    as={MaterialIcons}
+                    color="primary.100"
+                    ml="3"
+                    size="lg"
+                  />
+                }
               />
-            }
-          />
-          <FormControl.ErrorMessage>Password inválida</FormControl.ErrorMessage>
-        </VStack>
-      </FormControl>
+              <FormControl.ErrorMessage>
+                {errors.password && errors.password.message}
+              </FormControl.ErrorMessage>
+            </VStack>
+          </FormControl>
+        )}
+      />
 
       <HStack alignItems="center" mb="6" space="2">
         <Switch
-          isChecked
+          value={rememberUser}
+          onToggle={(value) => setRememberUser(value)}
           size="sm"
           onTrackColor="primary.50"
           onThumbColor="primary.100"
@@ -111,6 +150,7 @@ const Login = () => {
           _pressed={{
             bg: 'primary.100',
           }}
+          onPress={handleSubmit(onSubmit)}
         >
           Entrar
         </Button>
@@ -124,7 +164,6 @@ const Login = () => {
           }}
           borderColor="primary.100"
           android_ripple={androidRippleEffect}
-          shadow="3"
           _pressed={{
             bg: 'light.50',
           }}
