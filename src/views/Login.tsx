@@ -1,5 +1,6 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigation } from '@react-navigation/native';
 import {
   Button,
   Center,
@@ -19,12 +20,14 @@ import { Controller, useForm } from 'react-hook-form';
 
 import LogoImage from '../../assets/images/logo.png';
 import Container from '../components/layout/Container';
+import { AuthStackNavigationProps } from '../routes/types';
 import { androidRippleEffect } from '../utils/theme/style';
 import loginSchema, { LoginFormType } from '../utils/validation/loginSchema';
 
 const Login = () => {
   const [rememberUser, setRememberUser] = useState();
 
+  const { replace } = useNavigation<AuthStackNavigationProps<'Login'>>();
   const {
     control,
     handleSubmit,
@@ -169,6 +172,7 @@ const Login = () => {
             _pressed={{
               bg: 'light.50',
             }}
+            onPress={() => replace('SignUp')}
           >
             Criar Conta
           </Button>
