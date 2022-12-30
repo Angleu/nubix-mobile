@@ -1,7 +1,8 @@
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { Avatar, HStack, Icon, Pressable, Text, VStack } from 'native-base';
+import { Avatar, HStack, Icon, Text, VStack } from 'native-base';
 import React, { FC } from 'react';
+import { TouchableOpacity } from 'react-native';
 
 import { TransactionType } from '../../models/Transaction';
 import { MainStackNavigationProps } from '../../routes/types';
@@ -22,7 +23,7 @@ const ActivityItem: FC<Props> = ({ activity }) => {
       : activity.destination.name;
 
   return (
-    <Pressable
+    <TouchableOpacity
       onPress={() => {
         navigation.push('Details', {
           transaction: activity,
@@ -38,7 +39,7 @@ const ActivityItem: FC<Props> = ({ activity }) => {
                 bg="white"
                 p={2}
                 mx={1}
-                shadow={4}
+                shadow={1}
               />
             </>
           ) : (
@@ -75,7 +76,7 @@ const ActivityItem: FC<Props> = ({ activity }) => {
           {formatMoney(activity.amount, activity.currency)}
         </Text>
       </HStack>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 

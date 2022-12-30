@@ -13,6 +13,10 @@ const Header: FC<Props> = ({ heading, RightIcon }) => {
   return (
     <HStack pt={5} justifyContent="space-between" alignItems="center">
       <IconButton
+        borderRadius="full"
+        _pressed={{
+          bg: 'light.50',
+        }}
         icon={<Icon as={<Ionicons name="arrow-back-circle-outline" />} />}
         _icon={{
           color: 'dark.50',

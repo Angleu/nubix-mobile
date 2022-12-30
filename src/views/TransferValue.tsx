@@ -16,6 +16,7 @@ import Header from '../components/layout/Header';
 import { TransferDescriptionBottomSheet } from '../components/modal';
 import { useBottomSheetModal } from '../hooks/useBottomSheetModal';
 import { MainStackScreenProps } from '../routes/types';
+import { androidRippleEffect } from '../utils/theme/style';
 
 type KeyHandlerActionsType =
   | '1'
@@ -174,13 +175,12 @@ const TransferValue = ({
               Adicionar Descrição
             </Button>
             <Button
+              android_ripple={androidRippleEffect}
+              _pressed={{ bg: 'white' }}
               onPress={onConfirm}
               bgColor="primary.100"
               rounded="xl"
               shadow={3}
-              android_ripple={{
-                color: '#fff4',
-              }}
               _text={{
                 fontFamily: 'body',
                 fontWeight: 'bold',

@@ -8,11 +8,11 @@ import {
   HStack,
   Icon,
   Input,
-  Pressable,
   Text,
   VStack,
 } from 'native-base';
 import React from 'react';
+import { TouchableOpacity } from 'react-native';
 
 import { MainStackNavigationProps } from '../../routes/types';
 import contactsMock from '../../utils/mocks/users';
@@ -52,7 +52,7 @@ const ContactsSearch = () => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <Box bg="white" shadow={2} mb="6" mx={1} p={2} rounded="3xl">
-            <Pressable
+            <TouchableOpacity
               onPress={() =>
                 push('TransferValue', {
                   destination: item,
@@ -85,7 +85,7 @@ const ContactsSearch = () => {
                   </Text>
                 </VStack>
               </HStack>
-            </Pressable>
+            </TouchableOpacity>
           </Box>
         )}
       />

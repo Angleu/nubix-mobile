@@ -8,6 +8,7 @@ import Header from '../components/layout/Header';
 import { MainStackScreenProps } from '../routes/types';
 import { formatMoney } from '../utils/formatter';
 import { userLoggedIn } from '../utils/mocks/users';
+import { androidRippleEffect } from '../utils/theme/style';
 
 const Payment = ({ navigation }: MainStackScreenProps<'Payment'>) => {
   return (
@@ -66,6 +67,8 @@ const Payment = ({ navigation }: MainStackScreenProps<'Payment'>) => {
 
       <VStack flex={1} space={9}>
         <Button
+          android_ripple={androidRippleEffect}
+          _pressed={{ bg: 'primary.100' }}
           onPress={() => navigation.push('NFCPayment')}
           bg="primary.100"
           rounded="xl"
@@ -87,6 +90,8 @@ const Payment = ({ navigation }: MainStackScreenProps<'Payment'>) => {
           NFC
         </Button>
         <Button
+          android_ripple={androidRippleEffect}
+          _pressed={{ bg: 'primary.100' }}
           bg="primary.100"
           rounded="xl"
           shadow={6}
