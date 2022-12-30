@@ -1,13 +1,19 @@
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { Box, HStack, Icon, IconButton, Text, VStack } from 'native-base';
-import React from 'react';
+import React, { FC } from 'react';
 
+import { CurrencyLiteral } from '../models/Account';
 import { formatMoney } from '../utils/formatter';
-import { userLoggedIn } from '../utils/mocks/users';
 
-const Card = () => {
+type Props = {
+  currency: CurrencyLiteral;
+  balance: number;
+  onShare: () => void;
+};
+
+const Card: FC<Props> = ({ balance, currency, onShare }) => {
   return (
-    <Box mt={5} bg="primary.50" px="10" py="8" rounded="3xl" shadow="8">
+    <Box mt={5} mx="2" bg="primary.50" px="10" py="8" rounded="3xl" shadow="8">
       <HStack justifyContent="space-between" mb={8}>
         <VStack>
           <Text
@@ -19,10 +25,7 @@ const Card = () => {
             Balanço Total
           </Text>
           <Text fontFamily="body" fontSize="xl" fontWeight="bold" color="white">
-            {formatMoney(
-              userLoggedIn.accounts[0].balance,
-              userLoggedIn.accounts[0].currency
-            )}
+            {formatMoney(balance, currency)}
           </Text>
         </VStack>
         <Icon
@@ -43,6 +46,7 @@ const Card = () => {
             />
           }
           _icon={{ color: 'white', size: '2xl' }}
+          onPress={onShare}
         />
       </HStack>
     </Box>

@@ -1,6 +1,7 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { Box, Button, HStack, Icon, Text, VStack } from 'native-base';
 import React from 'react';
+import Swiper from 'react-native-swiper';
 
 import Container from '../components/layout/Container';
 import Header from '../components/layout/Header';
@@ -12,47 +13,58 @@ const Payment = ({ navigation }: MainStackScreenProps<'Payment'>) => {
   return (
     <Container>
       <Header heading="Pagamento" />
-      <Box
-        mt={12}
-        bg="primary.50"
-        px="10"
-        py="8"
-        h="40"
-        rounded="3xl"
-        shadow="8"
+      <Swiper
+        containerStyle={{ flex: 0.6 }}
+        loop={false}
+        horizontal
+        bounces
+        dot={<Box w="2" h="2" bg="gray.100" borderRadius="full" m="1" />}
+        activeDot={
+          <Box w="4" h="2" bg="primary.100" borderRadius="full" m="1" />
+        }
       >
-        <HStack justifyContent="space-between" mb={8}>
-          <VStack>
-            <Text
-              fontFamily="body"
-              color="white"
-              fontSize="sm"
-              fontWeight="medium"
-            >
-              Balanço Total
-            </Text>
-            <Text
-              fontFamily="body"
-              fontSize="xl"
-              fontWeight="bold"
-              color="white"
-            >
-              {formatMoney(
-                userLoggedIn.accounts[0].balance,
-                userLoggedIn.accounts[0].currency
-              )}
-            </Text>
-          </VStack>
-          <Icon
-            as={<MaterialIcons />}
-            name="credit-card"
-            size="5xl"
-            color="white"
-          />
-        </HStack>
-      </Box>
+        {userLoggedIn.accounts.map(({ accountNumber, balance, currency }) => (
+          <Box
+            key={accountNumber}
+            mt={12}
+            mx={2}
+            bg="primary.50"
+            px="10"
+            py="16"
+            rounded="3xl"
+            shadow="8"
+          >
+            <HStack justifyContent="space-between">
+              <VStack>
+                <Text
+                  fontFamily="body"
+                  color="white"
+                  fontSize="sm"
+                  fontWeight="medium"
+                >
+                  Balanço Total
+                </Text>
+                <Text
+                  fontFamily="body"
+                  fontSize="xl"
+                  fontWeight="bold"
+                  color="white"
+                >
+                  {formatMoney(balance, currency)}
+                </Text>
+              </VStack>
+              <Icon
+                as={<MaterialIcons />}
+                name="credit-card"
+                size="5xl"
+                color="white"
+              />
+            </HStack>
+          </Box>
+        ))}
+      </Swiper>
 
-      <VStack mt="9" space={9}>
+      <VStack flex={1} space={9}>
         <Button
           onPress={() => navigation.push('NFCPayment')}
           bg="primary.100"
