@@ -20,6 +20,7 @@ import Container from '../components/layout/Container';
 import { MainStackScreenProps } from '../routes/types';
 import { formatMoney } from '../utils/formatter';
 import { userLoggedIn } from '../utils/mocks/users';
+import { androidRippleEffect } from '../utils/theme/style';
 
 export default function Details({
   route,
@@ -200,6 +201,8 @@ export default function Details({
         </VStack>
       </VStack>
       <Button
+        android_ripple={androidRippleEffect}
+        _pressed={{ bg: 'primary.100' }}
         py={4}
         mb={3}
         background="primary.100"
