@@ -129,6 +129,7 @@ const Analytics = () => {
           backgroundColor: '#fff',
         }}
       >
+        {/* TODO: Make the current month bg color different to others */}
         <VictoryChart
           width={Dimensions.get('screen').width}
           theme={VictoryTheme.material}
@@ -144,6 +145,24 @@ const Analytics = () => {
                 fontSize: 16,
                 fontWeight: 'bold',
                 fontFamily: 'Poppins_700Bold',
+              },
+              grid: {
+                stroke: 'transparent',
+              },
+            }}
+          />
+          <VictoryAxis
+            dependentAxis
+            animate
+            style={{
+              axis: { stroke: 'transparent' },
+              ticks: { stroke: 'transparent' },
+              tickLabels: {
+                fill: 'transparent',
+              },
+              grid: {
+                stroke: colorPallet.primary[50],
+                opacity: '0.4',
               },
             }}
           />
@@ -162,7 +181,7 @@ const Analytics = () => {
             x="month"
             y="amount"
             animate
-            barWidth={30}
+            barWidth={40}
             cornerRadius={10}
             labelComponent={<VictoryLabel />}
             labels={analyticsChartData.map(({ amount }) =>
@@ -177,12 +196,12 @@ const Analytics = () => {
           onPress={() => navigate('AnalyticsIncome')}
           android_ripple={androidRippleEffect}
           bg="primary.50"
-          p="6"
+          p="5"
           borderRadius="2xl"
           flex="1"
         >
           <Text color="white" fontSize="sm" fontFamily="body" mb="2">
-            Total Income
+            Total de Rendimento
           </Text>
           <Text color="white" fontWeight="bold" fontSize="lg" fontFamily="body">
             {formatMoney(188290, 'Kzs')}
@@ -192,12 +211,12 @@ const Analytics = () => {
           onPress={() => navigate('AnalyticsExpense')}
           android_ripple={androidRippleEffect}
           bg="light.800"
-          p="6"
+          p="5"
           borderRadius="2xl"
           flex="1"
         >
           <Text color="white" fontSize="sm" fontFamily="body" mb="2">
-            Total Expense
+            Total de Despesas
           </Text>
           <Text color="white" fontWeight="bold" fontSize="lg" fontFamily="body">
             {formatMoney(18290, 'Kzs')}
