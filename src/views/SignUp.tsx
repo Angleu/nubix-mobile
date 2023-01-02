@@ -31,6 +31,23 @@ const SignUp = () => {
     []
   );
 
+  const stepsGroupName = ['stepOne', 'personalInfo', 'address'];
+
+  const goToNextStep = async () => {
+    await methods.trigger(
+      stepsGroupName[currentStep] as 'stepOne' | 'personalInfo' | 'address'
+    );
+    if (Object.keys(methods.formState.errors).length === 0) {
+      incrementStep();
+      return;
+    }
+  };
+
+  const goToPreviousStep = () => {
+    methods.clearErrors();
+    decrementStep();
+  };
+
   const onSubmit = (data: SignUpFormType) => {
     console.log(data);
   };
@@ -49,10 +66,10 @@ const SignUp = () => {
               color: 'dark.50',
               size: '4xl',
             }}
-            onPress={() => (currentStep === 0 ? goBack() : decrementStep())}
+            onPress={() => (currentStep === 0 ? goBack() : goToPreviousStep())}
           />
         </HStack>
-        <ScrollView flex={1}>
+        <ScrollView flex={1} showsVerticalScrollIndicator={false}>
           <HStack justifyContent="center" space="7" mt="20" mb="4">
             {steps.map((_, index) => (
               <Text
@@ -110,7 +127,7 @@ const SignUp = () => {
             _pressed={{
               bg: 'primary.100',
             }}
-            onPress={incrementStep}
+            onPress={goToNextStep}
           >
             Continuar
           </Button>

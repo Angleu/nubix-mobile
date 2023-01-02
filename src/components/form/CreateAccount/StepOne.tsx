@@ -13,11 +13,15 @@ const StepOne = () => {
   return (
     <VStack>
       <Controller
-        name="email"
+        name="stepOne.email"
         control={control}
         render={({ field: { onChange, value } }) => (
           <Input
-            errorMessage={errors.email && errors.email.message}
+            errorMessage={
+              errors.stepOne &&
+              errors.stepOne.email &&
+              errors.stepOne.email.message
+            }
             label="E-mail"
             value={value}
             onChangeText={onChange}
@@ -27,11 +31,15 @@ const StepOne = () => {
       />
 
       <Controller
-        name="phoneNumber"
+        name="stepOne.phoneNumber"
         control={control}
         render={({ field: { onChange, value } }) => (
           <Input
-            errorMessage={errors.phoneNumber && errors.phoneNumber.message}
+            errorMessage={
+              errors.stepOne &&
+              errors.stepOne.phoneNumber &&
+              errors.stepOne.phoneNumber.message
+            }
             label="Telefone"
             value={value}
             onChangeText={onChange}
@@ -41,11 +49,15 @@ const StepOne = () => {
       />
 
       <Controller
-        name="password"
+        name="stepOne.password"
         control={control}
         render={({ field: { onChange, value } }) => (
           <Input
-            errorMessage={errors.password && errors.password.message}
+            errorMessage={
+              errors.stepOne &&
+              errors.stepOne.password &&
+              errors.stepOne.password.message
+            }
             label="Password"
             value={value}
             onChangeText={onChange}
@@ -55,12 +67,14 @@ const StepOne = () => {
       />
 
       <Controller
-        name="confirmPassword"
+        name="stepOne.confirmPassword"
         control={control}
         render={({ field: { onChange, value } }) => (
           <Input
             errorMessage={
-              errors.confirmPassword && errors.confirmPassword.message
+              errors.stepOne &&
+              errors.stepOne.confirmPassword &&
+              errors.stepOne.confirmPassword.message
             }
             label="Confirme a Password"
             value={value}
