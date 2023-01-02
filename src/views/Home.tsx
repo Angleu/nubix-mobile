@@ -8,6 +8,7 @@ import HomeLink from '../components/HomeLink';
 import Container from '../components/layout/Container';
 import HomeHeader from '../components/layout/HomeHeader';
 import RecentActivities from '../components/RecentActivities';
+import allActivities from '../utils/mocks/activities';
 import { userLoggedIn } from '../utils/mocks/users';
 
 export default function Home() {
@@ -48,7 +49,7 @@ export default function Home() {
         <HomeLink iconName="credit-card-outline" text="Pagar" to="Payment" />
         <HomeLink iconName="bank-transfer-in" text="Receber" to="Receive" />
       </HStack>
-      <RecentActivities />
+      <RecentActivities data={allActivities} />
     </Container>
   );
 }
