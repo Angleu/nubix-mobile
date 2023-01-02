@@ -27,7 +27,7 @@ import loginSchema, { LoginFormType } from '../utils/validation/loginSchema';
 const Login = () => {
   const [rememberUser, setRememberUser] = useState();
 
-  const { replace } = useNavigation<AuthStackNavigationProps<'Login'>>();
+  const { push } = useNavigation<AuthStackNavigationProps<'Login'>>();
   const {
     control,
     handleSubmit,
@@ -172,7 +172,7 @@ const Login = () => {
             _pressed={{
               bg: 'light.50',
             }}
-            onPress={() => replace('SignUp')}
+            onPress={() => push('SignUp')}
           >
             Criar Conta
           </Button>
