@@ -13,6 +13,7 @@ import {
 import React, { useMemo } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
+import { StepOne, StepThree, StepTwo } from '../components/form/CreateAccount';
 import Container from '../components/layout/Container';
 import useStepper from '../hooks/useStepper';
 import { androidRippleEffect } from '../utils/theme/style';
@@ -25,7 +26,10 @@ const SignUp = () => {
   const { goBack } = useNavigation();
   const { currentStep, incrementStep, decrementStep } = useStepper();
 
-  const steps = useMemo(() => [], []);
+  const steps = useMemo(
+    () => [<StepOne key={1} />, <StepTwo key={2} />, <StepThree key={3} />],
+    []
+  );
 
   const onSubmit = (data: SignUpFormType) => {
     console.log(data);
