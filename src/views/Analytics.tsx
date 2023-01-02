@@ -1,9 +1,10 @@
 import { Entypo } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 import {
-  Box,
   HStack,
   Icon,
   IconButton,
+  Pressable,
   Select,
   Text,
   theme,
@@ -21,12 +22,17 @@ import {
 
 import Container from '../components/layout/Container';
 import Header from '../components/layout/Header';
+import { MainStackNavigationProps } from '../routes/types';
 import { formatMoney } from '../utils/formatter';
 import { colorPallet } from '../utils/theme';
+import { androidRippleEffect } from '../utils/theme/style';
 
 const FIRST_HALF = '1';
 
 const Analytics = () => {
+  const { navigate } =
+    useNavigation<MainStackNavigationProps<'AnalyticsExpense'>>();
+
   const listOfYears = useMemo(
     () =>
       [
@@ -167,22 +173,36 @@ const Analytics = () => {
       </View>
 
       <HStack mt="9" space="5">
-        <Box bg="primary.50" p="6" borderRadius="2xl" flex="1">
+        <Pressable
+          onPress={() => navigate('AnalyticsIncome')}
+          android_ripple={androidRippleEffect}
+          bg="primary.50"
+          p="6"
+          borderRadius="2xl"
+          flex="1"
+        >
           <Text color="white" fontSize="sm" fontFamily="body" mb="2">
             Total Income
           </Text>
           <Text color="white" fontWeight="bold" fontSize="lg" fontFamily="body">
             {formatMoney(188290, 'Kzs')}
           </Text>
-        </Box>
-        <Box bg="light.800" p="6" borderRadius="2xl" flex="1">
+        </Pressable>
+        <Pressable
+          onPress={() => navigate('AnalyticsExpense')}
+          android_ripple={androidRippleEffect}
+          bg="light.800"
+          p="6"
+          borderRadius="2xl"
+          flex="1"
+        >
           <Text color="white" fontSize="sm" fontFamily="body" mb="2">
             Total Expense
           </Text>
           <Text color="white" fontWeight="bold" fontSize="lg" fontFamily="body">
             {formatMoney(18290, 'Kzs')}
           </Text>
-        </Box>
+        </Pressable>
       </HStack>
     </Container>
   );
