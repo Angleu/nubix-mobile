@@ -6,20 +6,29 @@ import React, { FC } from 'react';
 type Props = {
   heading: string;
   RightIcon?: JSX.Element;
+  canGoBack?: boolean;
 };
 
-const Header: FC<Props> = ({ heading, RightIcon }) => {
+const Header: FC<Props> = ({ heading, RightIcon, canGoBack = true }) => {
   const { goBack } = useNavigation();
   return (
     <HStack pt={5} justifyContent="space-between" alignItems="center">
-      <IconButton
-        icon={<Icon as={<Ionicons name="arrow-back-circle-outline" />} />}
-        _icon={{
-          color: 'dark.50',
-          size: '4xl',
-        }}
-        onPress={goBack}
-      />
+      {canGoBack ? (
+        <IconButton
+          borderRadius="full"
+          _pressed={{
+            bg: 'light.50',
+          }}
+          icon={<Icon as={<Ionicons name="arrow-back-circle-outline" />} />}
+          _icon={{
+            color: 'dark.50',
+            size: '4xl',
+          }}
+          onPress={goBack}
+        />
+      ) : (
+        <Box width={12}></Box>
+      )}
       <Heading
         fontFamily="heading"
         fontSize="xl"

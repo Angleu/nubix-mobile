@@ -35,6 +35,10 @@ export default function ReceiveMoney({
             </VStack>
           </HStack>
           <IconButton
+            borderRadius="full"
+            _pressed={{
+              bg: 'light.50',
+            }}
             icon={<Icon as={MaterialIcons} name="share" size={38} />}
             _icon={{ color: '_primary.400' }}
             onPress={onShare}

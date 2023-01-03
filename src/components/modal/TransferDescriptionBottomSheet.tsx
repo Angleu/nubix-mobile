@@ -2,6 +2,8 @@ import { BottomSheetModal, useBottomSheetModal } from '@gorhom/bottom-sheet';
 import { Box, Button, Heading, TextArea, VStack } from 'native-base';
 import React, { FC, useState } from 'react';
 
+import { androidRippleEffect } from '../../utils/theme/style';
+
 type Props = {
   reference: React.Ref<BottomSheetModal>;
   onConfirm: (description: string) => void;
@@ -57,6 +59,8 @@ const TransferDescriptionBottomSheet: FC<Props> = ({
         />
         <VStack space={3}>
           <Button
+            android_ripple={androidRippleEffect}
+            _pressed={{ bg: 'white' }}
             onPress={() => dismiss()}
             variant="outline"
             borderColor="primary.100"
@@ -70,12 +74,8 @@ const TransferDescriptionBottomSheet: FC<Props> = ({
           </Button>
           <Button
             onPress={descriptionConfirmationHandler}
-            android_ripple={{
-              radius: 10,
-            }}
-            _pressed={{
-              bg: 'primary.50',
-            }}
+            android_ripple={androidRippleEffect}
+            _pressed={{ bg: 'primary.100' }}
             variant="solid"
             bg="primary.100"
             _text={{

@@ -1,10 +1,14 @@
 import { Button, FlatList, HStack, Text, VStack } from 'native-base';
-import React from 'react';
+import React, { FC } from 'react';
 
-import activitiesMock from '../../utils/mocks/activities';
+import { TransactionType } from '../../models/Transaction';
 import ActivityItem from './_ActivityItem';
 
-const RecentActivities = () => {
+type Props = {
+  data: TransactionType[];
+};
+
+const RecentActivities: FC<Props> = ({ data }) => {
   return (
     <VStack mt={5} flex={1}>
       <HStack justifyContent="space-between">
@@ -30,7 +34,7 @@ const RecentActivities = () => {
         </Button>
       </HStack>
       <FlatList
-        data={activitiesMock}
+        data={data}
         mt={2}
         renderItem={({ item }) => <ActivityItem activity={item} />}
       />

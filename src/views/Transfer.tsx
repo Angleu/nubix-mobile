@@ -18,6 +18,10 @@ export default function Transfer({
         heading="Transferência"
         RightIcon={
           <IconButton
+            borderRadius="full"
+            _pressed={{
+              bg: 'light.50',
+            }}
             icon={<Icon as={<MaterialIcons name="qr-code" />} />}
             _icon={{
               color: 'primary.100',
