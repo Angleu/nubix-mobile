@@ -107,6 +107,7 @@ const SignUp = () => {
                   fontFamily="body"
                   fontSize="lg"
                   color="primary.100"
+                  mb="6"
                 >
                   {text}
                 </Text>

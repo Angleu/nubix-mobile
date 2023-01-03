@@ -20,17 +20,27 @@ const signUpSchema = z.object({
     nif: z.string({ required_error: 'Campo obrigatório' }),
     occupation: z.string({ required_error: 'Campo obrigatório' }),
     // TODO: Add date constraints
-    birthDate: z.date({
-      required_error: 'Campo obrigatório',
-      invalid_type_error: 'Data inválida',
-    }),
+    // TODO: Add when API adds this
+    // dayOfBirth: z
+    //   .number({ required_error: 'Campo obrigatório' })
+    //   .min(1, 'Dia inválido')
+    //   .max(31, 'Dia inválido'),
+    // monthOfBirth: z
+    //   .number({ required_error: 'Campo obrigatório' })
+    //   .min(1, 'Mês inválido')
+    //   .max(12, 'Mês inválido'),
+    // yearOfBirth: z
+    //   .number({ required_error: 'Campo obrigatório' })
+    //   .lte(new Date().getFullYear() - 18, 'Deve ser maior de 18 anos')
+    //   .max(new Date().getFullYear(), 'Ano inválido'),
   }),
   address: z.object({
     country: z.string({ required_error: 'Campo obrigatório' }),
     province: z.string({ required_error: 'Campo obrigatório' }),
     neighbor: z.string({ required_error: 'Campo obrigatório' }),
     district: z.string({ required_error: 'Campo obrigatório' }),
-    coordinates: z.string({ required_error: 'Campo obrigatório' }),
+    /* TODO: Add coordinates data validation */
+    // coordinates: z.string({ required_error: 'Campo obrigatório' }),
   }),
 });
 
