@@ -14,5 +14,5 @@ export const formatMoney = (
     }
   );
 
-  return sign + value + ' ' + currency;
+  return sign + value;
 };
