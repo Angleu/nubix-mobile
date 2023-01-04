@@ -10,11 +10,19 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { NavigationContainer } from '@react-navigation/native';
 import { NativeBaseProvider } from 'native-base';
 import React from 'react';
+import { Platform } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import RootRoute from './src/routes/RootRoute';
 import theme from './src/utils/theme';
+
+if (Platform.OS === 'android') {
+  // only android needs polyfill
+  require('intl');
+  require('intl/locale-data/jsonp/pt-AO');
+  require('intl/locale-data/jsonp/en-US');
+}
 
 export default function App() {
   const [fontsLoaded] = useFonts({
