@@ -30,12 +30,9 @@ const TransferValue = ({
   };
 
   function setTransferAmount(value: string) {
-    setAmount((prev) => {
-      // TODO: Fix the money output issue. The decimal numbers are not working correctly
-      const newValue =
-        value === 'del' ? prev.slice(0, prev.length - 1) : prev + value;
-      return newValue;
-    });
+    setAmount((prev) =>
+      value === 'del' ? prev.slice(0, prev.length - 1) : prev + value
+    );
   }
 
   return (
