@@ -5,6 +5,7 @@ import {
   Box,
   Center,
   FlatList,
+  Heading,
   HStack,
   Icon,
   Input,
@@ -65,6 +66,16 @@ const ContactsSearch = () => {
         />
       </Center>
       <FlatList
+        ListEmptyComponent={
+          <Center py="10">
+            <Heading fontFamily="heading" fontSize="xl" color="primary.100">
+              Sem Resultados
+            </Heading>
+            <Text fontFamily="body" color="primary.100">
+              Por favor altere os critérios de busca
+            </Text>
+          </Center>
+        }
         showsVerticalScrollIndicator={false}
         mt={6}
         data={filteredContacts}
