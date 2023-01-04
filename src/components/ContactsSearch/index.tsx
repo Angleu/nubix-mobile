@@ -5,21 +5,38 @@ import {
   Box,
   Center,
   FlatList,
+  Heading,
   HStack,
   Icon,
   Input,
   Text,
   VStack,
 } from 'native-base';
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 
 import { MainStackNavigationProps } from '../../routes/types';
 import contactsMock from '../../utils/mocks/users';
 
-// TODO: Make search form functional
 const ContactsSearch = () => {
   const { push } = useNavigation<MainStackNavigationProps<'Transfer'>>();
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredContacts = useMemo(
+    () =>
+      contactsMock.filter((contact) => {
+        if (!searchTerm) return contact;
+        if (
+          /^\d+$/.test(searchTerm) &&
+          contact.phoneNumber.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+          return contact;
+        if (contact.name.toLowerCase().includes(searchTerm.toLowerCase()))
+          return contact;
+      }),
+    [searchTerm]
+  );
+
   return (
     <>
       <Center>
@@ -27,10 +44,12 @@ const ContactsSearch = () => {
           Contactos
         </Text>
         <Input
+          value={searchTerm}
+          onChangeText={setSearchTerm}
           py="2"
           borderRadius="xl"
           borderColor="primary.100"
-          placeholder="Search"
+          placeholder="Pesquisar por nome ou número de telefone"
           _focus={{
             bg: 'white',
             borderColor: '_primary.200',
@@ -47,8 +66,19 @@ const ContactsSearch = () => {
         />
       </Center>
       <FlatList
+        ListEmptyComponent={
+          <Center py="10">
+            <Heading fontFamily="heading" fontSize="xl" color="primary.100">
+              Sem Resultados
+            </Heading>
+            <Text fontFamily="body" color="primary.100">
+              Por favor altere os critérios de busca
+            </Text>
+          </Center>
+        }
+        showsVerticalScrollIndicator={false}
         mt={6}
-        data={contactsMock}
+        data={filteredContacts}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <Box bg="white" shadow={2} mb="6" mx={1} p={2} rounded="3xl">
