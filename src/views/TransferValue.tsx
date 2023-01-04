@@ -1,36 +1,14 @@
-import { MaterialIcons } from '@expo/vector-icons';
-import {
-  Button,
-  Center,
-  HStack,
-  Icon,
-  ScrollView,
-  Text,
-  VStack,
-} from 'native-base';
+import { Button, Center, ScrollView, Text, VStack } from 'native-base';
 import React, { useState } from 'react';
 
-import NumberButton from '../components/button/NumberButton';
 import Container from '../components/layout/Container';
 import Header from '../components/layout/Header';
+import NumberPad from '../components/layout/NumberPad';
 import { TransferDescriptionBottomSheet } from '../components/modal';
 import { useBottomSheetModal } from '../hooks/useBottomSheetModal';
 import { MainStackScreenProps } from '../routes/types';
-import { androidRippleEffect } from '../utils/theme/style';
-
-type KeyHandlerActionsType =
-  | '1'
-  | '2'
-  | '3'
-  | '4'
-  | '5'
-  | '6'
-  | '7'
-  | '8'
-  | '9'
-  | '0'
-  | '.'
-  | 'del';
+import { formatMoney } from '../utils/formatter';
+import { androidRippleEffect, textShadowStyle } from '../utils/theme/style';
 
 const TransferValue = ({
   navigation: { navigate },
@@ -38,43 +16,27 @@ const TransferValue = ({
 }: MainStackScreenProps<'TransferValue'>) => {
   const { destination } = route.params;
 
+  const [amount, setAmount] = useState('0');
+  const [description, setDescription] = useState('');
   const { reference, showModal } = useBottomSheetModal();
 
-  const [valueToTransfer, setValueToTransfer] = useState<
-    KeyHandlerActionsType[]
-  >(['0']);
-  const [description, setDescription] = useState('');
-
-  const handleValueToTransferChange = (value: KeyHandlerActionsType) => {
-    switch (value) {
-      case 'del':
-        if (valueToTransfer.length > 1)
-          setValueToTransfer((old) => old.slice(0, -1));
-        else setValueToTransfer(['0']);
-        break;
-      case '.':
-        if (!valueToTransfer.includes('.'))
-          setValueToTransfer((old) => [...old, '.']);
-        break;
-      default:
-        if (/\.\d{2}$/g.test(valueToTransfer.join(''))) break;
-        if (valueToTransfer.length !== 1 || valueToTransfer[0] !== '0')
-          setValueToTransfer((old) => [...old, value]);
-        else setValueToTransfer([value]);
-        break;
-    }
-  };
-
-  const clearValue = () => setValueToTransfer(['0']);
-
   const onConfirm = () => {
-    const transferAmount = '$' + valueToTransfer.join('');
+    const transferAmount = formatMoney(amount, 'Kzs');
     navigate('TransferConfirmation', {
       destination,
       transferAmount,
       message: description,
     });
   };
+
+  function setTransferAmount(value: string) {
+    setAmount((prev) => {
+      // TODO: Fix the money output issue. The decimal numbers are not working correctly
+      const newValue =
+        value === 'del' ? prev.slice(0, prev.length - 1) : prev + value;
+      return newValue;
+    });
+  }
 
   return (
     <>
@@ -96,72 +58,18 @@ const TransferValue = ({
               fontWeight="bold"
               fontSize="4xl"
               color="primary.100"
-              style={{
-                textShadowColor: 'rgba(0, 0, 0, 0.25)',
-                textShadowOffset: { width: 0, height: 4 },
-                textShadowRadius: 10,
-              }}
+              style={textShadowStyle}
             >
-              $ {valueToTransfer.join('')}
+              {formatMoney(amount, 'Kzs')}
             </Text>
           </Center>
-          <VStack space={3} px={10}>
-            <HStack space={9}>
-              <NumberButton onPress={() => handleValueToTransferChange('1')}>
-                1
-              </NumberButton>
-              <NumberButton onPress={() => handleValueToTransferChange('2')}>
-                2
-              </NumberButton>
-              <NumberButton onPress={() => handleValueToTransferChange('3')}>
-                3
-              </NumberButton>
-            </HStack>
-            <HStack space={9}>
-              <NumberButton onPress={() => handleValueToTransferChange('4')}>
-                4
-              </NumberButton>
-              <NumberButton onPress={() => handleValueToTransferChange('5')}>
-                5
-              </NumberButton>
-              <NumberButton onPress={() => handleValueToTransferChange('6')}>
-                6
-              </NumberButton>
-            </HStack>
-            <HStack space={9}>
-              <NumberButton onPress={() => handleValueToTransferChange('7')}>
-                7
-              </NumberButton>
-              <NumberButton onPress={() => handleValueToTransferChange('8')}>
-                8
-              </NumberButton>
-              <NumberButton onPress={() => handleValueToTransferChange('9')}>
-                9
-              </NumberButton>
-            </HStack>
-            <HStack space={9}>
-              <NumberButton onPress={() => handleValueToTransferChange('.')}>
-                .
-              </NumberButton>
-              <NumberButton onPress={() => handleValueToTransferChange('0')}>
-                0
-              </NumberButton>
-              <NumberButton
-                isDelete
-                onPress={() => handleValueToTransferChange('del')}
-                onLongPress={clearValue}
-              >
-                <Icon
-                  as={<MaterialIcons />}
-                  name="backspace"
-                  color="danger.700"
-                  size="xl"
-                />
-              </NumberButton>
-            </HStack>
-          </VStack>
 
-          <VStack mt={12} mb={16} pb={2} space={4}>
+          <NumberPad
+            onPress={setTransferAmount}
+            onLongPressDelete={() => setAmount('0')}
+          />
+
+          <VStack mt={12} pb={2} space={4}>
             <Button
               onPress={showModal}
               variant="link"
@@ -175,9 +83,9 @@ const TransferValue = ({
               Adicionar Descrição
             </Button>
             <Button
+              onPress={onConfirm}
               android_ripple={androidRippleEffect}
               _pressed={{ bg: 'white' }}
-              onPress={onConfirm}
               bgColor="primary.100"
               rounded="xl"
               shadow={3}
