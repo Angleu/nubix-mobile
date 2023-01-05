@@ -1,6 +1,7 @@
 import { Entypo, MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Box, useTheme } from 'native-base';
+import { Platform } from 'react-native';
 
 import { Analytics, ATMLocator, Home, Wallet } from '../views';
 import { MainBottomTabParamListType } from './types';
@@ -24,7 +25,8 @@ const BottomTabRoute = () => {
         tabBarStyle: {
           elevation: 0,
           borderWidth: 0,
-          height: 60,
+          height: Platform.OS === 'android' ? 60 : 90,
+          paddingTop: Platform.OS === 'ios' ? 20 : 0,
         },
       }}
     >
