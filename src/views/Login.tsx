@@ -67,6 +67,9 @@ const Login = () => {
                   </Text>
                 </FormControl.Label>
                 <Input
+                  _ios={{
+                    py: '4',
+                  }}
                   keyboardType="email-address"
                   value={value}
                   onChangeText={onChange}
@@ -106,6 +109,9 @@ const Login = () => {
                   </Text>
                 </FormControl.Label>
                 <Input
+                  _ios={{
+                    py: '4',
+                  }}
                   value={value}
                   onChangeText={onChange}
                   secureTextEntry
