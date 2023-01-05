@@ -15,6 +15,7 @@ import QRCode from 'react-native-qrcode-svg';
 
 import Container from '../components/layout/Container';
 import { MainStackScreenProps } from '../routes/types';
+import { createShareableMessage } from '../utils/formatter';
 import { userLoggedIn } from '../utils/mocks/users';
 import { colorPallet } from '../utils/theme';
 
@@ -30,13 +31,11 @@ export default function ReceiveMoney({
     iban: accountToReceive.iban,
   };
 
-  console.log(accountToReceive);
-
   const onShare = async () => {
     await Share.share(
       {
         title: 'Detalhes de Conta',
-        message: `Nome: ${valueToShare.name}\nIBAN: ${valueToShare.iban}\nNúmero de Telefone: ${valueToShare.phoneNumber}`,
+        message: createShareableMessage(valueToShare),
       },
       { dialogTitle: 'Detalhes de Conta' }
     );

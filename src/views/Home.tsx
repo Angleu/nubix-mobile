@@ -8,6 +8,7 @@ import HomeLink from '../components/HomeLink';
 import Container from '../components/layout/Container';
 import HomeHeader from '../components/layout/HomeHeader';
 import RecentActivities from '../components/RecentActivities';
+import { createShareableMessage } from '../utils/formatter';
 import allActivities from '../utils/mocks/activities';
 import { userLoggedIn } from '../utils/mocks/users';
 
@@ -35,7 +36,11 @@ export default function Home() {
               Share.share(
                 {
                   title: 'Detalhes de Conta',
-                  message: `Nome: ${userLoggedIn.name}\nIBAN: ${account.iban}\nNúmero de Telefone: ${userLoggedIn.phoneNumber}`,
+                  message: createShareableMessage({
+                    name: userLoggedIn.name,
+                    phoneNumber: userLoggedIn.phoneNumber,
+                    iban: account.iban,
+                  }),
                 },
                 { dialogTitle: 'Detalhes de Conta' }
               )
