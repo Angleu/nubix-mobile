@@ -15,23 +15,46 @@ import QRCode from 'react-native-qrcode-svg';
 
 import Container from '../components/layout/Container';
 import { MainStackScreenProps } from '../routes/types';
+import { userLoggedIn } from '../utils/mocks/users';
 import { colorPallet } from '../utils/theme';
 
 export default function ReceiveMoney({
   navigation: { goBack },
+  route: {
+    params: { accountToReceive },
+  },
 }: MainStackScreenProps<'Receive'>) {
-  const onShare = async () => {
-    await Share.share({ url: 'http://www.google.com' });
+  const valueToShare = {
+    name: userLoggedIn.name,
+    phoneNumber: userLoggedIn.phoneNumber,
+    iban: accountToReceive.iban,
   };
+
+  console.log(accountToReceive);
+
+  const onShare = async () => {
+    await Share.share(
+      {
+        title: 'Detalhes de Conta',
+        message: `Nome: ${valueToShare.name}\nIBAN: ${valueToShare.iban}\nNúmero de Telefone: ${valueToShare.phoneNumber}`,
+      },
+      { dialogTitle: 'Detalhes de Conta' }
+    );
+  };
+
   return (
     <Container>
       <VStack flex={1} justifyContent="space-between">
         <HStack py={4} justifyContent="space-between">
           <HStack space={4} alignItems="center">
-            <Avatar source={{ uri: data[0].profilePic }} size={68} shadow="6" />
+            <Avatar
+              source={{ uri: userLoggedIn.profilePictureURL }}
+              size={68}
+              shadow="6"
+            />
             <VStack>
-              <Heading>{data[0].name}</Heading>
-              <Text>{data[0].number}</Text>
+              <Heading>{userLoggedIn.name}</Heading>
+              <Text>{userLoggedIn.phoneNumber}</Text>
             </VStack>
           </HStack>
           <IconButton
@@ -49,7 +72,7 @@ export default function ReceiveMoney({
         </Text>
         <Flex alignItems="center">
           <QRCode
-            value="http://www.google.com"
+            value={JSON.stringify(valueToShare)}
             logoBackgroundColor="#fff"
             color={colorPallet.primary[100]}
             size={340}

@@ -1,5 +1,5 @@
 import { Box, HStack } from 'native-base';
-import React from 'react';
+import React, { useRef } from 'react';
 import { Share } from 'react-native';
 import Swiper from 'react-native-swiper';
 
@@ -12,10 +12,14 @@ import allActivities from '../utils/mocks/activities';
 import { userLoggedIn } from '../utils/mocks/users';
 
 export default function Home() {
+  const selectedAccount = useRef(userLoggedIn.accounts[0]);
   return (
     <Container>
       <HomeHeader />
       <Swiper
+        onIndexChanged={(index) =>
+          (selectedAccount.current = userLoggedIn.accounts[index])
+        }
         loop={false}
         dot={<Box w="2" h="2" bg="gray.100" borderRadius="full" m="1" />}
         activeDot={
@@ -47,7 +51,14 @@ export default function Home() {
         />
         <HomeLink iconName="inbox" text="Depositar" to="Deposit" />
         <HomeLink iconName="credit-card-outline" text="Pagar" to="Payment" />
-        <HomeLink iconName="bank-transfer-in" text="Receber" to="Receive" />
+        <HomeLink
+          iconName="bank-transfer-in"
+          text="Receber"
+          to="Receive"
+          routeParams={{
+            accountToReceive: selectedAccount.current,
+          }}
+        />
       </HStack>
       <RecentActivities data={allActivities} />
     </Container>

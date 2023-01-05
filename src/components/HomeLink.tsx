@@ -14,13 +14,14 @@ type Props = {
   iconName: string;
   text: string;
   to: keyof MainStackParamListType;
+  routeParams?: unknown;
 };
 
-const HomeLink: FC<Props> = ({ iconName, text, to }) => {
+const HomeLink: FC<Props> = ({ iconName, text, to, routeParams }) => {
   const { push } = useNavigation<MainStackNavigationProps<'HomeTab'>>();
 
   return (
-    <TouchableOpacity onPress={() => push(to)}>
+    <TouchableOpacity onPress={() => push(to, routeParams as never)}>
       <VStack alignItems="center">
         <Icon
           as={<MaterialCommunityIcons />}
