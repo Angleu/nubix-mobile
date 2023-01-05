@@ -16,3 +16,13 @@ export const formatMoney = (
 
   return sign + value;
 };
+
+type ShareableMessageParamType = {
+  name: string;
+  phoneNumber: string;
+  iban: string;
+};
+
+export function createShareableMessage(userInfo: ShareableMessageParamType) {
+  return `Nome: ${userInfo.name}\nIBAN: ${userInfo.iban}\nNúmero de Telefone: ${userInfo.phoneNumber}`;
+}
