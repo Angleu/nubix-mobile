@@ -26,6 +26,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a6c98028-c018-48f7-862e-ea9161a5f481"
+      }
+    },
+    "owner": "rafaelwillen"
   }
 }
