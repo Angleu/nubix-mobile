@@ -29,6 +29,9 @@ const Input: FC<Props> = ({
         </Text>
       </FormControl.Label>
       <NInput
+        _ios={{
+          py: '3',
+        }}
         _focus={{
           bg: 'white',
           borderColor: 'primary.100',

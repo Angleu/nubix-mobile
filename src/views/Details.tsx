@@ -15,6 +15,7 @@ import {
   VStack,
 } from 'native-base';
 import React from 'react';
+import { Platform } from 'react-native';
 
 import Container from '../components/layout/Container';
 import { MainStackScreenProps } from '../routes/types';
@@ -112,7 +113,7 @@ export default function Details({
             width="full"
             borderBottomColor="primary.50"
             borderBottomWidth={3}
-            borderStyle="dashed"
+            borderStyle={Platform.OS === 'ios' ? 'solid' : 'dashed'}
             py={4}
           >
             <HStack justifyContent="space-between">
@@ -156,7 +157,7 @@ export default function Details({
             width="full"
             borderBottomColor="primary.50"
             borderBottomWidth={3}
-            borderStyle="dashed"
+            borderStyle={Platform.OS === 'ios' ? 'solid' : 'dashed'}
             py={4}
           >
             <HStack justifyContent="space-between">

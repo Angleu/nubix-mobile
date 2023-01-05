@@ -47,6 +47,9 @@ const ContactsSearch = () => {
           value={searchTerm}
           onChangeText={setSearchTerm}
           py="2"
+          _ios={{
+            py: '4',
+          }}
           borderRadius="xl"
           borderColor="primary.100"
           placeholder="Pesquisar por nome ou número de telefone"
