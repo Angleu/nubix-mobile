@@ -144,7 +144,6 @@ const Analytics = () => {
                 fill: theme.colors.light[800],
                 fontSize: 16,
                 fontWeight: 'bold',
-                fontFamily: 'Poppins_700Bold',
               },
               grid: {
                 stroke: 'transparent',
@@ -174,7 +173,6 @@ const Analytics = () => {
               labels: {
                 fontSize: 12,
                 fontWeight: 'bold',
-                fontFamily: 'Poppins_700Bold',
                 fill: (d) => d.datum.fill,
               },
             }}
