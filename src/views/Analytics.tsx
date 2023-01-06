@@ -30,6 +30,7 @@ import { androidRippleEffect } from '../utils/theme/style';
 const FIRST_HALF = '1';
 
 const Analytics = () => {
+  const currentMonth = new Date().getMonth();
   const { navigate } =
     useNavigation<MainStackNavigationProps<'AnalyticsExpense'>>();
 
@@ -129,7 +130,6 @@ const Analytics = () => {
           backgroundColor: '#fff',
         }}
       >
-        {/* TODO: Make the current month bg color different to others */}
         <VictoryChart
           width={Dimensions.get('screen').width}
           theme={VictoryTheme.material}
@@ -169,15 +169,21 @@ const Analytics = () => {
           <VictoryBar
             style={{
               data: {
-                fill: colorPallet.primary[100],
+                fill: (d) => d.datum.fill,
               },
               labels: {
                 fontSize: 12,
                 fontWeight: 'bold',
                 fontFamily: 'Poppins_700Bold',
+                fill: (d) => d.datum.fill,
               },
             }}
-            data={analyticsChartData}
+            data={analyticsChartData.map((value, index) =>
+              (currentMonth === index && selectedYear.endsWith(FIRST_HALF)) ||
+              (currentMonth === index + 6 && !selectedYear.endsWith(FIRST_HALF))
+                ? { ...value, fill: colorPallet.primary[100] }
+                : { ...value, fill: theme.colors.muted[300] }
+            )}
             x="month"
             y="amount"
             animate
@@ -193,6 +199,7 @@ const Analytics = () => {
 
       <HStack mt="9" space="5">
         <Pressable
+          shadow="9"
           onPress={() => navigate('AnalyticsIncome')}
           android_ripple={androidRippleEffect}
           bg="primary.50"
@@ -208,6 +215,7 @@ const Analytics = () => {
           </Text>
         </Pressable>
         <Pressable
+          shadow="9"
           onPress={() => navigate('AnalyticsExpense')}
           android_ripple={androidRippleEffect}
           bg="light.800"
