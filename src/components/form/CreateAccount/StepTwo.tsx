@@ -3,6 +3,7 @@ import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
 import { SignUpFormType } from '../../../utils/validation/signUpSchema';
+import ImageSubmit from './ImageSubmit';
 import Input from './Input';
 
 const StepTwo = () => {
@@ -12,7 +13,7 @@ const StepTwo = () => {
   } = useFormContext<SignUpFormType>();
   return (
     <VStack>
-      {/* TODO: Add profile picture input */}
+      <ImageSubmit />
 
       <Controller
         name="personalInfo.firstName"

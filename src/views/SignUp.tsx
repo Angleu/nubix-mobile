@@ -70,7 +70,7 @@ const SignUp = () => {
           />
         </HStack>
         <ScrollView flex={1} showsVerticalScrollIndicator={false}>
-          <HStack justifyContent="center" space="7" mt="20" mb="4">
+          <HStack justifyContent="center" space="7" mt="2" mb="4">
             {steps.map((_, index) => (
               <Text
                 key={index}
