@@ -6,6 +6,14 @@
     "orientation": "portrait",
     "icon": "./assets/images/adaptive-icon.png",
     "userInterfaceStyle": "light",
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "O aplicativo acessa as suas fotos para alterar a sua foto de perfil."
+        }
+      ]
+    ],
     "splash": {
       "image": "./assets/images/adaptive-icon.png",
       "resizeMode": "contain",
