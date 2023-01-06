@@ -44,7 +44,7 @@ const Login = () => {
     <Container>
       <ScrollView>
         <Center>
-          <Image source={LogoImage} alt="Tique Bank Logo" />
+          <Image source={LogoImage} alt="Nubix Logo" h="56" />
           <Heading
             my="25"
             fontFamily="heading"
