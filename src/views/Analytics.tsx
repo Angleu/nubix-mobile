@@ -28,8 +28,6 @@ import { formatMoney } from '../utils/formatter';
 import { colorPallet } from '../utils/theme';
 import { androidRippleEffect } from '../utils/theme/style';
 
-const FIRST_HALF = '1';
-
 const Analytics = () => {
   const currentMonth = new Date().getMonth();
   const { navigate } =
@@ -38,10 +36,8 @@ const Analytics = () => {
   const listOfYears = useMemo(
     () =>
       [
-        { label: '2022 1ª Metade', value: '2022/1' },
-        { label: '2022 2ª Metade', value: '2022/2' },
-        { label: '2023 1ª Metade', value: '2023/1' },
-        { label: '2023 2ª Metade', value: '2023/2' },
+        { label: '2022', value: '2022' },
+        { label: '2023', value: '2023' },
       ].reverse(),
     []
   );
@@ -51,7 +47,7 @@ const Analytics = () => {
   const [isFirstHalf, setFirstHalf] = useState(true);
   const analyticsChartData = useMemo<{ month: string; amount: number }[]>(
     () =>
-      selectedYear.endsWith(FIRST_HALF)
+      isFirstHalf
         ? [
             { month: 'Jan', amount: 138000 },
             { month: 'Feb', amount: 189300 },
@@ -68,7 +64,7 @@ const Analytics = () => {
             { month: 'Nov', amount: 183400 },
             { month: 'Dez', amount: 140300 },
           ],
-    [selectedYear]
+    [isFirstHalf]
   );
 
   return (
@@ -214,8 +210,8 @@ const Analytics = () => {
               },
             }}
             data={analyticsChartData.map((value, index) =>
-              (currentMonth === index && selectedYear.endsWith(FIRST_HALF)) ||
-              (currentMonth === index + 6 && !selectedYear.endsWith(FIRST_HALF))
+              (currentMonth === index && isFirstHalf) ||
+              (currentMonth === index + 6 && !isFirstHalf)
                 ? { ...value, fill: colorPallet.primary[100] }
                 : { ...value, fill: theme.colors.muted[300] }
             )}
