@@ -244,7 +244,7 @@ const Analytics = () => {
           flex="1"
         >
           <Text color="white" fontSize="sm" fontFamily="body" mb="2">
-            Total de Rendimento
+            Total de Ganhos
           </Text>
           <Text color="white" fontWeight="bold" fontSize="lg" fontFamily="body">
             {formatMoney(188290, 'Kzs')}
@@ -260,7 +260,7 @@ const Analytics = () => {
           flex="1"
         >
           <Text color="white" fontSize="sm" fontFamily="body" mb="2">
-            Total de Despesas
+            Total de Gastos
           </Text>
           <Text color="white" fontWeight="bold" fontSize="lg" fontFamily="body">
             {formatMoney(18290, 'Kzs')}
