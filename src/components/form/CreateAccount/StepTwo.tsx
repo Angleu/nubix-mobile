@@ -13,7 +13,7 @@ const StepTwo = () => {
   } = useFormContext<SignUpFormType>();
   return (
     <VStack>
-      <ImageSubmit />
+      <ImageSubmit onImageChange={() => console.log('Image updated')} />
 
       <Controller
         name="personalInfo.firstName"
