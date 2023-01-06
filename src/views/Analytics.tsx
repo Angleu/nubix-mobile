@@ -1,6 +1,7 @@
 import { Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import {
+  Button,
   HStack,
   Icon,
   IconButton,
@@ -94,10 +95,13 @@ const Analytics = () => {
       <HStack justifyContent="flex-end" mt="8">
         <Select
           selectedValue={selectedYear}
-          minWidth="1/2"
+          flex={1}
           _text={{
             fontFamily: 'body',
             fontSize: 'xs',
+          }}
+          _ios={{
+            py: '4',
           }}
           borderRadius="xl"
           color="white"
@@ -121,6 +125,32 @@ const Analytics = () => {
             <Select.Item key={value} label={label} value={value} />
           ))}
         </Select>
+      </HStack>
+      <HStack my="2">
+        <Button
+          bg="primary.100"
+          _text={{
+            color: 'white',
+            fontFamily: 'body',
+          }}
+          borderRadius={0}
+          borderLeftRadius="lg"
+          flex={1}
+          variant="unstyled"
+        >
+          Janeiro - Junho
+        </Button>
+        <Button
+          bg="white"
+          borderWidth={1}
+          borderColor="primary.100"
+          borderRadius={0}
+          borderRightRadius="lg"
+          flex={1}
+          variant="unstyled"
+        >
+          Julho - Dezembro
+        </Button>
       </HStack>
 
       <View
