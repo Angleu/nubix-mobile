@@ -14,6 +14,7 @@ import { Platform } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import { UserProvider } from './src/context/UserContext';
 import RootRoute from './src/routes/RootRoute';
 import theme from './src/utils/theme';
 
@@ -40,9 +41,11 @@ export default function App() {
       <NativeBaseProvider theme={theme}>
         <BottomSheetModalProvider>
           <SafeAreaProvider>
-            <NavigationContainer>
-              <RootRoute />
-            </NavigationContainer>
+            <UserProvider>
+              <NavigationContainer>
+                <RootRoute />
+              </NavigationContainer>
+            </UserProvider>
           </SafeAreaProvider>
         </BottomSheetModalProvider>
       </NativeBaseProvider>
