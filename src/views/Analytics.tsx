@@ -30,6 +30,7 @@ import { androidRippleEffect } from '../utils/theme/style';
 
 const Analytics = () => {
   const currentMonth = new Date().getMonth();
+  const currentYear = new Date().getFullYear().toString();
   const { navigate } =
     useNavigation<MainStackNavigationProps<'AnalyticsExpense'>>();
 
@@ -210,8 +211,12 @@ const Analytics = () => {
               },
             }}
             data={analyticsChartData.map((value, index) =>
-              (currentMonth === index && isFirstHalf) ||
-              (currentMonth === index + 6 && !isFirstHalf)
+              (currentMonth === index &&
+                isFirstHalf &&
+                currentYear === selectedYear) ||
+              (currentMonth === index + 6 &&
+                !isFirstHalf &&
+                currentYear === selectedYear)
                 ? { ...value, fill: colorPallet.primary[100] }
                 : { ...value, fill: theme.colors.muted[300] }
             )}
