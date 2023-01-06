@@ -199,6 +199,7 @@ const Analytics = () => {
 
       <HStack mt="9" space="5">
         <Pressable
+          shadow="9"
           onPress={() => navigate('AnalyticsIncome')}
           android_ripple={androidRippleEffect}
           bg="primary.50"
@@ -214,6 +215,7 @@ const Analytics = () => {
           </Text>
         </Pressable>
         <Pressable
+          shadow="9"
           onPress={() => navigate('AnalyticsExpense')}
           android_ripple={androidRippleEffect}
           bg="light.800"
