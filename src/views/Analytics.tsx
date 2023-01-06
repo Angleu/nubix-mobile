@@ -45,11 +45,10 @@ const Analytics = () => {
       ].reverse(),
     []
   );
-
   const [selectedYear, setSelectedYear] = useState(
     listOfYears[listOfYears.length - 1].value
   );
-
+  const [isFirstHalf, setFirstHalf] = useState(true);
   const analyticsChartData = useMemo<{ month: string; amount: number }[]>(
     () =>
       selectedYear.endsWith(FIRST_HALF)
@@ -128,26 +127,34 @@ const Analytics = () => {
       </HStack>
       <HStack my="2">
         <Button
-          bg="primary.100"
+          bg={isFirstHalf ? 'primary.100' : 'white'}
           _text={{
-            color: 'white',
+            color: isFirstHalf ? 'white' : 'primary.100',
             fontFamily: 'body',
           }}
+          borderWidth={isFirstHalf ? 0 : 1}
+          borderColor="primary.100"
           borderRadius={0}
           borderLeftRadius="lg"
           flex={1}
           variant="unstyled"
+          onPress={() => setFirstHalf(true)}
         >
           Janeiro - Junho
         </Button>
         <Button
-          bg="white"
-          borderWidth={1}
+          bg={!isFirstHalf ? 'primary.100' : 'white'}
+          _text={{
+            color: !isFirstHalf ? 'white' : 'primary.100',
+            fontFamily: 'body',
+          }}
+          borderWidth={!isFirstHalf ? 0 : 1}
           borderColor="primary.100"
           borderRadius={0}
           borderRightRadius="lg"
           flex={1}
           variant="unstyled"
+          onPress={() => setFirstHalf(false)}
         >
           Julho - Dezembro
         </Button>
