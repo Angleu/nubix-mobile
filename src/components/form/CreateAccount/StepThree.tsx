@@ -1,5 +1,5 @@
 import * as Location from 'expo-location';
-import { Button, Text, VStack } from 'native-base';
+import { Button, Spinner, Text, VStack } from 'native-base';
 import React, { useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
@@ -13,6 +13,7 @@ const StepThree = () => {
     longitude: number;
   } | null>(null);
   const [hasError, setError] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   async function getDeviceLocation() {
     const { status } = await Location.requestForegroundPermissionsAsync();
@@ -20,11 +21,13 @@ const StepThree = () => {
       setError(true);
       return;
     }
+    setLoading(true);
     setError(false);
     const {
       coords: { latitude, longitude },
     } = await Location.getCurrentPositionAsync({});
     setLocation({ latitude, longitude });
+    setLoading(false);
   }
 
   const {
@@ -97,6 +100,7 @@ const StepThree = () => {
           />
         )}
       />
+
       {hasError ? (
         <>
           <Text textAlign="center" fontWeight="bold">
@@ -106,12 +110,21 @@ const StepThree = () => {
             Verifique se a aplicação tem permissão para aceder a localização
           </Text>
         </>
+      ) : isLoading ? (
+        <Spinner color="primary.100" size="lg" />
       ) : !location ? (
         <Button
           variant="primary"
+          py="3"
           bg="primary.100"
-          _text={{ color: 'white' }}
+          borderRadius="lg"
           android_ripple={androidRippleEffect}
+          shadow="3"
+          _pressed={{
+            bg: 'primary.100',
+            opacity: 80,
+          }}
+          _text={{ color: 'white' }}
           onPress={getDeviceLocation}
         >
           Buscar Coordenadas Geográficas

@@ -1,5 +1,12 @@
 import * as ImagePicker from 'expo-image-picker';
-import { Center, FormControl, Image, Pressable, Text } from 'native-base';
+import {
+  Center,
+  FormControl,
+  Image,
+  Pressable,
+  Spinner,
+  Text,
+} from 'native-base';
 import React, { FC, useState } from 'react';
 
 import { SavePictureSVG } from '../../../svg';
@@ -10,8 +17,10 @@ type Props = {
 
 const ImageSubmit: FC<Props> = ({ onImageChange }) => {
   const [image, setImage] = useState('');
+  const [isLoading, setLoading] = useState(false);
 
   const pickImage = async () => {
+    setLoading(true);
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
@@ -22,6 +31,7 @@ const ImageSubmit: FC<Props> = ({ onImageChange }) => {
       setImage(result.assets[0].uri);
       onImageChange(result.assets[0].uri);
     }
+    setLoading(false);
   };
   return (
     <Pressable mb="4" onPress={pickImage}>
@@ -35,7 +45,9 @@ const ImageSubmit: FC<Props> = ({ onImageChange }) => {
         height="40"
       >
         <Center h="full">
-          {image ? (
+          {isLoading ? (
+            <Spinner color="primary.100" size="lg" />
+          ) : image ? (
             <Image
               source={{ uri: image }}
               w={24}
