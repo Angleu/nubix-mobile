@@ -47,14 +47,15 @@ export type NormalizedContactType = {
 
 // XXX Not implemented - API needs to be fixed
 export type CreateUserResponseType = {
-  id_login: string;
   email: string;
   telephone: string;
   password: string;
   isVerified: boolean;
   created_at: string;
-  updated_at: string;
 };
 
-// XXX Not implemented - API needs to be fixed
-export type CreateUserRequestType = unknown;
+export type CreateUserRequestType = {
+  email: string;
+  telephone: string;
+  password: string;
+};
