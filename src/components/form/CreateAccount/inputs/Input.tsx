@@ -19,10 +19,10 @@ const Input: FC<Props> = ({
   onChangeText,
   secureText = false,
   keyboardType = 'default',
-  required = true,
+  // required = true,
 }) => {
   return (
-    <FormControl isRequired={required} isInvalid={!!errorMessage} mb="4">
+    <FormControl isInvalid={!!errorMessage} mb="4">
       <FormControl.Label>
         <Text fontSize="sm" color="light.500">
           {label}

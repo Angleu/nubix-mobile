@@ -3,7 +3,7 @@ import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
 import { SignUpFormType } from '../../../utils/validation/signUpSchema';
-import Input from './Input';
+import Input from './inputs/Input';
 
 const StepOne = () => {
   const {
