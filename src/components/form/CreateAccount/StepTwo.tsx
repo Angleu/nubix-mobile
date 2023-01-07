@@ -3,8 +3,9 @@ import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
 import { SignUpFormType } from '../../../utils/validation/signUpSchema';
-import ImageSubmit from './ImageSubmit';
-import Input from './Input';
+import GenderSelect from './inputs/GenderSelect';
+import ImageSubmit from './inputs/ImageSubmit';
+import Input from './inputs/Input';
 
 const StepTwo = () => {
   const {
@@ -48,6 +49,8 @@ const StepTwo = () => {
           />
         )}
       />
+
+      <GenderSelect />
 
       <Controller
         name="personalInfo.nif"
