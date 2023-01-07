@@ -1,11 +1,32 @@
-import { VStack } from 'native-base';
-import React from 'react';
+import * as Location from 'expo-location';
+import { Button, Text, VStack } from 'native-base';
+import React, { useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
+import { androidRippleEffect } from '../../../utils/theme/style';
 import { SignUpFormType } from '../../../utils/validation/signUpSchema';
 import Input from './inputs/Input';
 
 const StepThree = () => {
+  const [location, setLocation] = useState<{
+    latitude: number;
+    longitude: number;
+  } | null>(null);
+  const [hasError, setError] = useState(false);
+
+  async function getDeviceLocation() {
+    const { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') {
+      setError(true);
+      return;
+    }
+    setError(false);
+    const {
+      coords: { latitude, longitude },
+    } = await Location.getCurrentPositionAsync({});
+    setLocation({ latitude, longitude });
+  }
+
   const {
     control,
     formState: { errors },
@@ -28,7 +49,6 @@ const StepThree = () => {
           />
         )}
       />
-
       <Controller
         name="address.province"
         control={control}
@@ -45,7 +65,6 @@ const StepThree = () => {
           />
         )}
       />
-
       <Controller
         name="address.neighbor"
         control={control}
@@ -62,7 +81,6 @@ const StepThree = () => {
           />
         )}
       />
-
       <Controller
         name="address.district"
         control={control}
@@ -79,8 +97,30 @@ const StepThree = () => {
           />
         )}
       />
-
-      {/* TODO: Add coordinates data capture */}
+      {hasError ? (
+        <>
+          <Text textAlign="center" fontWeight="bold">
+            Não foi possível obter a localização
+          </Text>
+          <Text textAlign="center">
+            Verifique se a aplicação tem permissão para aceder a localização
+          </Text>
+        </>
+      ) : !location ? (
+        <Button
+          variant="primary"
+          bg="primary.100"
+          _text={{ color: 'white' }}
+          android_ripple={androidRippleEffect}
+          onPress={getDeviceLocation}
+        >
+          Buscar Coordenadas Geográficas
+        </Button>
+      ) : (
+        <Text textAlign="center" fontWeight="bold" color="primary.100">
+          Coordenadas buscadas com sucesso!
+        </Text>
+      )}
     </VStack>
   );
 };
