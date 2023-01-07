@@ -1,5 +1,4 @@
-// TODO: Add the type after the API is fixed
-export type GetUserResponseType = unknown;
+export type GetUserResponseType = CreateUserResponseType;
 
 export type CreateUserRequestType = {
   NIF: string;
@@ -11,5 +10,13 @@ export type CreateUserRequestType = {
   birth_day: string;
 };
 
-// TODO: Add the type after the API is fixed
-export type CreateeUserResponseType = unknown;
+export type CreateUserResponseType = {
+  NIF: string;
+  name: string;
+  surname: string;
+  middleName: string;
+  avatar: string;
+  sex: string;
+  birth_day: string;
+  created_at: string;
+};
