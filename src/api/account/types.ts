@@ -1,5 +1,10 @@
-// TODO: Add the type after the API is fixed
-export type GetAccountResponseType = unknown;
+export type GetAccountResponseType = {
+  number_account: string;
+  balance: number;
+  IBAN: string;
+  coin: string;
+  created_at: string;
+};
 
 export type CreateAccountRequestType = {
   IBAN: string;
@@ -7,5 +12,4 @@ export type CreateAccountRequestType = {
   numberPhone: string;
 };
 
-// TODO: Add the type after the API is fixed
-export type CreateAccountResponseType = unknown;
+export type CreateAccountResponseType = GetAccountResponseType;
