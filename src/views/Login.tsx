@@ -26,7 +26,7 @@ import { androidRippleEffect } from '../utils/theme/style';
 import loginSchema, { LoginFormType } from '../utils/validation/loginSchema';
 
 const Login = () => {
-  const [rememberUser, setRememberUser] = useState();
+  const [rememberUser, setRememberUser] = useState(false);
   const { signIn } = useUser();
 
   const { push } = useNavigation<AuthStackNavigationProps<'Login'>>();
@@ -39,7 +39,7 @@ const Login = () => {
   });
 
   const onSubmit = async ({ email, password }: LoginFormType) => {
-    await signIn(email as string, password as string);
+    await signIn(email as string, password as string, rememberUser);
   };
 
   return (
