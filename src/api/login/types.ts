@@ -2,12 +2,15 @@ export type AuthenticationResponseType = {
   email: string;
   isVerified: boolean;
   telephone: string;
+  created_at: string;
   user: {
     id_user: string;
     NIF: string;
     name: string;
     surname: string;
     avatar: string;
+    birth_day: string;
+    sex: string;
     Account: ReadonlyArray<{
       number_account: string;
       balance: number;
@@ -45,7 +48,6 @@ export type NormalizedContactType = {
   lastName: string;
 };
 
-// XXX Not implemented - API needs to be fixed
 export type CreateUserResponseType = {
   email: string;
   telephone: string;

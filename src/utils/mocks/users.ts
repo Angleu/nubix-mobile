@@ -1,6 +1,6 @@
-import { UserType } from '../../models/User';
+import { Old_UserType } from '../../models/User';
 
-const users: UserType[] = [
+const users: Old_UserType[] = [
   {
     id: '4f282ecb-a324-4cbe-9f4d-a2de57844aed',
     name: 'Ginelle Sherme',

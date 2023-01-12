@@ -1,5 +1,6 @@
 import { AxiosError, AxiosResponse } from 'axios';
 
+import { UserType } from '../../models/User';
 import axios from '../config';
 import {
   AuthenticationRequestType,
@@ -7,7 +8,7 @@ import {
   ContactResponseType,
   CreateUserRequestType,
   CreateUserResponseType,
-  NormalizedContactType as CleanedContactType,
+  NormalizedContactType,
 } from './types';
 
 export async function createUser(userBody: CreateUserRequestType) {
@@ -65,8 +66,8 @@ export async function authenticate(
       password,
       value: emailOrPhoneNumber,
     });
-
-    return response.data;
+    const user = transformUser(response.data);
+    return user;
   } catch (error) {
     if (error instanceof AxiosError) {
       const { status, cause } = error;
@@ -85,10 +86,44 @@ export async function authenticate(
 }
 
 function cleanContact(contact: ContactResponseType) {
-  const cleanedContact: CleanedContactType = {
+  const cleanedContact: NormalizedContactType = {
     phoneNumber: contact.telephone,
     firstName: contact.User ? contact.User.name : '',
     lastName: contact.User ? contact.User.surname : '',
   };
   return cleanedContact;
+}
+
+function transformUser(user: AuthenticationResponseType) {
+  const { email, isVerified, telephone, user: _user, created_at } = user;
+  const {
+    avatar,
+    name,
+    surname,
+    id_user,
+    NIF,
+    birth_day,
+    sex,
+    Address: { city, country },
+  } = _user;
+  const transformedUser: UserType = {
+    email,
+    isVerified,
+    phoneNumber: telephone,
+    avatarImageURL: avatar,
+    firstName: name,
+    lastName: surname,
+    id: id_user,
+    nif: NIF,
+    birthDate: new Date(birth_day),
+    sex,
+    accounts: [],
+    address: {
+      city,
+      country,
+    },
+    contacts: [],
+    createdAt: new Date(created_at),
+  };
+  return transformedUser;
 }

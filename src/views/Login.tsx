@@ -20,12 +20,14 @@ import { Controller, useForm } from 'react-hook-form';
 
 import LogoImage from '../../assets/images/logo.png';
 import Container from '../components/layout/Container';
+import useUser from '../hooks/useUser';
 import { AuthStackNavigationProps } from '../routes/types';
 import { androidRippleEffect } from '../utils/theme/style';
 import loginSchema, { LoginFormType } from '../utils/validation/loginSchema';
 
 const Login = () => {
   const [rememberUser, setRememberUser] = useState();
+  const { signIn } = useUser();
 
   const { push } = useNavigation<AuthStackNavigationProps<'Login'>>();
   const {
@@ -36,8 +38,8 @@ const Login = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = (data: LoginFormType) => {
-    console.log(data);
+  const onSubmit = async ({ email, password }: LoginFormType) => {
+    await signIn(email as string, password as string);
   };
 
   return (
