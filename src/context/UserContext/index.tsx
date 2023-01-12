@@ -13,16 +13,15 @@ export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    checkUserStorage();
-  }, [checkUserStorage]);
-
-  async function checkUserStorage() {
-    const storedUser = await getUser();
-    if (storedUser) {
-      const { emailOrPhoneNumber, password } = storedUser;
-      await signIn(emailOrPhoneNumber, password);
-    }
-  }
+    const loginStoredUser = async () => {
+      const storedUser = await getUser();
+      if (storedUser) {
+        const { emailOrPhoneNumber, password } = storedUser;
+        await signIn(emailOrPhoneNumber, password);
+      }
+    };
+    loginStoredUser();
+  }, []);
 
   async function signIn(
     emailOrPhoneNumber: string,
