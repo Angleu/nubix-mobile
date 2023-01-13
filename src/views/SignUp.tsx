@@ -43,11 +43,22 @@ const SignUp = () => {
     await methods.trigger(
       stepsGroupName[currentStep] as 'stepOne' | 'personalInfo' | 'address'
     );
+    if (currentStep === 0) {
+      const password = methods.getValues('stepOne.password');
+      const passwordConfirmation = methods.getValues('stepOne.confirmPassword');
+      if (password !== passwordConfirmation) {
+        methods.setError('stepOne.password', {
+          message: 'As duas passwords devem ser iguais',
+        });
+        methods.setError('stepOne.confirmPassword', {
+          message: 'As duas passwords devem ser iguais',
+        });
+      }
+    }
     if (Object.keys(methods.formState.errors).length === 0) {
       incrementStep();
       return;
     }
-    console.log(methods.formState.errors);
   };
 
   const goToPreviousStep = () => {
