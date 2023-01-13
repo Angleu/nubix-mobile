@@ -3,6 +3,7 @@ import { createContext, FC, ReactNode, useEffect, useState } from 'react';
 import { authenticate } from '../../api/login';
 import { UserType } from '../../models/User';
 import { clearUser, getUser, storeUser } from '../../utils/storage/user';
+import { SignUpFormType } from '../../utils/validation/signUpSchema';
 import { UserContextType } from './types';
 
 const UserContext = createContext<UserContextType>({} as UserContextType);
@@ -46,6 +47,7 @@ export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
       .catch(console.error);
   }
 
+  async function signUp(userDetails: SignUpFormType) {}
 
   const providerValue: UserContextType = {
     signIn,
@@ -53,6 +55,7 @@ export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
     user,
     isLoading,
     isAuthenticated: !!user,
+    signUp,
   };
 
   return (

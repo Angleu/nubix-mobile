@@ -20,7 +20,7 @@ import { Controller, useForm } from 'react-hook-form';
 
 import LogoImage from '../../assets/images/logo.png';
 import Container from '../components/layout/Container';
-import useUser from '../hooks/useUser';
+import { useUser } from '../hooks';
 import { AuthStackNavigationProps } from '../routes/types';
 import { androidRippleEffect } from '../utils/theme/style';
 import loginSchema, { LoginFormType } from '../utils/validation/loginSchema';

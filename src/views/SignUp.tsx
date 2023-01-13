@@ -19,11 +19,13 @@ import { checkFiscalNumber } from '../api/user';
 import { StepOne, StepThree, StepTwo } from '../components/form/CreateAccount';
 import Container from '../components/layout/Container';
 import LoadingModal from '../components/modal/LoadingModal';
-import useStepper from '../hooks/useStepper';
+import { useStepper } from '../hooks';
+import { useUser } from '../hooks';
 import { androidRippleEffect } from '../utils/theme/style';
 import signUpSchema, { SignUpFormType } from '../utils/validation/signUpSchema';
 
 const SignUp = () => {
+  const { signUp } = useUser();
   const [isLoading, setLoading] = useState(false);
 
   const methods = useForm<SignUpFormType>({
@@ -98,8 +100,8 @@ const SignUp = () => {
     decrementStep();
   };
 
-  const onSubmit = (data: SignUpFormType) => {
-    console.log(data);
+  const onSubmit = async (data: SignUpFormType) => {
+    await signUp(data);
   };
 
   return (

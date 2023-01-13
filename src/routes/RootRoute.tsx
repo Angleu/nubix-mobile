@@ -1,6 +1,6 @@
 import { Center, Spinner } from 'native-base';
 
-import useUser from '../hooks/useUser';
+import { useUser } from '../hooks';
 import AuthRoute from './AuthRoute';
 import MainRoute from './MainRoute';
 
