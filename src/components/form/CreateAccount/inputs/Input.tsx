@@ -11,6 +11,7 @@ type Props = {
   secureText?: boolean;
   required?: boolean;
   disabled?: boolean;
+  placeholder?: string;
 };
 
 const Input: FC<Props> = ({
@@ -20,7 +21,7 @@ const Input: FC<Props> = ({
   onChangeText,
   secureText = false,
   keyboardType = 'default',
-  // required = true,
+  placeholder = '',
   disabled = false,
 }) => {
   return (
@@ -44,6 +45,9 @@ const Input: FC<Props> = ({
         keyboardType={keyboardType}
         value={value}
         onChangeText={onChangeText}
+        placeholder={placeholder}
+        autoCapitalize={keyboardType === 'email-address' ? 'none' : 'words'}
+        cursorColor="primary.100"
       />
       <FormControl.ErrorMessage>{errorMessage}</FormControl.ErrorMessage>
     </FormControl>
