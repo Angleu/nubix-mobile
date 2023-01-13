@@ -52,11 +52,15 @@ export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
   async function signUp(userDetails: SignUpFormType) {
     const { stepOne, address, personalInfo } = userDetails;
     const { email, phoneNumber, password } = stepOne;
+    console.log('Processing Step 1...');
     await createUser({
       email,
       telephone: phoneNumber,
       password,
     });
+    console.log('Done!');
+    console.log('Processing Step 2...');
+
     const { nif, firstName, lastName, gender, birthDate } = personalInfo;
     await createUserWithPersonalData({
       NIF: nif,
@@ -67,6 +71,9 @@ export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
       sex: gender,
       birth_day: birthDate.toISOString(),
     });
+    console.log('Done!');
+    console.log('Processing Step 3...');
+
     const { coordinates, country, province } = address;
     await createAddress({
       city: province,
@@ -77,6 +84,7 @@ export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
       longitude: coordinates.longitude.toString(),
       email,
     });
+    console.log('Done!');
   }
 
   const providerValue: UserContextType = {

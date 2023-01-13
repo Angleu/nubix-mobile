@@ -12,11 +12,12 @@ import {
 } from './types';
 
 export async function createUser(userBody: CreateUserRequestType) {
+
   try {
-    const response = await axios.post<CreateUserResponseType>(
-      '/login',
-      userBody
-    );
+    const response = await axios.post<CreateUserResponseType>('/login', {
+      confirmPassword: userBody.password,
+      ...userBody,
+    });
     return response.data;
   } catch (error) {
     if (error instanceof AxiosError) {

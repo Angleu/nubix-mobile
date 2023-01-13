@@ -36,7 +36,6 @@ const StepTwo = () => {
             label="NIF"
             value={value}
             onChangeText={onChange}
-
           />
         )}
       />
