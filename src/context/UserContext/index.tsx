@@ -1,6 +1,8 @@
 import { createContext, FC, ReactNode, useEffect, useState } from 'react';
 
-import { authenticate } from '../../api/login';
+import { createAddress } from '../../api/address';
+import { authenticate, createUser } from '../../api/login';
+import { createUserWithPersonalData } from '../../api/user';
 import { UserType } from '../../models/User';
 import { clearUser, getUser, storeUser } from '../../utils/storage/user';
 import { SignUpFormType } from '../../utils/validation/signUpSchema';
@@ -47,7 +49,35 @@ export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
       .catch(console.error);
   }
 
-  async function signUp(userDetails: SignUpFormType) {}
+  async function signUp(userDetails: SignUpFormType) {
+    const { stepOne, address, personalInfo } = userDetails;
+    const { email, phoneNumber, password } = stepOne;
+    await createUser({
+      email,
+      telephone: phoneNumber,
+      password,
+    });
+    const { nif, firstName, lastName, gender, birthDate } = personalInfo;
+    await createUserWithPersonalData({
+      NIF: nif,
+      name: firstName,
+      middleName: '',
+      surname: lastName,
+      email,
+      sex: gender,
+      birth_day: birthDate.toISOString(),
+    });
+    const { coordinates, country, province } = address;
+    await createAddress({
+      city: province,
+      country,
+      street: '',
+      houseNumber: '',
+      latitude: coordinates.latitude.toString(),
+      longitude: coordinates.longitude.toString(),
+      NIF: nif,
+    });
+  }
 
   const providerValue: UserContextType = {
     signIn,
