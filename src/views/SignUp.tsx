@@ -11,16 +11,21 @@ import {
   ScrollView,
   Text,
 } from 'native-base';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { Alert } from 'react-native';
 
+import { checkFiscalNumber } from '../api/user';
 import { StepOne, StepThree, StepTwo } from '../components/form/CreateAccount';
 import Container from '../components/layout/Container';
+import LoadingModal from '../components/modal/LoadingModal';
 import useStepper from '../hooks/useStepper';
 import { androidRippleEffect } from '../utils/theme/style';
 import signUpSchema, { SignUpFormType } from '../utils/validation/signUpSchema';
 
 const SignUp = () => {
+  const [isLoading, setLoading] = useState(false);
+
   const methods = useForm<SignUpFormType>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -43,6 +48,7 @@ const SignUp = () => {
     await methods.trigger(
       stepsGroupName[currentStep] as 'stepOne' | 'personalInfo' | 'address'
     );
+
     if (currentStep === 0) {
       const password = methods.getValues('stepOne.password');
       const passwordConfirmation = methods.getValues('stepOne.confirmPassword');
@@ -54,7 +60,33 @@ const SignUp = () => {
           message: 'As duas passwords devem ser iguais',
         });
       }
+    } else if (currentStep === 1) {
+      const nif = methods.getValues('personalInfo.nif');
+      const firstName = methods.getValues('personalInfo.firstName');
+      const lastName = methods.getValues('personalInfo.lastName');
+
+      const inferredFullName = firstName + ' ' + lastName;
+      try {
+        setLoading(true);
+        const { name } = await checkFiscalNumber(nif);
+        if (!name.toLowerCase().includes(inferredFullName.toLowerCase())) {
+          Alert.alert(
+            'Nome Inválido',
+            'O nome inserido não corresponde com o nome do NIF'
+          );
+          methods.resetField('personalInfo.nif');
+          methods.resetField('personalInfo.firstName');
+          methods.resetField('personalInfo.lastName');
+        }
+      } catch (error) {
+        methods.setError('personalInfo.nif', {
+          message: error.message,
+        });
+      } finally {
+        setLoading(false);
+      }
     }
+
     if (Object.keys(methods.formState.errors).length === 0) {
       incrementStep();
       return;
@@ -73,6 +105,7 @@ const SignUp = () => {
   return (
     <Container>
       <FormProvider {...methods}>
+        <LoadingModal isOpen={isLoading} text="Validando o NIF..." />
         <HStack>
           <IconButton
             borderRadius="full"
