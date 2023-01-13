@@ -1,7 +1,7 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useNavigation } from '@react-navigation/native';
 import {
+  AlertDialog,
   Button,
   Center,
   FormControl,
@@ -15,21 +15,25 @@ import {
   Text,
   VStack,
 } from 'native-base';
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import LogoImage from '../../assets/images/logo.png';
 import Container from '../components/layout/Container';
 import { useUser } from '../hooks';
-import { AuthStackNavigationProps } from '../routes/types';
+import { AuthStackScreenProps } from '../routes/types';
 import { androidRippleEffect } from '../utils/theme/style';
 import loginSchema, { LoginFormType } from '../utils/validation/loginSchema';
 
-const Login = () => {
+const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
+  const params = route.params;
+  const { push } = navigation;
+
   const [rememberUser, setRememberUser] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
+
   const { signIn } = useUser();
 
-  const { push } = useNavigation<AuthStackNavigationProps<'Login'>>();
   const {
     control,
     handleSubmit,
@@ -44,6 +48,44 @@ const Login = () => {
 
   return (
     <Container>
+      {params && (
+        <AlertDialog
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          leastDestructiveRef={undefined}
+        >
+          <AlertDialog.Content>
+            <AlertDialog.CloseButton />
+            <AlertDialog.Header
+              borderBottomWidth={0}
+              _text={{
+                color: params.signUpSuccess ? 'primary.100' : 'danger.700',
+              }}
+            >
+              {params.signUpSuccess
+                ? 'Conta Criada'
+                : 'Erro na Criação de Conta'}
+            </AlertDialog.Header>
+            <AlertDialog.Body>
+              {params.signUpSuccess
+                ? 'Parabéns! Já possui uma conta na Nubix. Faça o login para continuar'
+                : params.errorMessage}
+            </AlertDialog.Body>
+            <AlertDialog.Footer borderTopWidth={0}>
+              <Button
+                variant="unstyled"
+                _text={{
+                  color: 'primary.100',
+                }}
+                onPress={() => setIsOpen(false)}
+              >
+                Ok
+              </Button>
+            </AlertDialog.Footer>
+          </AlertDialog.Content>
+        </AlertDialog>
+      )}
+
       <ScrollView>
         <Center>
           <Image source={LogoImage} alt="Nubix Logo" h="56" />

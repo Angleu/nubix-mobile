@@ -44,7 +44,10 @@ export type MainStackNavigationProps<T extends keyof MainStackParamListType> =
 
 // Auth Native Stack
 export type AuthStackParamListType = {
-  Login: undefined;
+  Login: {
+    errorMessage?: string;
+    signUpSuccess?: boolean;
+  };
   SignUp: undefined;
 };
 

@@ -19,10 +19,12 @@ import { checkFiscalNumber } from '../api/user';
 import { StepOne, StepThree, StepTwo } from '../components/form/CreateAccount';
 import Container from '../components/layout/Container';
 import LoadingModal from '../components/modal/LoadingModal';
-import { useStepper } from '../hooks';
-import { useUser } from '../hooks';
+import { useStepper, useUser } from '../hooks';
+import { AuthStackNavigationProps } from '../routes/types';
 import { androidRippleEffect } from '../utils/theme/style';
 import signUpSchema, { SignUpFormType } from '../utils/validation/signUpSchema';
+
+const VALIDATE_NIF = false;
 
 const SignUp = () => {
   const { signUp } = useUser();
@@ -36,7 +38,8 @@ const SignUp = () => {
       },
     },
   });
-  const { goBack } = useNavigation();
+  const { goBack, navigate } =
+    useNavigation<AuthStackNavigationProps<'SignUp'>>();
   const { currentStep, incrementStep, decrementStep } = useStepper();
 
   const steps = useMemo(
@@ -62,7 +65,7 @@ const SignUp = () => {
           message: 'As duas passwords devem ser iguais',
         });
       }
-    } else if (currentStep === 1) {
+    } else if (currentStep === 1 && VALIDATE_NIF) {
       const nif = methods.getValues('personalInfo.nif');
       const firstName = methods.getValues('personalInfo.firstName');
       const lastName = methods.getValues('personalInfo.lastName');
@@ -101,7 +104,17 @@ const SignUp = () => {
   };
 
   const onSubmit = async (data: SignUpFormType) => {
-    await signUp(data);
+    try {
+      await signUp(data);
+      navigate('Login', {
+        signUpSuccess: true,
+      });
+    } catch (error) {
+      navigate('Login', {
+        errorMessage: error.message,
+        signUpSuccess: false,
+      });
+    }
   };
 
   return (
