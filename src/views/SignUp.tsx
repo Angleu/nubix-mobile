@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigation } from '@react-navigation/native';
+import { subYears } from 'date-fns';
 import {
   Button,
   Heading,
@@ -10,20 +11,35 @@ import {
   ScrollView,
   Text,
 } from 'native-base';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { Alert } from 'react-native';
 
+import { checkFiscalNumber } from '../api/user';
 import { StepOne, StepThree, StepTwo } from '../components/form/CreateAccount';
 import Container from '../components/layout/Container';
-import useStepper from '../hooks/useStepper';
+import LoadingModal from '../components/modal/LoadingModal';
+import { useStepper, useUser } from '../hooks';
+import { AuthStackNavigationProps } from '../routes/types';
 import { androidRippleEffect } from '../utils/theme/style';
 import signUpSchema, { SignUpFormType } from '../utils/validation/signUpSchema';
 
+const VALIDATE_NIF = false;
+
 const SignUp = () => {
+  const { signUp } = useUser();
+  const [isLoading, setLoading] = useState(false);
+
   const methods = useForm<SignUpFormType>({
     resolver: zodResolver(signUpSchema),
+    defaultValues: {
+      personalInfo: {
+        birthDate: subYears(new Date(), 17),
+      },
+    },
   });
-  const { goBack } = useNavigation();
+  const { goBack, navigate } =
+    useNavigation<AuthStackNavigationProps<'SignUp'>>();
   const { currentStep, incrementStep, decrementStep } = useStepper();
 
   const steps = useMemo(
@@ -37,6 +53,45 @@ const SignUp = () => {
     await methods.trigger(
       stepsGroupName[currentStep] as 'stepOne' | 'personalInfo' | 'address'
     );
+
+    if (currentStep === 0) {
+      const password = methods.getValues('stepOne.password');
+      const passwordConfirmation = methods.getValues('stepOne.confirmPassword');
+      if (password !== passwordConfirmation) {
+        methods.setError('stepOne.password', {
+          message: 'As duas passwords devem ser iguais',
+        });
+        methods.setError('stepOne.confirmPassword', {
+          message: 'As duas passwords devem ser iguais',
+        });
+      }
+    } else if (currentStep === 1 && VALIDATE_NIF) {
+      const nif = methods.getValues('personalInfo.nif');
+      const firstName = methods.getValues('personalInfo.firstName');
+      const lastName = methods.getValues('personalInfo.lastName');
+
+      const inferredFullName = firstName + ' ' + lastName;
+      try {
+        setLoading(true);
+        const { name } = await checkFiscalNumber(nif);
+        if (!name.toLowerCase().includes(inferredFullName.toLowerCase())) {
+          Alert.alert(
+            'Nome Inválido',
+            'O nome inserido não corresponde com o nome do NIF'
+          );
+          methods.resetField('personalInfo.nif');
+          methods.resetField('personalInfo.firstName');
+          methods.resetField('personalInfo.lastName');
+        }
+      } catch (error) {
+        methods.setError('personalInfo.nif', {
+          message: error.message,
+        });
+      } finally {
+        setLoading(false);
+      }
+    }
+
     if (Object.keys(methods.formState.errors).length === 0) {
       incrementStep();
       return;
@@ -48,13 +103,24 @@ const SignUp = () => {
     decrementStep();
   };
 
-  const onSubmit = (data: SignUpFormType) => {
-    console.log(data);
+  const onSubmit = async (data: SignUpFormType) => {
+    try {
+      await signUp(data);
+      navigate('Login', {
+        signUpSuccess: true,
+      });
+    } catch (error) {
+      navigate('Login', {
+        errorMessage: error.message,
+        signUpSuccess: false,
+      });
+    }
   };
 
   return (
     <Container>
       <FormProvider {...methods}>
+        <LoadingModal isOpen={isLoading} text="Validando o NIF..." />
         <HStack>
           <IconButton
             borderRadius="full"
@@ -116,38 +182,39 @@ const SignUp = () => {
           }
 
           {steps[currentStep]}
+
+          {currentStep < steps.length - 1 ? (
+            <Button
+              mb="4"
+              py="3"
+              bg="primary.100"
+              borderRadius="lg"
+              android_ripple={androidRippleEffect}
+              shadow="3"
+              _pressed={{
+                bg: 'primary.100',
+              }}
+              onPress={goToNextStep}
+            >
+              Continuar
+            </Button>
+          ) : (
+            <Button
+              my="4"
+              py="3"
+              bg="primary.100"
+              borderRadius="lg"
+              android_ripple={androidRippleEffect}
+              shadow="3"
+              _pressed={{
+                bg: 'primary.100',
+              }}
+              onPress={methods.handleSubmit(onSubmit)}
+            >
+              Terminar
+            </Button>
+          )}
         </ScrollView>
-        {currentStep < steps.length - 1 ? (
-          <Button
-            mb="4"
-            py="3"
-            bg="primary.100"
-            borderRadius="lg"
-            android_ripple={androidRippleEffect}
-            shadow="3"
-            _pressed={{
-              bg: 'primary.100',
-            }}
-            onPress={goToNextStep}
-          >
-            Continuar
-          </Button>
-        ) : (
-          <Button
-            mb="4"
-            py="3"
-            bg="primary.100"
-            borderRadius="lg"
-            android_ripple={androidRippleEffect}
-            shadow="3"
-            _pressed={{
-              bg: 'primary.100',
-            }}
-            onPress={methods.handleSubmit(onSubmit)}
-          >
-            Terminar
-          </Button>
-        )}
       </FormProvider>
     </Container>
   );

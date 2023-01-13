@@ -26,6 +26,7 @@ const StepOne = () => {
             value={value}
             onChangeText={onChange}
             keyboardType="email-address"
+            placeholder="example@email.com"
           />
         )}
       />
@@ -44,6 +45,7 @@ const StepOne = () => {
             value={value}
             onChangeText={onChange}
             keyboardType="phone-pad"
+            placeholder="9XXXXXXXX"
           />
         )}
       />

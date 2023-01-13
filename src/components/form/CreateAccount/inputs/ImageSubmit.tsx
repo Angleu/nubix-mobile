@@ -6,6 +6,7 @@ import {
   Pressable,
   Spinner,
   Text,
+  VStack,
 } from 'native-base';
 import React, { FC, useState } from 'react';
 
@@ -36,7 +37,7 @@ const ImageSubmit: FC<Props> = ({ onImageChange }) => {
   return (
     <Pressable mb="4" onPress={pickImage}>
       <Text fontSize="sm" color="light.500">
-        Submeter Foto
+        Foto de Perfil
       </Text>
       <FormControl
         borderWidth={1}
@@ -56,7 +57,12 @@ const ImageSubmit: FC<Props> = ({ onImageChange }) => {
               alt="Profile Picture"
             />
           ) : (
-            <SavePictureSVG />
+            <VStack alignItems="center" space="2">
+              <SavePictureSVG />
+              <Text fontSize="xs" color="primary.100">
+                Pressione para submeter a foto de perfil
+              </Text>
+            </VStack>
           )}
         </Center>
       </FormControl>

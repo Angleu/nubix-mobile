@@ -5,7 +5,7 @@ import Container from '../components/layout/Container';
 import Header from '../components/layout/Header';
 import NumberPad from '../components/layout/NumberPad';
 import { TransferDescriptionBottomSheet } from '../components/modal';
-import { useBottomSheetModal } from '../hooks/useBottomSheetModal';
+import { useBottomSheetModal } from '../hooks';
 import { MainStackScreenProps } from '../routes/types';
 import { formatMoney } from '../utils/formatter';
 import { androidRippleEffect, textShadowStyle } from '../utils/theme/style';

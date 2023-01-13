@@ -8,7 +8,7 @@ export type CreateAddressRequestType = {
   houseNumber: string;
   latitude: string;
   longitude: string;
-  NIF: string;
+  email: string;
 };
 
 // TODO: Add the type after the API is fixed
