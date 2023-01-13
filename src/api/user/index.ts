@@ -5,6 +5,7 @@ import {
   CreateUserRequestType,
   CreateUserResponseType,
   GetUserResponseType,
+  NIFConsultingResponseType,
 } from './types';
 
 export async function getUser(nif: string) {
@@ -44,6 +45,36 @@ export async function createUserWithPersonalData(user: CreateUserRequestType) {
           });
         case 401:
           throw new Error('Dados de login não foram encontrados', {
+            cause,
+          });
+        default:
+          throw new Error(
+            'Existe um problema com o servidor. Tente mais tarde',
+            { cause }
+          );
+      }
+    }
+    throw new Error('Erro ao se conectar com o servidor', { cause: error });
+  }
+}
+
+export async function checkFiscalNumber(fiscalNumber: string) {
+  try {
+    const response = await axios.get<NIFConsultingResponseType>(
+      `/user/consulting/${fiscalNumber}`
+    );
+    const data = {
+      name: response.data.nome,
+      type: response.data.tipo,
+      state: response.data.estado,
+    };
+    return data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      const { status, cause } = error;
+      switch (status) {
+        case 404:
+          throw new Error('Não foi encontrado um utilizador com esse NIF', {
             cause,
           });
         default:

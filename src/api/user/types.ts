@@ -20,3 +20,9 @@ export type CreateUserResponseType = {
   birth_day: string;
   created_at: string;
 };
+
+export type NIFConsultingResponseType = {
+  nome: string;
+  tipo: string;
+  estado: string;
+};
