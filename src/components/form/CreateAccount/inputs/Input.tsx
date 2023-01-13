@@ -10,6 +10,7 @@ type Props = {
   keyboardType?: KeyboardTypeOptions;
   secureText?: boolean;
   required?: boolean;
+  disabled?: boolean;
 };
 
 const Input: FC<Props> = ({
@@ -20,6 +21,7 @@ const Input: FC<Props> = ({
   secureText = false,
   keyboardType = 'default',
   // required = true,
+  disabled = false,
 }) => {
   return (
     <FormControl isInvalid={!!errorMessage} mb="4">
@@ -37,6 +39,7 @@ const Input: FC<Props> = ({
           borderColor: 'primary.100',
         }}
         fontSize="md"
+        isDisabled={disabled}
         secureTextEntry={secureText}
         keyboardType={keyboardType}
         value={value}

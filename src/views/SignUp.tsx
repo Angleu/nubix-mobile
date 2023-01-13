@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigation } from '@react-navigation/native';
+import { subYears } from 'date-fns';
 import {
   Button,
   Heading,
@@ -22,6 +23,11 @@ import signUpSchema, { SignUpFormType } from '../utils/validation/signUpSchema';
 const SignUp = () => {
   const methods = useForm<SignUpFormType>({
     resolver: zodResolver(signUpSchema),
+    defaultValues: {
+      personalInfo: {
+        birthDate: subYears(new Date(), 17),
+      },
+    },
   });
   const { goBack } = useNavigation();
   const { currentStep, incrementStep, decrementStep } = useStepper();
@@ -41,6 +47,7 @@ const SignUp = () => {
       incrementStep();
       return;
     }
+    console.log(methods.formState.errors);
   };
 
   const goToPreviousStep = () => {
@@ -116,38 +123,39 @@ const SignUp = () => {
           }
 
           {steps[currentStep]}
+
+          {currentStep < steps.length - 1 ? (
+            <Button
+              mb="4"
+              py="3"
+              bg="primary.100"
+              borderRadius="lg"
+              android_ripple={androidRippleEffect}
+              shadow="3"
+              _pressed={{
+                bg: 'primary.100',
+              }}
+              onPress={goToNextStep}
+            >
+              Continuar
+            </Button>
+          ) : (
+            <Button
+              my="4"
+              py="3"
+              bg="primary.100"
+              borderRadius="lg"
+              android_ripple={androidRippleEffect}
+              shadow="3"
+              _pressed={{
+                bg: 'primary.100',
+              }}
+              onPress={methods.handleSubmit(onSubmit)}
+            >
+              Terminar
+            </Button>
+          )}
         </ScrollView>
-        {currentStep < steps.length - 1 ? (
-          <Button
-            mb="4"
-            py="3"
-            bg="primary.100"
-            borderRadius="lg"
-            android_ripple={androidRippleEffect}
-            shadow="3"
-            _pressed={{
-              bg: 'primary.100',
-            }}
-            onPress={goToNextStep}
-          >
-            Continuar
-          </Button>
-        ) : (
-          <Button
-            mb="4"
-            py="3"
-            bg="primary.100"
-            borderRadius="lg"
-            android_ripple={androidRippleEffect}
-            shadow="3"
-            _pressed={{
-              bg: 'primary.100',
-            }}
-            onPress={methods.handleSubmit(onSubmit)}
-          >
-            Terminar
-          </Button>
-        )}
       </FormProvider>
     </Container>
   );

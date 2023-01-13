@@ -46,6 +46,7 @@ export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
       .catch(console.error);
   }
 
+
   const providerValue: UserContextType = {
     signIn,
     logout,

@@ -3,6 +3,7 @@ import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
 import { SignUpFormType } from '../../../utils/validation/signUpSchema';
+import BirthDateInput from './inputs/BirthDateInput';
 import GenderSelect from './inputs/GenderSelect';
 import ImageSubmit from './inputs/ImageSubmit';
 import Input from './inputs/Input';
@@ -10,11 +11,35 @@ import Input from './inputs/Input';
 const StepTwo = () => {
   const {
     control,
+    setValue,
     formState: { errors },
   } = useFormContext<SignUpFormType>();
+
   return (
     <VStack>
-      <ImageSubmit onImageChange={() => console.log('Image updated')} />
+      <ImageSubmit
+        onImageChange={(imageUri) =>
+          setValue('personalInfo.profilePicture', imageUri)
+        }
+      />
+
+      <Controller
+        name="personalInfo.nif"
+        control={control}
+        render={({ field: { onChange, value } }) => (
+          <Input
+            errorMessage={
+              errors.personalInfo &&
+              errors.personalInfo.nif &&
+              errors.personalInfo.nif.message
+            }
+            label="NIF"
+            value={value}
+            onChangeText={onChange}
+            keyboardType="number-pad"
+          />
+        )}
+      />
 
       <Controller
         name="personalInfo.firstName"
@@ -50,22 +75,18 @@ const StepTwo = () => {
         )}
       />
 
-      <GenderSelect />
-
       <Controller
-        name="personalInfo.nif"
+        name="personalInfo.gender"
         control={control}
         render={({ field: { onChange, value } }) => (
-          <Input
+          <GenderSelect
+            value={value}
+            onChange={onChange}
             errorMessage={
               errors.personalInfo &&
-              errors.personalInfo.nif &&
-              errors.personalInfo.nif.message
+              errors.personalInfo.gender &&
+              errors.personalInfo.gender.message
             }
-            label="NIF"
-            value={value}
-            onChangeText={onChange}
-            keyboardType="number-pad"
           />
         )}
       />
@@ -83,6 +104,22 @@ const StepTwo = () => {
             label="Ocupação"
             value={value}
             onChangeText={onChange}
+          />
+        )}
+      />
+
+      <Controller
+        name="personalInfo.birthDate"
+        control={control}
+        render={({ field: { onChange, value } }) => (
+          <BirthDateInput
+            value={value}
+            onChange={onChange}
+            errorMessage={
+              errors.personalInfo &&
+              errors.personalInfo.birthDate &&
+              errors.personalInfo.birthDate.message
+            }
           />
         )}
       />

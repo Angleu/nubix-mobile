@@ -1,17 +1,24 @@
 import { FormControl, Select, Text } from 'native-base';
-import React from 'react';
+import React, { FC } from 'react';
 
-const GenderSelect = () => {
+type Props = {
+  value: string;
+  onChange: (value: string) => void;
+  errorMessage?: string;
+};
+
+const GenderSelect: FC<Props> = ({ onChange, value, errorMessage }) => {
   return (
-    <FormControl>
+    <FormControl isInvalid={!!errorMessage}>
       <FormControl.Label>
         <Text fontSize="sm" color="light.500">
           Género
         </Text>
       </FormControl.Label>
       <Select
+        onValueChange={onChange}
+        selectedValue={value}
         placeholder="Selecione o seu género"
-        mb="4"
         _ios={{
           py: '4',
         }}
@@ -21,6 +28,7 @@ const GenderSelect = () => {
         <Select.Item value="female" label="Feminino" />
         <Select.Item value="other" label="Outro" />
       </Select>
+      <FormControl.ErrorMessage>{errorMessage}</FormControl.ErrorMessage>
     </FormControl>
   );
 };
