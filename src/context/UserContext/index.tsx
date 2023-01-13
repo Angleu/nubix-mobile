@@ -75,7 +75,7 @@ export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
       houseNumber: '',
       latitude: coordinates.latitude.toString(),
       longitude: coordinates.longitude.toString(),
-      NIF: nif,
+      email,
     });
   }
 
