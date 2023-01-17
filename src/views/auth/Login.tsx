@@ -119,6 +119,7 @@ const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
                   onChangeText={onChange}
                   placeholder="example@mail.com"
                   borderColor="primary.100"
+                  autoCapitalize="none"
                   _focus={{
                     bg: 'light.50',
                     borderColor: 'primary.100',
