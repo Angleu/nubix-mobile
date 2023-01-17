@@ -8,13 +8,35 @@ import {
   ScrollView,
   Text,
 } from 'native-base';
-import React from 'react';
+import React, { FC, useState } from 'react';
 
 import Container from '../../components/layout/Container';
 import SignUpStepCount from '../../components/layout/SignUpStepCount';
+import { AuthStackScreenProps } from '../../routes/types';
 import { androidRippleEffect } from '../../utils/theme/style';
 
-const SignUpStepThree = () => {
+const SignUpStepThree: FC<AuthStackScreenProps<'SignUpStepThree'>> = ({
+  navigation,
+}) => {
+  const [isLoading, setLoading] = useState(false);
+
+  async function finalizeResister() {
+    setLoading(true);
+    // Do form submission here
+    setLoading(false);
+    navigation.reset({
+      index: 0,
+      routes: [
+        {
+          name: 'Login',
+          params: {
+            signUpSuccess: true,
+          },
+        },
+      ],
+    });
+  }
+
   return (
     <Container>
       <HStack>
@@ -28,10 +50,11 @@ const SignUpStepThree = () => {
             color: 'dark.50',
             size: '4xl',
           }}
+          onPress={() => navigation.goBack()}
         />
       </HStack>
       <ScrollView flex={1} showsVerticalScrollIndicator={false}>
-        <SignUpStepCount numberOfSteps={3} currentStepIndex={1} />
+        <SignUpStepCount numberOfSteps={3} currentStepIndex={2} />
         <Heading
           textAlign="center"
           textTransform="uppercase"
@@ -53,6 +76,7 @@ const SignUpStepThree = () => {
         </Text>
 
         <Button
+          isLoading={isLoading}
           my="4"
           py="3"
           bg="primary.100"
@@ -62,6 +86,7 @@ const SignUpStepThree = () => {
           _pressed={{
             bg: 'primary.100',
           }}
+          onPress={finalizeResister}
         >
           Terminar
         </Button>

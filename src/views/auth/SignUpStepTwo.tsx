@@ -8,13 +8,25 @@ import {
   ScrollView,
   Text,
 } from 'native-base';
-import React from 'react';
+import React, { FC, useState } from 'react';
 
 import Container from '../../components/layout/Container';
 import SignUpStepCount from '../../components/layout/SignUpStepCount';
+import { AuthStackScreenProps } from '../../routes/types';
 import { androidRippleEffect } from '../../utils/theme/style';
 
-const SignUpStepTwo = () => {
+const SignUpStepTwo: FC<AuthStackScreenProps<'SignUpStepTwo'>> = ({
+  navigation,
+}) => {
+  const [isLoading, setLoading] = useState(false);
+
+  async function handleGoNextStep() {
+    setLoading(true);
+    // Do form submission here
+    setLoading(false);
+    navigation.navigate('SignUpStepThree');
+  }
+
   return (
     <Container>
       <HStack>
@@ -28,6 +40,7 @@ const SignUpStepTwo = () => {
             color: 'dark.50',
             size: '4xl',
           }}
+          onPress={() => navigation.goBack()}
         />
       </HStack>
       <ScrollView flex={1} showsVerticalScrollIndicator={false}>
@@ -53,6 +66,7 @@ const SignUpStepTwo = () => {
         </Text>
 
         <Button
+          isLoading={isLoading}
           mb="4"
           py="3"
           bg="primary.100"
@@ -62,6 +76,7 @@ const SignUpStepTwo = () => {
           _pressed={{
             bg: 'primary.100',
           }}
+          onPress={handleGoNextStep}
         >
           Continuar
         </Button>
