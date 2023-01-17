@@ -1,5 +1,6 @@
 import { FormControl, Input as NInput, Text } from 'native-base';
 import React, { FC } from 'react';
+import { Noop } from 'react-hook-form';
 import { KeyboardTypeOptions } from 'react-native';
 
 type Props = {
@@ -7,6 +8,7 @@ type Props = {
   label: string;
   value: string;
   onChangeText: (value: string) => void;
+  onBlur?: Noop;
   keyboardType?: KeyboardTypeOptions;
   secureText?: boolean;
   required?: boolean;
@@ -19,6 +21,7 @@ const Input: FC<Props> = ({
   errorMessage,
   value,
   onChangeText,
+  onBlur,
   secureText = false,
   keyboardType = 'default',
   placeholder = '',
@@ -32,6 +35,7 @@ const Input: FC<Props> = ({
         </Text>
       </FormControl.Label>
       <NInput
+        onBlur={onBlur}
         _ios={{
           py: '3',
         }}

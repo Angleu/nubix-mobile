@@ -1,4 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { subYears } from 'date-fns';
 import {
   Button,
   Heading,
@@ -7,23 +9,48 @@ import {
   IconButton,
   ScrollView,
   Text,
+  VStack,
 } from 'native-base';
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 
+import BirthDateInput from '../../components/form/inputs/BirthDateInput';
+import GenderSelect from '../../components/form/inputs/GenderSelect';
+import ImageSubmit from '../../components/form/inputs/ImageSubmit';
+import Input from '../../components/form/inputs/Input';
 import Container from '../../components/layout/Container';
 import SignUpStepCount from '../../components/layout/SignUpStepCount';
 import { AuthStackScreenProps } from '../../routes/types';
 import { androidRippleEffect } from '../../utils/theme/style';
+import {
+  personalInfoSchema,
+  PersonalInfoSchemaType,
+} from '../../utils/validation/signUpSchema';
 
 const SignUpStepTwo: FC<AuthStackScreenProps<'SignUpStepTwo'>> = ({
   navigation,
 }) => {
-  const [isLoading, setLoading] = useState(false);
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    formState: { errors, isValid, isSubmitting, isDirty },
+  } = useForm<PersonalInfoSchemaType>({
+    resolver: zodResolver(personalInfoSchema),
+    defaultValues: {
+      profilePicture: '',
+      firstName: '',
+      lastName: '',
+      nif: '',
+      occupation: '',
+      birthDate: subYears(new Date(), 17),
+    },
+    mode: 'onChange',
+  });
 
-  async function handleGoNextStep() {
-    setLoading(true);
+  async function handleGoNextStep(formData: PersonalInfoSchemaType) {
     // Do form submission here
-    setLoading(false);
+    console.log(formData);
     navigation.navigate('SignUpStepThree');
   }
 
@@ -65,8 +92,95 @@ const SignUpStepTwo: FC<AuthStackScreenProps<'SignUpStepTwo'>> = ({
           Dados Pessoais
         </Text>
 
+        <VStack>
+          <ImageSubmit
+            onImageChange={(imageUri) => setValue('profilePicture', imageUri)}
+          />
+
+          <Controller
+            name="nif"
+            control={control}
+            render={({ field: { onChange, value, onBlur } }) => (
+              <Input
+                label="NIF"
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                errorMessage={errors?.nif?.message}
+              />
+            )}
+          />
+
+          <Controller
+            name="firstName"
+            control={control}
+            render={({ field: { onChange, value, onBlur } }) => (
+              <Input
+                label="Primeiro Nome"
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                errorMessage={errors?.firstName?.message}
+              />
+            )}
+          />
+
+          <Controller
+            name="lastName"
+            control={control}
+            render={({ field: { onChange, value, onBlur } }) => (
+              <Input
+                label="Último Nome"
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                errorMessage={errors?.lastName?.message}
+              />
+            )}
+          />
+
+          <Controller
+            name="gender"
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <GenderSelect
+                value={value}
+                onChange={onChange}
+                errorMessage={errors?.nif?.message}
+              />
+            )}
+          />
+
+          <Controller
+            name="occupation"
+            control={control}
+            render={({ field: { onChange, value, onBlur } }) => (
+              <Input
+                label="Ocupação"
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                errorMessage={errors?.occupation?.message}
+              />
+            )}
+          />
+
+          <Controller
+            name="birthDate"
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <BirthDateInput
+                value={value}
+                onChange={onChange}
+                errorMessage={errors?.birthDate?.message}
+              />
+            )}
+          />
+        </VStack>
+
         <Button
-          isLoading={isLoading}
+          isDisabled={!isValid || !isDirty}
+          isLoading={isSubmitting}
           mb="4"
           py="3"
           bg="primary.100"
@@ -76,7 +190,7 @@ const SignUpStepTwo: FC<AuthStackScreenProps<'SignUpStepTwo'>> = ({
           _pressed={{
             bg: 'primary.100',
           }}
-          onPress={handleGoNextStep}
+          onPress={handleSubmit(handleGoNextStep)}
         >
           Continuar
         </Button>
