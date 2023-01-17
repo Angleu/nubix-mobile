@@ -4,7 +4,7 @@ import { Button, FormControl, HStack, Text } from 'native-base';
 import React, { FC, useState } from 'react';
 import { Platform } from 'react-native';
 
-import { colorPallet } from '../../../../utils/theme';
+import { colorPallet } from '../../../utils/theme';
 
 type Props = {
   value: Date;

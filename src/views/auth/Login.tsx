@@ -18,12 +18,12 @@ import {
 import React, { FC, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import LogoImage from '../../assets/images/logo.png';
-import Container from '../components/layout/Container';
-import { useUser } from '../hooks';
-import { AuthStackScreenProps } from '../routes/types';
-import { androidRippleEffect } from '../utils/theme/style';
-import loginSchema, { LoginFormType } from '../utils/validation/loginSchema';
+import LogoImage from '../../../assets/images/logo.png';
+import Container from '../../components/layout/Container';
+import { useUser } from '../../hooks';
+import { AuthStackScreenProps } from '../../routes/types';
+import { androidRippleEffect } from '../../utils/theme/style';
+import loginSchema, { LoginFormType } from '../../utils/validation/loginSchema';
 
 const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
   const params = route.params;
@@ -119,6 +119,7 @@ const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
                   onChangeText={onChange}
                   placeholder="example@mail.com"
                   borderColor="primary.100"
+                  autoCapitalize="none"
                   _focus={{
                     bg: 'light.50',
                     borderColor: 'primary.100',
@@ -222,7 +223,7 @@ const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
             _pressed={{
               bg: 'light.50',
             }}
-            onPress={() => push('SignUp')}
+            onPress={() => push('SignUpStepOne')}
           >
             Criar Conta
           </Button>

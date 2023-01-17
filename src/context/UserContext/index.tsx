@@ -1,11 +1,8 @@
 import { createContext, FC, ReactNode, useEffect, useState } from 'react';
 
-import { createAddress } from '../../api/address';
-import { authenticate, createUser } from '../../api/login';
-import { createUserWithPersonalData } from '../../api/user';
+import { authenticate } from '../../api/login';
 import { UserType } from '../../models/User';
 import { clearUser, getUser, storeUser } from '../../utils/storage/user';
-import { SignUpFormType } from '../../utils/validation/signUpSchema';
 import { UserContextType } from './types';
 
 const UserContext = createContext<UserContextType>({} as UserContextType);
@@ -49,51 +46,12 @@ export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
       .catch(console.error);
   }
 
-  async function signUp(userDetails: SignUpFormType) {
-    const { stepOne, address, personalInfo } = userDetails;
-    const { email, phoneNumber, password } = stepOne;
-    console.log('Processing Step 1...');
-    await createUser({
-      email,
-      telephone: phoneNumber,
-      password,
-    });
-    console.log('Done!');
-    console.log('Processing Step 2...');
-
-    const { nif, firstName, lastName, gender, birthDate } = personalInfo;
-    await createUserWithPersonalData({
-      NIF: nif,
-      name: firstName,
-      middleName: '',
-      surname: lastName,
-      email,
-      sex: gender,
-      birth_day: birthDate.toISOString(),
-    });
-    console.log('Done!');
-    console.log('Processing Step 3...');
-
-    const { coordinates, country, province } = address;
-    await createAddress({
-      city: province,
-      country,
-      street: '',
-      houseNumber: '',
-      latitude: coordinates.latitude.toString(),
-      longitude: coordinates.longitude.toString(),
-      email,
-    });
-    console.log('Done!');
-  }
-
   const providerValue: UserContextType = {
     signIn,
     logout,
     user,
     isLoading,
     isAuthenticated: !!user,
-    signUp,
   };
 
   return (

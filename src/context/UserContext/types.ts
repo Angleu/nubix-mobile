@@ -1,5 +1,4 @@
 import { UserType } from '../../models/User';
-import { SignUpFormType } from '../../utils/validation/signUpSchema';
 
 export type UserContextType = {
   signIn: (
@@ -11,5 +10,4 @@ export type UserContextType = {
   user?: UserType;
   isAuthenticated: boolean;
   isLoading: boolean;
-  signUp: (userDetails: SignUpFormType) => Promise<void>;
 };

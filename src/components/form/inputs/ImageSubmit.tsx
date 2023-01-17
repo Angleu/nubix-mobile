@@ -10,7 +10,7 @@ import {
 } from 'native-base';
 import React, { FC, useState } from 'react';
 
-import { SavePictureSVG } from '../../../svg';
+import { SavePictureSVG } from '../../svg';
 
 type Props = {
   onImageChange: (imageUri: string) => void;
