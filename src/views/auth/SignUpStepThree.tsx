@@ -14,6 +14,7 @@ import React, { FC } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Alert } from 'react-native';
 
+import { createAddress } from '../../api/address';
 import Geolocation from '../../components/form/inputs/Geolocation';
 import Input from '../../components/form/inputs/Input';
 import Container from '../../components/layout/Container';
@@ -27,7 +28,9 @@ import {
 
 const SignUpStepThree: FC<AuthStackScreenProps<'SignUpStepThree'>> = ({
   navigation,
+  route,
 }) => {
+  const { email } = route.params;
   const {
     control,
     handleSubmit,
@@ -46,19 +49,31 @@ const SignUpStepThree: FC<AuthStackScreenProps<'SignUpStepThree'>> = ({
       );
       return;
     }
-    // Do form submission here
-    console.log(formData);
-    navigation.reset({
-      index: 0,
-      routes: [
-        {
-          name: 'Login',
-          params: {
-            signUpSuccess: true,
+    const { coordinates, country, province } = formData;
+    try {
+      await createAddress({
+        city: province,
+        country,
+        street: '',
+        houseNumber: '',
+        latitude: coordinates.latitude.toString(),
+        longitude: coordinates.longitude.toString(),
+        email,
+      });
+      navigation.reset({
+        index: 0,
+        routes: [
+          {
+            name: 'Login',
+            params: {
+              signUpSuccess: true,
+            },
           },
-        },
-      ],
-    });
+        ],
+      });
+    } catch (error) {
+      Alert.alert('Erro na criação de conta', error.message);
+    }
   }
 
   return (

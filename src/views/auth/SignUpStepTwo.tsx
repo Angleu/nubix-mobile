@@ -13,7 +13,9 @@ import {
 } from 'native-base';
 import React, { FC } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { Alert } from 'react-native';
 
+import { createUserWithPersonalData } from '../../api/user';
 import BirthDateInput from '../../components/form/inputs/BirthDateInput';
 import GenderSelect from '../../components/form/inputs/GenderSelect';
 import ImageSubmit from '../../components/form/inputs/ImageSubmit';
@@ -29,7 +31,9 @@ import {
 
 const SignUpStepTwo: FC<AuthStackScreenProps<'SignUpStepTwo'>> = ({
   navigation,
+  route,
 }) => {
+  const { email } = route.params;
   const {
     control,
     handleSubmit,
@@ -49,9 +53,23 @@ const SignUpStepTwo: FC<AuthStackScreenProps<'SignUpStepTwo'>> = ({
   });
 
   async function handleGoNextStep(formData: PersonalInfoSchemaType) {
-    // Do form submission here
-    console.log(formData);
-    navigation.navigate('SignUpStepThree');
+    const { nif, firstName, lastName, gender, birthDate } = formData;
+    try {
+      await createUserWithPersonalData({
+        NIF: nif,
+        name: firstName,
+        middleName: '',
+        surname: lastName,
+        email,
+        sex: gender,
+        birth_day: birthDate.toISOString(),
+      });
+      navigation.navigate('SignUpStepThree', {
+        email,
+      });
+    } catch (error) {
+      Alert.alert('Erro na criação de conta', error.message);
+    }
   }
 
   return (

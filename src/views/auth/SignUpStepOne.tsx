@@ -12,7 +12,9 @@ import {
 } from 'native-base';
 import React, { FC } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { Alert } from 'react-native';
 
+import { createUser } from '../../api/login';
 import Input from '../../components/form/inputs/Input';
 import Container from '../../components/layout/Container';
 import SignUpStepCount from '../../components/layout/SignUpStepCount';
@@ -42,8 +44,19 @@ const SignUpStepOne: FC<AuthStackScreenProps<'SignUpStepOne'>> = ({
   });
 
   async function handleGoNextStep(formData: CredentialSchemaType) {
-    console.log(formData);
-    navigation.navigate('SignUpStepTwo');
+    const { email, phoneNumber, password } = formData;
+    try {
+      await createUser({
+        email,
+        telephone: phoneNumber,
+        password,
+      });
+      navigation.navigate('SignUpStepTwo', {
+        email,
+      });
+    } catch (error) {
+      Alert.alert('Erro na criação de conta', error.message);
+    }
   }
 
   return (
