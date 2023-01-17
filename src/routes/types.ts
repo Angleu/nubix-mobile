@@ -48,7 +48,9 @@ export type AuthStackParamListType = {
     errorMessage?: string;
     signUpSuccess?: boolean;
   };
-  SignUp: undefined;
+  SignUpStepOne: undefined;
+  SignUpStepTwo: undefined;
+  SignUpStepThree: undefined;
 };
 
 export type AuthStackScreenProps<T extends keyof AuthStackParamListType> =
