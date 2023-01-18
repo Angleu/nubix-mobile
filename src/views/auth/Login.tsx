@@ -5,12 +5,10 @@ import {
   AlertDialog,
   Button,
   Center,
-  FormControl,
   Heading,
   HStack,
   Icon,
   Image,
-  Input,
   ScrollView,
   Switch,
   Text,
@@ -21,6 +19,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { Alert } from 'react-native';
 
 import LogoImage from '../../../assets/images/logo.png';
+import Input from '../../components/form/inputs/Input';
 import Container from '../../components/layout/Container';
 import { useUser } from '../../hooks';
 import { AuthStackScreenProps } from '../../routes/types';
@@ -39,12 +38,15 @@ const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting, isValid, isDirty },
   } = useForm<LoginFormType>({
     resolver: zodResolver(loginSchema),
   });
 
+  console.log(isSubmitting);
+
   const onSubmit = async ({ email, password }: LoginFormType) => {
+    console.log(email);
     await signIn(email as string, password as string, rememberUser);
   };
 
@@ -104,84 +106,48 @@ const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
         <Controller
           name="email"
           control={control}
-          render={({ field: { onChange, value } }) => (
-            <FormControl isRequired isInvalid={!!errors.email} mb="4">
-              <VStack>
-                <FormControl.Label>
-                  <Text fontSize="sm" color="light.500">
-                    EMAIL
-                  </Text>
-                </FormControl.Label>
-                <Input
-                  _ios={{
-                    py: '4',
-                  }}
-                  keyboardType="email-address"
-                  value={value}
-                  onChangeText={onChange}
-                  placeholder="example@mail.com"
-                  borderColor="primary.100"
-                  autoCapitalize="none"
-                  _focus={{
-                    bg: 'light.50',
-                    borderColor: 'primary.100',
-                  }}
-                  leftElement={
-                    <Icon
-                      name="email"
-                      as={MaterialIcons}
-                      color="primary.100"
-                      ml="3"
-                      size="lg"
-                    />
-                  }
+          render={({ field: { onChange, value, onBlur } }) => (
+            <Input
+              label="Email"
+              value={value}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              keyboardType="email-address"
+              errorMessage={errors?.email?.message}
+              leftElement={
+                <Icon
+                  name="email"
+                  as={MaterialIcons}
+                  color="primary.100"
+                  ml="3"
+                  size="lg"
                 />
-                <FormControl.ErrorMessage>
-                  {errors.email && errors.email.message}
-                </FormControl.ErrorMessage>
-              </VStack>
-            </FormControl>
+              }
+            />
           )}
         />
 
         <Controller
           name="password"
           control={control}
-          render={({ field: { onChange, value } }) => (
-            <FormControl isRequired isInvalid={!!errors.password} mb="4">
-              <VStack>
-                <FormControl.Label>
-                  <Text fontSize="sm" color="light.500">
-                    PASSWORD
-                  </Text>
-                </FormControl.Label>
-                <Input
-                  _ios={{
-                    py: '4',
-                  }}
-                  value={value}
-                  onChangeText={onChange}
-                  secureTextEntry
-                  borderColor="primary.100"
-                  _focus={{
-                    bg: 'light.50',
-                    borderColor: 'primary.100',
-                  }}
-                  leftElement={
-                    <Icon
-                      name="lock"
-                      as={MaterialIcons}
-                      color="primary.100"
-                      ml="3"
-                      size="lg"
-                    />
-                  }
+          render={({ field: { onChange, value, onBlur } }) => (
+            <Input
+              label="Password"
+              value={value}
+              onChangeText={onChange}
+              onBlur={onBlur}
+              secureText
+              errorMessage={errors?.password?.message}
+              leftElement={
+                <Icon
+                  name="lock"
+                  as={MaterialIcons}
+                  color="primary.100"
+                  ml="3"
+                  size="lg"
                 />
-                <FormControl.ErrorMessage>
-                  {errors.password && errors.password.message}
-                </FormControl.ErrorMessage>
-              </VStack>
-            </FormControl>
+              }
+            />
           )}
         />
 
@@ -200,6 +166,8 @@ const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
 
         <VStack space="5">
           <Button
+            isDisabled={!isValid || !isDirty}
+            isLoading={isSubmitting}
             py="3"
             bg="primary.100"
             borderRadius="lg"
@@ -207,6 +175,7 @@ const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
             shadow="3"
             _pressed={{
               bg: 'primary.100',
+              opacity: 90,
             }}
             onPress={async () => {
               const { isInternetReachable } =
@@ -218,7 +187,9 @@ const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
                 );
                 return;
               }
-              handleSubmit(onSubmit);
+              await handleSubmit(onSubmit, () => {
+                console.log('error');
+              });
             }}
           >
             Entrar

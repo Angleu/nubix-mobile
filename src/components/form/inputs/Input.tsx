@@ -14,6 +14,7 @@ type Props = {
   required?: boolean;
   disabled?: boolean;
   placeholder?: string;
+  leftElement?: JSX.Element | JSX.Element[];
 };
 
 const Input: FC<Props> = ({
@@ -26,6 +27,7 @@ const Input: FC<Props> = ({
   keyboardType = 'default',
   placeholder = '',
   disabled = false,
+  leftElement,
 }) => {
   return (
     <FormControl isInvalid={!!errorMessage} mb="4">
@@ -35,6 +37,7 @@ const Input: FC<Props> = ({
         </Text>
       </FormControl.Label>
       <NInput
+        leftElement={leftElement}
         onBlur={onBlur}
         _ios={{
           py: '3',
