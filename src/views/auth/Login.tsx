@@ -1,5 +1,6 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { zodResolver } from '@hookform/resolvers/zod';
+import * as Network from 'expo-network';
 import {
   AlertDialog,
   Button,
@@ -17,6 +18,7 @@ import {
 } from 'native-base';
 import React, { FC, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { Alert } from 'react-native';
 
 import LogoImage from '../../../assets/images/logo.png';
 import Container from '../../components/layout/Container';
@@ -206,7 +208,18 @@ const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
             _pressed={{
               bg: 'primary.100',
             }}
-            onPress={handleSubmit(onSubmit)}
+            onPress={async () => {
+              const { isInternetReachable } =
+                await Network.getNetworkStateAsync();
+              if (!isInternetReachable) {
+                Alert.alert(
+                  'Erro de conexão',
+                  'Tem que estar ligado a internet para continuar'
+                );
+                return;
+              }
+              handleSubmit(onSubmit);
+            }}
           >
             Entrar
           </Button>
@@ -223,7 +236,18 @@ const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
             _pressed={{
               bg: 'light.50',
             }}
-            onPress={() => push('SignUpStepOne')}
+            onPress={async () => {
+              const { isInternetReachable } =
+                await Network.getNetworkStateAsync();
+              if (!isInternetReachable) {
+                Alert.alert(
+                  'Erro de conexão',
+                  'Tem que estar ligado a internet para continuar'
+                );
+                return;
+              }
+              push('SignUpStepOne');
+            }}
           >
             Criar Conta
           </Button>
