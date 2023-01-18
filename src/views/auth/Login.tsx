@@ -177,20 +177,7 @@ const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
               bg: 'primary.100',
               opacity: 90,
             }}
-            onPress={async () => {
-              const { isInternetReachable } =
-                await Network.getNetworkStateAsync();
-              if (!isInternetReachable) {
-                Alert.alert(
-                  'Erro de conexão',
-                  'Tem que estar ligado a internet para continuar'
-                );
-                return;
-              }
-              await handleSubmit(onSubmit, () => {
-                console.log('error');
-              });
-            }}
+            onPress={handleSubmit(onSubmit)}
           >
             Entrar
           </Button>
