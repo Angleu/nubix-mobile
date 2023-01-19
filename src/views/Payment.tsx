@@ -55,7 +55,7 @@ const Payment = ({ navigation }: MainStackScreenProps<'Payment'>) => {
                   {formatMoney(balance, currency)}
                 </Text>
               </VStack>
-              <Image w={10} h={10} source={bankLogo} />
+              <Image w={10} h={10} source={bankLogo} alt="Nubix Bank" />
             </HStack>
           </Box>
         ))}

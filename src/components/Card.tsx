@@ -26,7 +26,7 @@ const Card: FC<Props> = ({ balance, currency, onShare }) => {
     <Box mt={5} mx="2" bg="white" px="10" py="6" rounded="3xl" shadow="8">
       <HStack>
         <VStack>
-          <Image w={10} h={10} source={bankLogo} />
+          <Image w={10} h={10} source={bankLogo} alt="Nubix Bank" />
           <Text
             fontFamily="body"
             color="primary.100"
