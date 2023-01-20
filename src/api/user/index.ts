@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 import axios from '../config';
 import {
   CreateUserRequestType,
@@ -44,12 +46,18 @@ export async function checkFiscalNumber(fiscalNumber: string) {
 
 export async function saveProfilePicture(imageUri: string) {
   try {
+    const uri =
+      Platform.OS === 'android' ? imageUri : imageUri.replace('file://', '');
+    const filename = imageUri.split('/').pop();
+    const match = /\.(\w+)$/.exec(filename as string);
+    const ext = match?.[1];
+    const type = match ? `image/${match[1]}` : `image`;
     const imageData = new FormData();
-    imageData.append(
-      'avatar',
-      imageUri,
-      imageUri.substring(imageUri.lastIndexOf('/') + 1)
-    );
+    imageData.append('avatar', {
+      uri,
+      name: `image.${ext}`,
+      type,
+    } as never);
     const response = await axios.put<SaveProfilePictureResponseType>(
       '/user/avatar',
       imageData,
