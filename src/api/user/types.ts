@@ -25,4 +25,6 @@ export type NIFConsultingResponseType = {
   nome: string;
   tipo: string;
   estado: string;
+  nif: string;
+  regime_iva: string;
 };
