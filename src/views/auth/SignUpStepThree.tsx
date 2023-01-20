@@ -8,7 +8,7 @@ import {
   IconButton,
   ScrollView,
   Text,
-  VStack,
+  VStack
 } from 'native-base';
 import React, { FC } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -17,13 +17,15 @@ import { Alert } from 'react-native';
 import { createAddress } from '../../api/address';
 import Geolocation from '../../components/form/inputs/Geolocation';
 import Input from '../../components/form/inputs/Input';
+import Select from '../../components/form/inputs/Select';
 import Container from '../../components/layout/Container';
 import SignUpStepCount from '../../components/layout/SignUpStepCount';
 import { AuthStackScreenProps } from '../../routes/types';
+import { mapToSelectList } from '../../utils/constants/angolaSubdivisions';
 import { androidRippleEffect } from '../../utils/theme/style';
 import {
   addressSchema,
-  AddressSchemaType,
+  AddressSchemaType
 } from '../../utils/validation/signUpSchema';
 
 const SignUpStepThree: FC<AuthStackScreenProps<'SignUpStepThree'>> = ({
@@ -31,6 +33,7 @@ const SignUpStepThree: FC<AuthStackScreenProps<'SignUpStepThree'>> = ({
   route,
 }) => {
   const { email } = route.params;
+  const provinces = mapToSelectList();
   const {
     control,
     handleSubmit,
@@ -49,13 +52,12 @@ const SignUpStepThree: FC<AuthStackScreenProps<'SignUpStepThree'>> = ({
       );
       return;
     }
-    const { coordinates, country, province } = formData;
+    const { coordinates, province, address } = formData;
     try {
       await createAddress({
         city: province,
-        country,
-        street: '',
-        houseNumber: '',
+        country: 'Angola',
+        address,
         latitude: coordinates.latitude.toString(),
         longitude: coordinates.longitude.toString(),
         email,
@@ -122,7 +124,7 @@ const SignUpStepThree: FC<AuthStackScreenProps<'SignUpStepThree'>> = ({
             }}
           />
 
-          <Controller
+          {/* <Controller
             name="country"
             control={control}
             render={({ field: { onChange, value, onBlur } }) => (
@@ -134,44 +136,31 @@ const SignUpStepThree: FC<AuthStackScreenProps<'SignUpStepThree'>> = ({
                 onChangeText={onChange}
               />
             )}
-          />
+          /> */}
 
           <Controller
             name="province"
             control={control}
-            render={({ field: { onChange, value, onBlur } }) => (
-              <Input
-                onBlur={onBlur}
+            render={({ field: { onChange, value } }) => (
+              <Select
                 errorMessage={errors?.province?.message}
                 label="Província"
                 value={value}
-                onChangeText={onChange}
+                onChange={onChange}
+                options={provinces}
               />
             )}
           />
 
           <Controller
-            name="neighbor"
+            name="address"
             control={control}
             render={({ field: { onChange, value, onBlur } }) => (
               <Input
                 onBlur={onBlur}
-                errorMessage={errors?.neighbor?.message}
-                label="Bairro / Distrito"
-                value={value}
-                onChangeText={onChange}
-              />
-            )}
-          />
-
-          <Controller
-            name="district"
-            control={control}
-            render={({ field: { onChange, value, onBlur } }) => (
-              <Input
-                onBlur={onBlur}
-                errorMessage={errors?.district?.message}
-                label="Município / Distrito"
+                placeholder="Coloque o seu distrito/município/bairro"
+                errorMessage={errors?.address?.message}
+                label="Endereço"
                 value={value}
                 onChangeText={onChange}
               />

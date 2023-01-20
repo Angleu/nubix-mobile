@@ -30,10 +30,9 @@ export const personalInfoSchema = z.object({
 });
 
 export const addressSchema = z.object({
-  country: z.string({ required_error: 'Campo obrigatório' }),
+  // country: z.string({ required_error: 'Campo obrigatório' }),
   province: z.string({ required_error: 'Campo obrigatório' }),
-  neighbor: z.string({ required_error: 'Campo obrigatório' }),
-  district: z.string({ required_error: 'Campo obrigatório' }),
+  address: z.string({ required_error: 'Campo obrigatório' }),
   coordinates: z
     .object({
       latitude: z.number().optional(),
