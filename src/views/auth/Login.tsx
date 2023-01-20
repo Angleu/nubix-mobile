@@ -43,10 +43,8 @@ const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
     resolver: zodResolver(loginSchema),
   });
 
-  console.log(isSubmitting);
 
   const onSubmit = async ({ email, password }: LoginFormType) => {
-    console.log(email);
     await signIn(email as string, password as string, rememberUser);
   };
 
@@ -92,7 +90,7 @@ const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
 
       <ScrollView>
         <Center>
-          <Image source={LogoImage} alt="Nubix Logo" h="56" />
+          <Image source={LogoImage} alt="Nubix Logo" w="32" h="32" />
           <Heading
             my="25"
             fontFamily="heading"
