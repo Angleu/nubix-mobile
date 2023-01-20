@@ -4,6 +4,7 @@ import {
   CreateUserResponseType,
   GetUserResponseType,
   NIFConsultingResponseType,
+  SaveProfilePictureResponseType,
 } from './types';
 
 export async function getUser(email: string) {
@@ -41,6 +42,26 @@ export async function checkFiscalNumber(fiscalNumber: string) {
   }
 }
 
-export async function saveProfilePicture(imageData: FormData, email: string) {
-  throw new Error('Not implemented');
+export async function saveProfilePicture(imageUri: string) {
+  try {
+    const imageData = new FormData();
+    imageData.append(
+      'avatar',
+      imageUri,
+      imageUri.substring(imageUri.lastIndexOf('/') + 1)
+    );
+    const response = await axios.put<SaveProfilePictureResponseType>(
+      '/user/avatar',
+      imageData,
+      {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error('Não é possível enviar a imagem');
+  }
 }

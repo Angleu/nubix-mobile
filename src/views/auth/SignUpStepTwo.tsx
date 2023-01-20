@@ -15,7 +15,7 @@ import React, { FC } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Alert } from 'react-native';
 
-import { createUserWithPersonalData } from '../../api/user';
+import { createUserWithPersonalData, saveProfilePicture } from '../../api/user';
 import BirthDateInput from '../../components/form/inputs/BirthDateInput';
 import GenderSelect from '../../components/form/inputs/GenderSelect';
 import ImageSubmit from '../../components/form/inputs/ImageSubmit';
@@ -53,8 +53,10 @@ const SignUpStepTwo: FC<AuthStackScreenProps<'SignUpStepTwo'>> = ({
   });
 
   async function handleGoNextStep(formData: PersonalInfoSchemaType) {
-    const { nif, firstName, lastName, gender, birthDate } = formData;
+    const { nif, firstName, lastName, gender, birthDate, profilePicture } =
+      formData;
     try {
+      const { url: avatar } = await saveProfilePicture(profilePicture);
       await createUserWithPersonalData({
         NIF: nif,
         name: firstName,
@@ -63,6 +65,7 @@ const SignUpStepTwo: FC<AuthStackScreenProps<'SignUpStepTwo'>> = ({
         email,
         sex: gender,
         birth_day: birthDate.toISOString(),
+        avatar,
       });
       navigation.navigate('SignUpStepThree', {
         email,
