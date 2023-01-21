@@ -8,19 +8,18 @@ import HomeLink from '../components/HomeLink';
 import Container from '../components/layout/Container';
 import HomeHeader from '../components/layout/HomeHeader';
 import RecentActivities from '../components/RecentActivities';
+import { useUser } from '../hooks';
 import { createShareableMessage } from '../utils/formatter';
 import allActivities from '../utils/mocks/activities';
-import { userLoggedIn } from '../utils/mocks/users';
 
 export default function Home() {
-  const selectedAccount = useRef(userLoggedIn.accounts[0]);
+  const { accounts, firstName, lastName, phoneNumber } = useUser().user;
+  const selectedAccount = useRef(accounts[0]);
   return (
     <Container>
       <HomeHeader />
       <Swiper
-        onIndexChanged={(index) =>
-          (selectedAccount.current = userLoggedIn.accounts[index])
-        }
+        onIndexChanged={(index) => (selectedAccount.current = accounts[index])}
         loop={false}
         dot={<Box w="2" h="2" bg="gray.100" borderRadius="full" m="1" />}
         activeDot={
@@ -28,18 +27,18 @@ export default function Home() {
         }
         bounces
       >
-        {userLoggedIn.accounts.map((account) => (
+        {accounts.map((account) => (
           <Card
             {...account}
-            key={account.accountNumber}
+            key={account.number_account}
             onShare={() =>
               Share.share(
                 {
                   title: 'Detalhes de Conta',
                   message: createShareableMessage({
-                    name: userLoggedIn.name,
-                    phoneNumber: userLoggedIn.phoneNumber,
-                    iban: account.iban,
+                    name: `${firstName} ${lastName}`,
+                    phoneNumber: phoneNumber,
+                    iban: account.IBAN,
                   }),
                 },
                 { dialogTitle: 'Detalhes de Conta' }

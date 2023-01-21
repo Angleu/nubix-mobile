@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
 
+import { AccountType } from '../../models/Account';
 import { UserType } from '../../models/User';
 import axios from '../config';
 import {
@@ -73,6 +74,7 @@ function transformUser(user: AuthenticationResponseType) {
     birth_day,
     sex,
     Address: { city, country },
+    Account,
   } = _user;
   const transformedUser: UserType = {
     email,
@@ -85,7 +87,7 @@ function transformUser(user: AuthenticationResponseType) {
     nif: NIF,
     birthDate: new Date(birth_day),
     sex,
-    accounts: [],
+    accounts: Account as AccountType[],
     address: {
       city,
       country,
