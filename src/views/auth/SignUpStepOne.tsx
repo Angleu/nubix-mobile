@@ -53,6 +53,7 @@ const SignUpStepOne: FC<AuthStackScreenProps<'SignUpStepOne'>> = ({
       });
       navigation.navigate('SignUpStepTwo', {
         email,
+        phoneNumber,
       });
     } catch (error) {
       Alert.alert('Erro na criação de conta', error.message);

@@ -33,7 +33,7 @@ const SignUpStepTwo: FC<AuthStackScreenProps<'SignUpStepTwo'>> = ({
   navigation,
   route,
 }) => {
-  const { email } = route.params;
+  const { email, phoneNumber } = route.params;
   const genderOptions: SelectOptionType[] = [
     {
       value: 'male',
@@ -83,6 +83,7 @@ const SignUpStepTwo: FC<AuthStackScreenProps<'SignUpStepTwo'>> = ({
       });
       navigation.navigate('SignUpStepThree', {
         email,
+        phoneNumber,
       });
     } catch (error) {
       Alert.alert('Erro na criação de conta', error.message);

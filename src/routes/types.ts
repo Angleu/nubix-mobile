@@ -51,9 +51,11 @@ export type AuthStackParamListType = {
   SignUpStepOne: undefined;
   SignUpStepTwo: {
     email: string;
+    phoneNumber: string;
   };
   SignUpStepThree: {
     email: string;
+    phoneNumber: string;
   };
 };
 

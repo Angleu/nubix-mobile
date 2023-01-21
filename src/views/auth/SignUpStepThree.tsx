@@ -14,6 +14,7 @@ import React, { FC } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Alert } from 'react-native';
 
+import { createAccount } from '../../api/account';
 import { createAddress } from '../../api/address';
 import Geolocation from '../../components/form/inputs/Geolocation';
 import Input from '../../components/form/inputs/Input';
@@ -25,14 +26,14 @@ import { mapToSelectList } from '../../utils/constants/angolaSubdivisions';
 import { androidRippleEffect } from '../../utils/theme/style';
 import {
   addressSchema,
-  AddressSchemaType
+  AddressSchemaType,
 } from '../../utils/validation/signUpSchema';
 
 const SignUpStepThree: FC<AuthStackScreenProps<'SignUpStepThree'>> = ({
   navigation,
   route,
 }) => {
-  const { email } = route.params;
+  const { email, phoneNumber } = route.params;
   const provinces = mapToSelectList();
   const {
     control,
@@ -62,6 +63,7 @@ const SignUpStepThree: FC<AuthStackScreenProps<'SignUpStepThree'>> = ({
         longitude: coordinates.longitude.toString(),
         email,
       });
+      await createAccount({ email, numberPhone: phoneNumber });
       navigation.reset({
         index: 0,
         routes: [
