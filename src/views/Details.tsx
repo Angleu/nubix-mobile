@@ -1,8 +1,4 @@
-import {
-  Ionicons,
-  MaterialCommunityIcons,
-  MaterialIcons,
-} from '@expo/vector-icons';
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import {
   Avatar,
   Button,
@@ -20,7 +16,6 @@ import { Platform } from 'react-native';
 
 import Container from '../components/layout/Container';
 import { MainStackScreenProps } from '../routes/types';
-import { formatMoney } from '../utils/formatter';
 import { androidRippleEffect } from '../utils/theme/style';
 
 export default function Details({
@@ -39,7 +34,7 @@ export default function Details({
             {transactionType === 'receive' ? (
               <>
                 <Avatar
-                  source={{ uri: transaction.origin.profilePictureURL }}
+                  // source={{ uri: transaction.origin.profilePictureURL }}
                   bg="white"
                   p={2}
                   mx={1}
@@ -49,14 +44,16 @@ export default function Details({
             ) : (
               <Icon
                 as={
-                  transaction.type === 'payment' ? (
-                    <MaterialIcons />
-                  ) : (
-                    <Ionicons />
-                  )
+                  // transaction.type === 'payment' ? (
+                  //   <MaterialIcons />
+                  // ) : (
+                  //   <Ionicons />
+                  // )
+                  <MaterialIcons />
                 }
                 name={
-                  transaction.type === 'payment' ? 'payments' : 'paper-plane'
+                  // transaction.type === 'payment' ? 'payments' : 'paper-plane'
+                  'payments'
                 }
                 color="primary.100"
                 size="3xl"
@@ -64,22 +61,22 @@ export default function Details({
               />
             )}
             <Text fontSize="lg" fontWeight="bold" fontFamily="body">
-              {transactionType === 'payment'
+              {/* {transactionType === 'payment'
                 ? transaction.entityName
                 : transactionType === 'receive'
                 ? transaction.origin.name
-                : transaction.destination.name}
+                : transaction.destination.name} */}
             </Text>
-            {transactionType !== 'payment' && (
+            {/* {transactionType !== 'payment' && (
               <Text fontFamily="body" fontSize="md">
                 {transactionType === 'receive'
                   ? transaction.origin.phoneNumber
                   : transaction.destination.phoneNumber}
               </Text>
-            )}
+            )} */}
           </VStack>
           <Heading fontFamily="body" color="primary.100">
-            {formatMoney(transaction.amount, transaction.coin)}
+            {/* {formatMoney(transaction.amount, transaction.coin)} */}
           </Heading>
           <HStack space={4}>
             <IconButton
@@ -129,7 +126,7 @@ export default function Details({
                   Valor da Transferência
                 </Text>
                 <Text fontFamily="body" fontSize="lg">
-                  {formatMoney(transaction.amount, transaction.coin)}
+                  {/* {formatMoney(transaction.amount, transaction.coin)} */}
                 </Text>
               </HStack>
               <HStack justifyContent="space-between">
@@ -141,7 +138,7 @@ export default function Details({
                 >
                   Custo
                 </Text>
-                <Text>{formatMoney(0, transaction.coin)}</Text>
+                {/* <Text>{formatMoney(0, transaction.coin)}</Text> */}
               </HStack>
               <HStack justifyContent="space-between">
                 <Text
@@ -173,10 +170,10 @@ export default function Details({
                   Balanço Atual
                 </Text>
                 <Text fontFamily="body" fontSize="lg">
-                  {formatMoney(
+                  {/* {formatMoney(
                     userLoggedIn.accounts[0].balance,
                     userLoggedIn.accounts[0].currency
-                  )}
+                  )} */}
                 </Text>
               </HStack>
               <HStack justifyContent="space-between">

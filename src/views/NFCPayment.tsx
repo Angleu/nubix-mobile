@@ -6,11 +6,13 @@ import React, { useEffect, useRef } from 'react';
 import Container from '../components/layout/Container';
 import Header from '../components/layout/Header';
 
+const STOP_ANIMATION_FRAME = 138;
+
 const NFCPayment = () => {
   const animation = useRef<LottieView>(null);
 
   useEffect(() => {
-    animation.current.play(0, 138);
+    animation.current.play(0, STOP_ANIMATION_FRAME);
   }, []);
 
   return (

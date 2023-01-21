@@ -3,7 +3,6 @@ import {
   Avatar,
   Button,
   Flex,
-  Heading,
   HStack,
   Icon,
   IconButton,
@@ -25,8 +24,10 @@ export default function ReceiveMoney({
   },
 }: MainStackScreenProps<'Receive'>) {
   const valueToShare = {
-    name: userLoggedIn.name,
-    phoneNumber: userLoggedIn.phoneNumber,
+    // name: userLoggedIn.name,
+    // phoneNumber: userLoggedIn.phoneNumber,
+    name: 'userLoggedIn.name',
+    phoneNumber: '',
     iban: accountToReceive.iban,
   };
 
@@ -46,13 +47,13 @@ export default function ReceiveMoney({
         <HStack py={4} justifyContent="space-between">
           <HStack space={4} alignItems="center">
             <Avatar
-              source={{ uri: userLoggedIn.profilePictureURL }}
+              // source={{ uri: userLoggedIn.profilePictureURL }}
               size={68}
               shadow="6"
             />
             <VStack>
-              <Heading>{userLoggedIn.name}</Heading>
-              <Text>{userLoggedIn.phoneNumber}</Text>
+              {/* <Heading>{userLoggedIn.name}</Heading> */}
+              {/* <Text>{userLoggedIn.phoneNumber}</Text> */}
             </VStack>
           </HStack>
           <IconButton

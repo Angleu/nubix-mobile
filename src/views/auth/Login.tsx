@@ -3,7 +3,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { requestPermissionsAsync } from 'expo-contacts';
 import * as Network from 'expo-network';
 import {
-  AlertDialog,
   Button,
   Center,
   Heading,
@@ -13,13 +12,14 @@ import {
   ScrollView,
   Switch,
   Text,
-  VStack
+  VStack,
 } from 'native-base';
 import React, { FC, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Alert } from 'react-native';
 
 import LogoImage from '../../../assets/images/logo.png';
+import SuccessfulRegister from '../../components/alerts/SuccessfulRegister';
 import Input from '../../components/form/inputs/Input';
 import Container from '../../components/layout/Container';
 import { useUser } from '../../hooks';
@@ -38,7 +38,10 @@ const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
     (async () => {
       const { status } = await requestPermissionsAsync();
       if (status === 'denied') {
-        Alert.alert('Permissão Negada', 'É necessária ter acesso aos contactos do dispositivo');
+        Alert.alert(
+          'Permissão Negada',
+          'É necessário ter acesso aos contactos do dispositivo'
+        );
       }
     })();
   }, []);
@@ -60,43 +63,8 @@ const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
   return (
     <Container>
       {params && (
-        <AlertDialog
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-          leastDestructiveRef={undefined}
-        >
-          <AlertDialog.Content>
-            <AlertDialog.CloseButton />
-            <AlertDialog.Header
-              borderBottomWidth={0}
-              _text={{
-                color: params.signUpSuccess ? 'primary.100' : 'danger.700',
-              }}
-            >
-              {params.signUpSuccess
-                ? 'Conta Criada'
-                : 'Erro na Criação de Conta'}
-            </AlertDialog.Header>
-            <AlertDialog.Body>
-              {params.signUpSuccess
-                ? 'Parabéns! Já possui uma conta na Nubix. Faça o login para continuar'
-                : params.errorMessage}
-            </AlertDialog.Body>
-            <AlertDialog.Footer borderTopWidth={0}>
-              <Button
-                variant="unstyled"
-                _text={{
-                  color: 'primary.100',
-                }}
-                onPress={() => setIsOpen(false)}
-              >
-                Ok
-              </Button>
-            </AlertDialog.Footer>
-          </AlertDialog.Content>
-        </AlertDialog>
+        <SuccessfulRegister show={isOpen} onClose={() => setIsOpen(false)} />
       )}
-
       <ScrollView>
         <Center>
           <Image source={LogoImage} alt="Nubix Logo" mt="8" w="32" h="32" />

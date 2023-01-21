@@ -6,7 +6,6 @@ import ContactsSearch from '../components/ContactsSearch';
 import Container from '../components/layout/Container';
 import Header from '../components/layout/Header';
 import { MainStackScreenProps } from '../routes/types';
-import { formatMoney } from '../utils/formatter';
 
 export default function Transfer({
   navigation: { navigate },
@@ -52,10 +51,10 @@ export default function Transfer({
             textShadowRadius: 10,
           }}
         >
-          {formatMoney(
+          {/* {formatMoney(
             userLoggedIn.accounts[0].balance,
             userLoggedIn.accounts[0].currency
-          )}
+          )} */}
         </Text>
       </Center>
 
