@@ -8,7 +8,7 @@ import {
   IconButton,
   ScrollView,
   Text,
-  VStack
+  VStack,
 } from 'native-base';
 import React, { FC } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -25,7 +25,7 @@ import { mapToSelectList } from '../../utils/constants/angolaSubdivisions';
 import { androidRippleEffect } from '../../utils/theme/style';
 import {
   addressSchema,
-  AddressSchemaType
+  AddressSchemaType,
 } from '../../utils/validation/signUpSchema';
 
 const SignUpStepThree: FC<AuthStackScreenProps<'SignUpStepThree'>> = ({

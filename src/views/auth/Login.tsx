@@ -43,7 +43,6 @@ const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
     resolver: zodResolver(loginSchema),
   });
 
-
   const onSubmit = async ({ email, password }: LoginFormType) => {
     await signIn(email as string, password as string, rememberUser);
   };
