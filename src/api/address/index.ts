@@ -9,7 +9,7 @@ export async function getAddress() {
 export async function createAddress(address: CreateAddressRequestType) {
   try {
     const response = await axios.post<CreateAddressResponseType>(
-      '/user/address',
+      '/address',
       address
     );
     return response.data;

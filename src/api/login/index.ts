@@ -25,7 +25,7 @@ export async function createUser(userBody: CreateUserRequestType) {
 
 export async function getAllContacts() {
   try {
-    const response = await axios.get<ContactResponseType[]>('/login/contacts');
+    const response = await axios.get<ContactResponseType[]>('/contacts');
     const contacts = response.data.map(cleanContact);
     return contacts;
   } catch (error) {
@@ -42,7 +42,7 @@ export async function authenticate(
       AuthenticationResponseType,
       AxiosResponse<AuthenticationResponseType>,
       AuthenticationRequestType
-    >('/login/authentication', {
+    >('/authentication', {
       password,
       value: emailOrPhoneNumber,
     });
