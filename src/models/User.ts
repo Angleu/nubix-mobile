@@ -1,11 +1,12 @@
-import { AccountType } from './Account';
+import { AccountType, Old_AccountType } from './Account';
+import { ContactType } from './Contact';
 
 export type Old_UserType = {
   id: string;
   name: string;
   phoneNumber: string;
   profilePictureURL: string;
-  accounts: AccountType[];
+  accounts: Old_AccountType[];
 };
 
 export type UserType = {
@@ -20,8 +21,8 @@ export type UserType = {
   avatarImageURL?: string;
   sex: string;
   birthDate: Date;
-  accounts: ReadonlyArray<unknown>;
-  contacts: ReadonlyArray<unknown>;
+  accounts: ReadonlyArray<AccountType>;
+  contacts: Array<ContactType>;
   address: {
     country: string;
     city: string;
