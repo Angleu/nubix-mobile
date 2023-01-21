@@ -1,5 +1,6 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { requestPermissionsAsync } from 'expo-contacts';
 import * as Network from 'expo-network';
 import {
   AlertDialog,
@@ -14,7 +15,7 @@ import {
   Text,
   VStack
 } from 'native-base';
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Alert } from 'react-native';
 
@@ -32,6 +33,15 @@ const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
 
   const [rememberUser, setRememberUser] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await requestPermissionsAsync();
+      if (status === 'denied') {
+        Alert.alert('Permissão Negada', 'É necessária ter acesso aos contactos do dispositivo');
+      }
+    })();
+  }, []);
 
   const { signIn } = useUser();
 
@@ -89,7 +99,7 @@ const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
 
       <ScrollView>
         <Center>
-          <Image source={LogoImage} alt="Nubix Logo" w="32" h="32" />
+          <Image source={LogoImage} alt="Nubix Logo" mt="8" w="32" h="32" />
           <Heading
             my="25"
             fontFamily="heading"

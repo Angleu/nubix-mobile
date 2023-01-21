@@ -8,7 +8,6 @@ import Container from '../components/layout/Container';
 import Header from '../components/layout/Header';
 import { MainStackScreenProps } from '../routes/types';
 import { formatMoney } from '../utils/formatter';
-import { userLoggedIn } from '../utils/mocks/users';
 import { androidRippleEffect } from '../utils/theme/style';
 
 const Payment = ({ navigation }: MainStackScreenProps<'Payment'>) => {

@@ -8,19 +8,20 @@ import {
 } from '@react-navigation/native-stack';
 
 import { Old_AccountType } from '../models/Account';
+import { ContactType } from '../models/Contact';
 import { TransactionType } from '../models/Transaction';
-import { UserInfoType } from '../models/User';
 
 export type MainStackParamListType = {
   HomeTab: undefined;
   Transfer: undefined;
   TransferConfirmation: {
-    destination: UserInfoType;
+    destination: ContactType;
     transferAmount: string;
+
     message?: string;
   };
   TransferValue: {
-    destination: UserInfoType;
+    destination: ContactType;
   };
   Payment: undefined;
   NFCPayment: undefined;

@@ -1,9 +1,4 @@
-export type Old_AccountType = {
-  balance: number;
-  currency: CurrencyLiteral;
-  iban: string;
-  accountNumber: string;
-};
+import { TransactionType } from './Transaction';
 
 export type AccountType = {
   id_account: string;
@@ -13,7 +8,7 @@ export type AccountType = {
   coin: string;
   created_at: string;
   updated_at: string;
-  Transaction: unknown[];
+  Transaction: TransactionType[];
   Card: unknown;
 };
 

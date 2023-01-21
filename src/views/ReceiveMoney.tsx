@@ -16,7 +16,6 @@ import QRCode from 'react-native-qrcode-svg';
 import Container from '../components/layout/Container';
 import { MainStackScreenProps } from '../routes/types';
 import { createShareableMessage } from '../utils/formatter';
-import { userLoggedIn } from '../utils/mocks/users';
 import { colorPallet } from '../utils/theme';
 
 export default function ReceiveMoney({

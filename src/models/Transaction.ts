@@ -1,4 +1,4 @@
-export type Transaction = {
+export type TransactionType = {
   id_transaction: string;
   amount: number;
   coin: string;

@@ -4,9 +4,10 @@ import React from 'react';
 import Container from '../components/layout/Container';
 import Header from '../components/layout/Header';
 import RecentActivities from '../components/RecentActivities';
-import allActivities from '../utils/mocks/activities';
+
 
 const ExpenseAnalytics = () => {
+  const allActivities = [];
   return (
     <Container>
       <Header heading="Gastos" />

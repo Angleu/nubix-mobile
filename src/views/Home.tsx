@@ -10,7 +10,6 @@ import HomeHeader from '../components/layout/HomeHeader';
 import RecentActivities from '../components/RecentActivities';
 import { useUser } from '../hooks';
 import { createShareableMessage } from '../utils/formatter';
-import allActivities from '../utils/mocks/activities';
 
 export default function Home() {
   const { accounts, firstName, lastName, phoneNumber } = useUser().user;
@@ -64,7 +63,7 @@ export default function Home() {
           }}
         />
       </HStack>
-      <RecentActivities data={allActivities} />
+      <RecentActivities data={selectedAccount.current.Transaction} />
     </Container>
   );
 }

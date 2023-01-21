@@ -21,7 +21,6 @@ import { Platform } from 'react-native';
 import Container from '../components/layout/Container';
 import { MainStackScreenProps } from '../routes/types';
 import { formatMoney } from '../utils/formatter';
-import { userLoggedIn } from '../utils/mocks/users';
 import { androidRippleEffect } from '../utils/theme/style';
 
 export default function Details({
@@ -80,7 +79,7 @@ export default function Details({
             )}
           </VStack>
           <Heading fontFamily="body" color="primary.100">
-            {formatMoney(transaction.amount, transaction.currency)}
+            {formatMoney(transaction.amount, transaction.coin)}
           </Heading>
           <HStack space={4}>
             <IconButton
@@ -130,7 +129,7 @@ export default function Details({
                   Valor da Transferência
                 </Text>
                 <Text fontFamily="body" fontSize="lg">
-                  {formatMoney(transaction.amount, transaction.currency)}
+                  {formatMoney(transaction.amount, transaction.coin)}
                 </Text>
               </HStack>
               <HStack justifyContent="space-between">
@@ -142,7 +141,7 @@ export default function Details({
                 >
                   Custo
                 </Text>
-                <Text>{formatMoney(0, transaction.currency)}</Text>
+                <Text>{formatMoney(0, transaction.coin)}</Text>
               </HStack>
               <HStack justifyContent="space-between">
                 <Text

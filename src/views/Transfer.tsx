@@ -7,7 +7,6 @@ import Container from '../components/layout/Container';
 import Header from '../components/layout/Header';
 import { MainStackScreenProps } from '../routes/types';
 import { formatMoney } from '../utils/formatter';
-import { userLoggedIn } from '../utils/mocks/users';
 
 export default function Transfer({
   navigation: { navigate },
