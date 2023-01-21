@@ -7,8 +7,7 @@ export type GetAccountResponseType = {
 };
 
 export type CreateAccountRequestType = {
-  IBAN: string;
-  NIF: string;
+  email: string;
   numberPhone: string;
 };
 

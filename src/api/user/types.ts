@@ -8,6 +8,7 @@ export type CreateUserRequestType = {
   email: string;
   sex: string;
   birth_day: string;
+  avatar?: string;
 };
 
 export type CreateUserResponseType = {
@@ -25,4 +26,10 @@ export type NIFConsultingResponseType = {
   nome: string;
   tipo: string;
   estado: string;
+  nif: string;
+  regime_iva: string;
+};
+
+export type SaveProfilePictureResponseType = {
+  url: string;
 };

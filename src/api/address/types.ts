@@ -4,8 +4,7 @@ export type GetAddressResponseType = unknown;
 export type CreateAddressRequestType = {
   city: string;
   country: string;
-  street: string;
-  houseNumber: string;
+  address: string;
   latitude: string;
   longitude: string;
   email: string;

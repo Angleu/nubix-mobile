@@ -15,11 +15,11 @@ import React, { FC } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Alert } from 'react-native';
 
-import { createUserWithPersonalData } from '../../api/user';
+import { createUserWithPersonalData, saveProfilePicture } from '../../api/user';
 import BirthDateInput from '../../components/form/inputs/BirthDateInput';
-import GenderSelect from '../../components/form/inputs/GenderSelect';
 import ImageSubmit from '../../components/form/inputs/ImageSubmit';
 import Input from '../../components/form/inputs/Input';
+import Select, { SelectOptionType } from '../../components/form/inputs/Select';
 import Container from '../../components/layout/Container';
 import SignUpStepCount from '../../components/layout/SignUpStepCount';
 import { AuthStackScreenProps } from '../../routes/types';
@@ -34,6 +34,20 @@ const SignUpStepTwo: FC<AuthStackScreenProps<'SignUpStepTwo'>> = ({
   route,
 }) => {
   const { email } = route.params;
+  const genderOptions: SelectOptionType[] = [
+    {
+      value: 'male',
+      label: 'Masculino',
+    },
+    {
+      value: 'female',
+      label: 'Feminino',
+    },
+    {
+      value: 'other',
+      label: 'Outro',
+    },
+  ];
   const {
     control,
     handleSubmit,
@@ -53,8 +67,10 @@ const SignUpStepTwo: FC<AuthStackScreenProps<'SignUpStepTwo'>> = ({
   });
 
   async function handleGoNextStep(formData: PersonalInfoSchemaType) {
-    const { nif, firstName, lastName, gender, birthDate } = formData;
+    const { nif, firstName, lastName, gender, birthDate, profilePicture } =
+      formData;
     try {
+      const { url: avatar } = await saveProfilePicture(profilePicture);
       await createUserWithPersonalData({
         NIF: nif,
         name: firstName,
@@ -63,6 +79,7 @@ const SignUpStepTwo: FC<AuthStackScreenProps<'SignUpStepTwo'>> = ({
         email,
         sex: gender,
         birth_day: birthDate.toISOString(),
+        avatar,
       });
       navigation.navigate('SignUpStepThree', {
         email,
@@ -161,10 +178,13 @@ const SignUpStepTwo: FC<AuthStackScreenProps<'SignUpStepTwo'>> = ({
             name="gender"
             control={control}
             render={({ field: { onChange, value } }) => (
-              <GenderSelect
+              <Select
+                errorMessage={errors?.gender?.message}
+                label="Género"
                 value={value}
                 onChange={onChange}
-                errorMessage={errors?.nif?.message}
+                options={genderOptions}
+                placeholder="Selecione o seu género"
               />
             )}
           />
