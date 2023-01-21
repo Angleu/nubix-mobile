@@ -1,12 +1,9 @@
 export type ContactType = {
+  name: string;
   telephone: string;
-  User: {
-    name: string;
-    middleName: string;
-    surname: string;
-    Account: Array<{
-      IBAN: string;
-      coin: string;
-    }>;
-  };
+  avatar: string;
+  account: Array<{
+    IBAN: string;
+    coin: string;
+  }>;
 };

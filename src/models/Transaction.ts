@@ -1,27 +1,10 @@
-import { CurrencyLiteral } from './Account';
-import { UserInfoType } from './User';
-
-export type TransactionType =
-  | ({ type: 'send' } & SendMoneyTransactionType)
-  | ({ type: 'payment' } & PaymentTransactionType)
-  | ({ type: 'receive' } & ReceiveMoneyTransactionType);
-
-type SendMoneyTransactionType = {
-  destination: UserInfoType;
-  message?: string;
-} & BasicTransactionType;
-
-type PaymentTransactionType = {
-  entityName: string;
-} & BasicTransactionType;
-
-type ReceiveMoneyTransactionType = {
-  origin: UserInfoType;
-  message?: string;
-} & BasicTransactionType;
-
-type BasicTransactionType = {
+export type Transaction = {
+  id_transaction: string;
   amount: number;
-  currency: CurrencyLiteral;
-  transactionDate: string;
+  coin: string;
+  description: string;
+  id_accountTo: string;
+  IBANF: string;
+  type: 'send' | 'receive';
+  created_at: string;
 };
