@@ -1,8 +1,9 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import { Box, Button, HStack, Icon, Text, VStack } from 'native-base';
+import { Box, Button, HStack, Icon, Image, Text, VStack } from 'native-base';
 import React from 'react';
 import Swiper from 'react-native-swiper';
 
+import bankLogo from '../../assets/images/adaptive-icon.png';
 import Container from '../components/layout/Container';
 import Header from '../components/layout/Header';
 import { MainStackScreenProps } from '../routes/types';
@@ -29,7 +30,7 @@ const Payment = ({ navigation }: MainStackScreenProps<'Payment'>) => {
             key={accountNumber}
             mt={12}
             mx={2}
-            bg="primary.50"
+            bg="white"
             px="10"
             py="16"
             rounded="3xl"
@@ -39,7 +40,7 @@ const Payment = ({ navigation }: MainStackScreenProps<'Payment'>) => {
               <VStack>
                 <Text
                   fontFamily="body"
-                  color="white"
+                  color="primary.100"
                   fontSize="sm"
                   fontWeight="medium"
                 >
@@ -49,17 +50,12 @@ const Payment = ({ navigation }: MainStackScreenProps<'Payment'>) => {
                   fontFamily="body"
                   fontSize="xl"
                   fontWeight="bold"
-                  color="white"
+                  color="primary.100"
                 >
                   {formatMoney(balance, currency)}
                 </Text>
               </VStack>
-              <Icon
-                as={<MaterialIcons />}
-                name="credit-card"
-                size="5xl"
-                color="white"
-              />
+              <Image w={10} h={10} source={bankLogo} alt="Nubix Bank" />
             </HStack>
           </Box>
         ))}

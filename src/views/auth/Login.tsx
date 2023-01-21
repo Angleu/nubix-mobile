@@ -12,7 +12,7 @@ import {
   ScrollView,
   Switch,
   Text,
-  VStack,
+  VStack
 } from 'native-base';
 import React, { FC, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -89,7 +89,7 @@ const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
 
       <ScrollView>
         <Center>
-          <Image source={LogoImage} alt="Nubix Logo" h="56" />
+          <Image source={LogoImage} alt="Nubix Logo" w="32" h="32" />
           <Heading
             my="25"
             fontFamily="heading"

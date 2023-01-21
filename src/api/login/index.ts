@@ -1,4 +1,4 @@
-import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 
 import { UserType } from '../../models/User';
 import axios from '../config';
@@ -12,7 +12,6 @@ import {
 } from './types';
 
 export async function createUser(userBody: CreateUserRequestType) {
-
   try {
     const response = await axios.post<CreateUserResponseType>('/login', {
       confirmPassword: userBody.password,
@@ -20,37 +19,17 @@ export async function createUser(userBody: CreateUserRequestType) {
     });
     return response.data;
   } catch (error) {
-    if (error instanceof AxiosError) {
-      const { status, cause } = error;
-      switch (status) {
-        case 400:
-          throw new Error('Erro no envio dos dados de criação de conta', {
-            cause,
-          });
-        default:
-          throw new Error(
-            'Existe um problema com o servidor. Tente mais tarde',
-            { cause }
-          );
-      }
-    }
-    throw new Error('Erro ao se conectar com o servidor', { cause: error });
+    throw new Error(error.message);
   }
 }
 
 export async function getAllContacts() {
   try {
-    const response = await axios.get<ContactResponseType[]>('/login/contacts');
+    const response = await axios.get<ContactResponseType[]>('/contacts');
     const contacts = response.data.map(cleanContact);
     return contacts;
   } catch (error) {
-    if (error instanceof AxiosError) {
-      const { cause } = error;
-      throw new Error('Existe um problema com o servidor. Tente mais tarde', {
-        cause,
-      });
-    }
-    throw new Error('Erro ao se conectar com o servidor', { cause: error });
+    throw new Error(error.message);
   }
 }
 
@@ -63,26 +42,14 @@ export async function authenticate(
       AuthenticationResponseType,
       AxiosResponse<AuthenticationResponseType>,
       AuthenticationRequestType
-    >('/login/authentication', {
+    >('/authentication', {
       password,
       value: emailOrPhoneNumber,
     });
     const user = transformUser(response.data);
     return user;
   } catch (error) {
-    if (error instanceof AxiosError) {
-      const { status, cause } = error;
-      switch (status) {
-        case 401:
-          throw new Error('O utilizador não existe', { cause });
-        default:
-          throw new Error(
-            'Existe um problema com o servidor. Tente mais tarde',
-            { cause }
-          );
-      }
-    }
-    throw new Error('Erro ao se conectar com o servidor', { cause: error });
+    throw new Error(error.message);
   }
 }
 
