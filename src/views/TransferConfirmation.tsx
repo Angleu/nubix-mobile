@@ -25,17 +25,15 @@ const TransferConfirmation = ({
   async function sendTransactionRequest() {
     setIsLoading(true);
     try {
-      const response = await createTransaction(accountNumber, {
-        amount: Number(transferAmount),
-        coin: 'AOA',
-        description: message,
-        IBANF: destination.account[0].IBAN,
-      });
-      console.log(response);
+       await createTransaction(accountNumber, {
+         amount: Number(transferAmount),
+         coin: 'AOA',
+         description: message,
+         IBANF: destination.account[0].IBAN,
+       });
       setSuccessful(true);
       updateUserData();
     } catch (error) {
-      console.error(error);
       Alert.alert('Erro na Transferência');
     } finally {
       setIsLoading(false);

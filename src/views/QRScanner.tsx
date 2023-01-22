@@ -41,7 +41,6 @@ export default function ScannerQR({
     const { iban, name, phoneNumber, avatar } = JSON.parse(
       data
     ) as QRTransferDetails;
-    console.log(data);
     navigate('TransferValue', {
       destination: {
         account: [{ coin: 'AOA', IBAN: iban }],

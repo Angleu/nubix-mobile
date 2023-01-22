@@ -36,16 +36,11 @@ export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
     password: string,
     rememberUser = false
   ) {
-    try {
-      setIsLoading(true);
-      const userLoggedIn = await authenticate(emailOrPhoneNumber, password);
-      setUser(userLoggedIn);
-      if (rememberUser) await storeUser(emailOrPhoneNumber, password);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
+    setIsLoading(true);
+    const userLoggedIn = await authenticate(emailOrPhoneNumber, password);
+    setUser(userLoggedIn);
+    if (rememberUser) await storeUser(emailOrPhoneNumber, password);
+    setIsLoading(false);
   }
 
   async function updateUserData() {
@@ -53,9 +48,7 @@ export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
   }
 
   function logout() {
-    clearUser()
-      .then(() => setUser(undefined))
-      .catch(console.error);
+    clearUser().then(() => setUser(undefined));
   }
 
   const providerValue: UserContextType = {
