@@ -129,7 +129,6 @@ async function fetchAllUserContacts() {
   const { data } = await Contacts.getContactsAsync({
     fields: [Contacts.Fields.Name, Contacts.Fields.PhoneNumbers],
   });
-  // console.log(data.forEach(({ phoneNumbers }) => console.log(phoneNumbers)));
   return data
     .filter(({ phoneNumbers }) => phoneNumbers !== undefined)
     .map(({ name, phoneNumbers }) => ({
