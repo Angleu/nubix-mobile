@@ -1,9 +1,12 @@
+import { TransactionType } from '../../models/Transaction';
 import axios from '../config';
 import { CreateTransactionRequestType } from './type';
 
-export async function getAllTransactions(phoneNumber: string) {
+export async function getAllTransactions(accountNumber: string) {
   try {
-    const response = await axios.get(`/account/transaction/${phoneNumber}`);
+    const response = await axios.get<TransactionType[]>(
+      `/account/transaction/${accountNumber}`
+    );
     return response.data;
   } catch (error) {
     throw new Error(error.message);
@@ -11,14 +14,14 @@ export async function getAllTransactions(phoneNumber: string) {
 }
 
 export async function createTransaction(
-  phoneNumber: string,
+  accountNumber: string,
   data: CreateTransactionRequestType
 ) {
   try {
-    const response = await axios.post(
-      `/account/transaction/${phoneNumber}`,
-      data
-    );
+    const response = await axios.post(`/account/transaction/${accountNumber}`, {
+      ...data,
+      reference: '',
+    });
     return response.data;
   } catch (error) {
     throw new Error(error.message);

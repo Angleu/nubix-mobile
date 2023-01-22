@@ -6,22 +6,21 @@ import {
   IconButton,
   Image,
   Text,
-  VStack
+  VStack,
 } from 'native-base';
 import React, { FC } from 'react';
 
 import bankLogo from '../../assets/images/adaptive-icon.png';
-import { CurrencyLiteral } from '../models/Account';
 import { formatMoney } from '../utils/formatter';
 import { androidRippleEffect } from '../utils/theme/style';
 
 type Props = {
-  currency: CurrencyLiteral;
+  coin: string;
   balance: number;
   onShare: () => void;
 };
 
-const Card: FC<Props> = ({ balance, currency, onShare }) => {
+const Card: FC<Props> = ({ balance, coin, onShare }) => {
   return (
     <Box mt={5} mx="2" bg="white" px="10" py="6" rounded="3xl" shadow="8">
       <HStack>
@@ -41,7 +40,7 @@ const Card: FC<Props> = ({ balance, currency, onShare }) => {
             fontWeight="bold"
             color="primary.100"
           >
-            {formatMoney(balance, currency)}
+            {formatMoney(balance, coin === 'AOA' ? 'Kzs' : '$')}
           </Text>
         </VStack>
       </HStack>

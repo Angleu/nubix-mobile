@@ -1,3 +1,5 @@
+import { ContactType } from '../../models/Contact';
+
 export type AuthenticationResponseType = {
   email: string;
   isVerified: boolean;
@@ -34,13 +36,7 @@ export type AuthenticationRequestType = {
   password: string;
 };
 
-export type ContactResponseType = {
-  telephone: string;
-  User?: {
-    name: string;
-    surname: string;
-  };
-};
+export type ContactResponseType = ContactType;
 
 export type NormalizedContactType = {
   phoneNumber: string;

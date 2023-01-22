@@ -3,6 +3,7 @@ import {
   MaterialCommunityIcons,
   MaterialIcons,
 } from '@expo/vector-icons';
+import { format } from 'date-fns';
 import {
   Avatar,
   Button,
@@ -19,9 +20,9 @@ import React from 'react';
 import { Platform } from 'react-native';
 
 import Container from '../components/layout/Container';
+import { useUser } from '../hooks';
 import { MainStackScreenProps } from '../routes/types';
 import { formatMoney } from '../utils/formatter';
-import { userLoggedIn } from '../utils/mocks/users';
 import { androidRippleEffect } from '../utils/theme/style';
 
 export default function Details({
@@ -30,6 +31,7 @@ export default function Details({
 }: MainStackScreenProps<'Details'>): JSX.Element {
   const { transaction } = route.params;
   const transactionType = transaction.type;
+  const { accounts } = useUser().user;
 
   return (
     <Container>
@@ -40,7 +42,7 @@ export default function Details({
             {transactionType === 'receive' ? (
               <>
                 <Avatar
-                  source={{ uri: transaction.origin.profilePictureURL }}
+                  source={{ uri: transaction.user_destine.avatar }}
                   bg="white"
                   p={2}
                   mx={1}
@@ -49,38 +51,25 @@ export default function Details({
               </>
             ) : (
               <Icon
-                as={
-                  transaction.type === 'payment' ? (
-                    <MaterialIcons />
-                  ) : (
-                    <Ionicons />
-                  )
-                }
-                name={
-                  transaction.type === 'payment' ? 'payments' : 'paper-plane'
-                }
+                as={Ionicons}
+                name={'paper-plane'}
                 color="primary.100"
                 size="3xl"
                 mx="2.5"
               />
             )}
             <Text fontSize="lg" fontWeight="bold" fontFamily="body">
-              {transactionType === 'payment'
-                ? transaction.entityName
-                : transactionType === 'receive'
-                ? transaction.origin.name
-                : transaction.destination.name}
+              {transaction.user_destine.name}
             </Text>
-            {transactionType !== 'payment' && (
-              <Text fontFamily="body" fontSize="md">
-                {transactionType === 'receive'
-                  ? transaction.origin.phoneNumber
-                  : transaction.destination.phoneNumber}
-              </Text>
-            )}
+            <Text fontFamily="body" fontSize="md">
+              {transaction.user_destine.telephone}
+            </Text>
           </VStack>
           <Heading fontFamily="body" color="primary.100">
-            {formatMoney(transaction.amount, transaction.currency)}
+            {formatMoney(
+              transaction.amount,
+              transaction.coin === 'AOA' ? 'Kzs' : '$'
+            )}
           </Heading>
           <HStack space={4}>
             <IconButton
@@ -130,7 +119,10 @@ export default function Details({
                   Valor da Transferência
                 </Text>
                 <Text fontFamily="body" fontSize="lg">
-                  {formatMoney(transaction.amount, transaction.currency)}
+                  {formatMoney(
+                    transaction.amount,
+                    transaction.coin === 'AOA' ? 'Kzs' : '$'
+                  )}
                 </Text>
               </HStack>
               <HStack justifyContent="space-between">
@@ -142,18 +134,25 @@ export default function Details({
                 >
                   Custo
                 </Text>
-                <Text>{formatMoney(0, transaction.currency)}</Text>
+                <Text>
+                  {formatMoney(0, transaction.coin === 'AOA' ? 'Kzs' : '$')}
+                </Text>
               </HStack>
-              <HStack justifyContent="space-between">
+              <HStack justifyContent="space-between" alignItems="center">
                 <Text
                   fontFamily="body"
                   color="primary.100"
                   fontSize="lg"
                   fontWeight="bold"
                 >
-                  Data da Transação
+                  Data e Hora da Transação
                 </Text>
-                <Text fontFamily="body">29/02/2022</Text>
+                <Text fontFamily="body">
+                  {format(
+                    new Date(transaction.data_transaction),
+                    'dd/MM/yyyy hh:mm'
+                  )}
+                </Text>
               </HStack>
             </Stack>
             <Stack
@@ -175,21 +174,25 @@ export default function Details({
                 </Text>
                 <Text fontFamily="body" fontSize="lg">
                   {formatMoney(
-                    userLoggedIn.accounts[0].balance,
-                    userLoggedIn.accounts[0].currency
+                    accounts[0].balance,
+                    accounts[0].coin === 'AOA' ? 'Kzs' : '$'
                   )}
                 </Text>
               </HStack>
               <HStack justifyContent="space-between">
-                <Text
-                  fontFamily="body"
-                  color="primary.100"
-                  fontSize="lg"
-                  fontWeight="bold"
-                >
-                  Referencia
-                </Text>
-                <Text>Some thing here</Text>
+                {transaction.reference && (
+                  <>
+                    <Text
+                      fontFamily="body"
+                      color="primary.100"
+                      fontSize="lg"
+                      fontWeight="bold"
+                    >
+                      Referencia
+                    </Text>
+                    <Text>{transaction.description}</Text>
+                  </>
+                )}
               </HStack>
               <HStack justifyContent="space-between">
                 <Text
@@ -200,7 +203,12 @@ export default function Details({
                 >
                   Número da Transação
                 </Text>
-                <Text>#2987667</Text>
+                <Text>
+                  #
+                  {transaction.id_transaction.substring(
+                    transaction.id_transaction.length - 9
+                  )}
+                </Text>
               </HStack>
             </Stack>
           </VStack>

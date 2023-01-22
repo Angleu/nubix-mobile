@@ -10,4 +10,5 @@ export type UserContextType = {
   user?: UserType;
   isAuthenticated: boolean;
   isLoading: boolean;
+  updateUserData: () => Promise<void>;
 };

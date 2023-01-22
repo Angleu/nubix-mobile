@@ -1,10 +1,23 @@
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Avatar, Heading, HStack, Icon, Text, VStack } from 'native-base';
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import {
+  Avatar,
+  Heading,
+  HStack,
+  Icon,
+  Pressable,
+  Text,
+  VStack,
+} from 'native-base';
 import React from 'react';
 
-import { userLoggedIn } from '../../utils/mocks/users';
+import { useUser } from '../../hooks';
 
 const HomeHeader = () => {
+  const {
+    user: { firstName, lastName, avatarImageURL },
+    logout,
+  } = useUser();
+  const fullName = `${firstName} ${lastName}`;
   return (
     <HStack pt={5} justifyContent="space-between" alignItems="center">
       <VStack space={4}>
@@ -17,15 +30,21 @@ const HomeHeader = () => {
           Bem Vindo de Volta!
         </Heading>
         <Text fontFamily="body" fontSize="lg" color="dark.50">
-          Olá, {userLoggedIn.name}
+          Olá, {fullName}
         </Text>
       </VStack>
       <HStack alignItems="center" space={5}>
-        <Avatar
-          source={{
-            uri: userLoggedIn.profilePictureURL,
-          }}
-        />
+        <Pressable onPress={logout}>
+          {avatarImageURL ? (
+            <Avatar
+              source={{
+                uri: avatarImageURL,
+              }}
+            />
+          ) : (
+            <Icon size="4xl" as={MaterialIcons} name="person" />
+          )}
+        </Pressable>
         <Icon
           as={<MaterialCommunityIcons />}
           name="bell-outline"

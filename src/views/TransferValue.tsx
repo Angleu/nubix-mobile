@@ -21,10 +21,9 @@ const TransferValue = ({
   const { reference, showModal } = useBottomSheetModal();
 
   const onConfirm = () => {
-    const transferAmount = formatMoney(amount, 'Kzs');
     navigate('TransferConfirmation', {
       destination,
-      transferAmount,
+      transferAmount: amount,
       message: description,
     });
   };

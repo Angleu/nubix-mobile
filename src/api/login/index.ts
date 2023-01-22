@@ -1,14 +1,17 @@
 import { AxiosResponse } from 'axios';
+import * as Contacts from 'expo-contacts';
 
+import { AccountType } from '../../models/Account';
+import { ContactType } from '../../models/Contact';
 import { UserType } from '../../models/User';
 import axios from '../config';
+import { getAllTransactions } from '../transaction';
 import {
   AuthenticationRequestType,
   AuthenticationResponseType,
   ContactResponseType,
   CreateUserRequestType,
   CreateUserResponseType,
-  NormalizedContactType,
 } from './types';
 
 export async function createUser(userBody: CreateUserRequestType) {
@@ -23,11 +26,14 @@ export async function createUser(userBody: CreateUserRequestType) {
   }
 }
 
-export async function getAllContacts() {
+export async function filterContacts(
+  phoneNumbers: string[]
+): Promise<ContactType[]> {
   try {
-    const response = await axios.get<ContactResponseType[]>('/contacts');
-    const contacts = response.data.map(cleanContact);
-    return contacts;
+    const response = await axios.post<ContactResponseType[]>('/contacts', {
+      phoneNumbers,
+    });
+    return response.data;
   } catch (error) {
     throw new Error(error.message);
   }
@@ -53,16 +59,7 @@ export async function authenticate(
   }
 }
 
-function cleanContact(contact: ContactResponseType) {
-  const cleanedContact: NormalizedContactType = {
-    phoneNumber: contact.telephone,
-    firstName: contact.User ? contact.User.name : '',
-    lastName: contact.User ? contact.User.surname : '',
-  };
-  return cleanedContact;
-}
-
-function transformUser(user: AuthenticationResponseType) {
+async function transformUser(user: AuthenticationResponseType) {
   const { email, isVerified, telephone, user: _user, created_at } = user;
   const {
     avatar,
@@ -73,7 +70,18 @@ function transformUser(user: AuthenticationResponseType) {
     birth_day,
     sex,
     Address: { city, country },
+    Account,
   } = _user;
+
+  const phoneNumbers = await (
+    await fetchAllUserContacts()
+  )
+    .flatMap(({ phoneNumbers }) => phoneNumbers)
+    .map((phoneNumber) => {
+      if (!phoneNumber.startsWith('+')) return '+244' + phoneNumber;
+      return phoneNumber;
+    });
+  const registeredContacts = await filterContacts([...new Set(phoneNumbers)]);
   const transformedUser: UserType = {
     email,
     isVerified,
@@ -85,13 +93,35 @@ function transformUser(user: AuthenticationResponseType) {
     nif: NIF,
     birthDate: new Date(birth_day),
     sex,
-    accounts: [],
+    accounts: Account as AccountType[],
     address: {
       city,
       country,
     },
-    contacts: [],
+    contacts: registeredContacts,
     createdAt: new Date(created_at),
   };
+  for (let i = 0; i < transformedUser.accounts.length; i++) {
+    const transactions = await getAllTransactions(
+      transformedUser.accounts[i].number_account
+    );
+    transformedUser.accounts[i].Transaction = [...transactions];
+  }
   return transformedUser;
+}
+
+async function fetchAllUserContacts() {
+  const { data } = await Contacts.getContactsAsync({
+    fields: [Contacts.Fields.Name, Contacts.Fields.PhoneNumbers],
+  });
+  // console.log(data.forEach(({ phoneNumbers }) => console.log(phoneNumbers)));
+  return data
+    .filter(({ phoneNumbers }) => phoneNumbers !== undefined)
+    .map(({ name, phoneNumbers }) => ({
+      name,
+      phoneNumbers: phoneNumbers
+        ?.map((phoneNumber) => phoneNumber.number)
+        .map((phoneNumber) => phoneNumber.replace(/\s/g, ''))
+        .filter((phoneNumber) => phoneNumber.length > 8),
+    }));
 }
