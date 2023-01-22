@@ -1,7 +1,7 @@
 import {
   Ionicons,
   MaterialCommunityIcons,
-  MaterialIcons
+  MaterialIcons,
 } from '@expo/vector-icons';
 import { format } from 'date-fns';
 import {
@@ -14,7 +14,7 @@ import {
   ScrollView,
   Stack,
   Text,
-  VStack
+  VStack,
 } from 'native-base';
 import React from 'react';
 import { Platform } from 'react-native';
@@ -163,7 +163,7 @@ export default function Details({
               borderStyle={Platform.OS === 'ios' ? 'solid' : 'dashed'}
               py={4}
             >
-              <HStack justifyContent="space-between" >
+              <HStack justifyContent="space-between">
                 <Text
                   fontFamily="body"
                   color="primary.100"

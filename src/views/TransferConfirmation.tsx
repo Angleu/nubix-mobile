@@ -33,7 +33,7 @@ const TransferConfirmation = ({
       });
       console.log(response);
       setSuccessful(true);
-updateUserData();
+      updateUserData();
     } catch (error) {
       console.error(error);
       Alert.alert('Erro na Transferência');

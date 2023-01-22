@@ -5,7 +5,6 @@ import Container from '../components/layout/Container';
 import Header from '../components/layout/Header';
 import RecentActivities from '../components/RecentActivities';
 
-
 const ExpenseAnalytics = () => {
   const allActivities = [];
   return (

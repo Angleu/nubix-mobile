@@ -8,7 +8,7 @@ import {
   IconButton,
   ScrollView,
   Text,
-  VStack
+  VStack,
 } from 'native-base';
 import React, { FC } from 'react';
 import { Controller, useForm } from 'react-hook-form';

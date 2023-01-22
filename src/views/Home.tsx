@@ -4,6 +4,7 @@ import { Share } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { useQuery } from 'react-query';
 
+import { getAllAccountsFromUser } from '../api/account';
 import { getAllTransactions } from '../api/transaction';
 import Card from '../components/Card';
 import HomeLink from '../components/HomeLink';
@@ -14,12 +15,17 @@ import { useUser } from '../hooks';
 import { createShareableMessage } from '../utils/formatter';
 
 export default function Home() {
-  const { accounts, firstName, lastName, phoneNumber } = useUser().user;
+  const { user } = useUser();
+  const { accounts, firstName, lastName, phoneNumber } = user;
 
-  const { isLoading, data } = useQuery(
+  const transactionsQuery = useQuery(
     'transactions',
     async () => await getAllTransactions(accounts[0].number_account)
   );
+  const accountsQuery = useQuery('accounts', async () =>
+    getAllAccountsFromUser(user)
+  );
+
   const selectedAccount = useRef(accounts[0]);
 
   return (
@@ -34,25 +40,31 @@ export default function Home() {
         }
         bounces
       >
-        {accounts.map((account) => (
-          <Card
-            {...account}
-            key={account.number_account}
-            onShare={() =>
-              Share.share(
-                {
-                  title: 'Detalhes de Conta',
-                  message: createShareableMessage({
-                    name: `${firstName} ${lastName}`,
-                    phoneNumber: phoneNumber,
-                    iban: account.IBAN,
-                  }),
-                },
-                { dialogTitle: 'Detalhes de Conta' }
-              )
-            }
-          />
-        ))}
+        {accountsQuery.isLoading ? (
+          <Box mt={5} mx="2" px="10" py="6">
+            <Spinner color="primary.100" size="lg" />
+          </Box>
+        ) : (
+          accountsQuery.data.map((account) => (
+            <Card
+              {...account}
+              key={account.number_account}
+              onShare={() =>
+                Share.share(
+                  {
+                    title: 'Detalhes de Conta',
+                    message: createShareableMessage({
+                      name: `${firstName} ${lastName}`,
+                      phoneNumber: phoneNumber,
+                      iban: account.IBAN,
+                    }),
+                  },
+                  { dialogTitle: 'Detalhes de Conta' }
+                )
+              }
+            />
+          ))
+        )}
       </Swiper>
       <HStack mt="0" justifyContent="center" space="12">
         <HomeLink
@@ -71,10 +83,10 @@ export default function Home() {
           }}
         />
       </HStack>
-      {isLoading ? (
+      {transactionsQuery.isLoading ? (
         <Spinner color="primary.100" size="lg" />
       ) : (
-        <RecentActivities data={data.reverse()} />
+        <RecentActivities data={transactionsQuery.data.reverse()} />
       )}
     </Container>
   );

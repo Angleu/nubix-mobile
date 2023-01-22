@@ -6,7 +6,7 @@ import {
   IconButton,
   Image,
   Text,
-  VStack
+  VStack,
 } from 'native-base';
 import React, { FC } from 'react';
 
