@@ -73,14 +73,12 @@ async function transformUser(user: AuthenticationResponseType) {
     Account,
   } = _user;
 
-  const phoneNumbers = await (
-    await fetchAllUserContacts()
-  )
+  const phoneNumbers = await(await fetchAllUserContacts())
     .flatMap(({ phoneNumbers }) => phoneNumbers)
     .map((phoneNumber) => {
-      if (!phoneNumber.startsWith('+')) return '+244' + phoneNumber;
-      return phoneNumber;
-    });
+      return phoneNumber.replace('+244', '');
+    })
+    .filter((phoneNumber) => phoneNumber !== telephone);
   const registeredContacts = await filterContacts([...new Set(phoneNumbers)]);
   const transformedUser: UserType = {
     email,
