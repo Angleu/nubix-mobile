@@ -4,7 +4,7 @@ import {
   ReactNode,
   useCallback,
   useEffect,
-  useState
+  useState,
 } from 'react';
 
 import { authenticate } from '../../api/login';
