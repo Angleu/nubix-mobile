@@ -1,8 +1,10 @@
-import { Box, HStack } from 'native-base';
+import { Box, HStack, Spinner } from 'native-base';
 import React, { useRef } from 'react';
 import { Share } from 'react-native';
 import Swiper from 'react-native-swiper';
+import { useQuery } from 'react-query';
 
+import { getAllTransactions } from '../api/transaction';
 import Card from '../components/Card';
 import HomeLink from '../components/HomeLink';
 import Container from '../components/layout/Container';
@@ -13,7 +15,13 @@ import { createShareableMessage } from '../utils/formatter';
 
 export default function Home() {
   const { accounts, firstName, lastName, phoneNumber } = useUser().user;
+
+  const { isLoading, data } = useQuery(
+    'transactions',
+    async () => await getAllTransactions(accounts[0].number_account)
+  );
   const selectedAccount = useRef(accounts[0]);
+
   return (
     <Container>
       <HomeHeader />
@@ -63,7 +71,11 @@ export default function Home() {
           }}
         />
       </HStack>
-      <RecentActivities data={selectedAccount.current.Transaction.reverse()} />
+      {isLoading ? (
+        <Spinner color="primary.100" size="lg" />
+      ) : (
+        <RecentActivities data={data.reverse()} />
+      )}
     </Container>
   );
 }

@@ -3,6 +3,7 @@ import {
   Avatar,
   Button,
   Flex,
+  Heading,
   HStack,
   Icon,
   IconButton,
@@ -13,6 +14,7 @@ import { Share } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 
 import Container from '../components/layout/Container';
+import { useUser } from '../hooks';
 import { MainStackScreenProps } from '../routes/types';
 import { createShareableMessage } from '../utils/formatter';
 import { colorPallet } from '../utils/theme';
@@ -23,12 +25,12 @@ export default function ReceiveMoney({
     params: { accountToReceive },
   },
 }: MainStackScreenProps<'Receive'>) {
+  const { firstName, lastName, phoneNumber, avatarImageURL } = useUser().user;
   const valueToShare = {
-    // name: userLoggedIn.name,
-    // phoneNumber: userLoggedIn.phoneNumber,
-    name: 'userLoggedIn.name',
-    phoneNumber: '',
-    iban: accountToReceive.iban,
+    name: `${firstName} ${lastName}`,
+    phoneNumber: phoneNumber,
+    iban: accountToReceive.IBAN,
+    avatar: avatarImageURL,
   };
 
   const onShare = async () => {
@@ -46,14 +48,10 @@ export default function ReceiveMoney({
       <VStack flex={1} justifyContent="space-between">
         <HStack py={4} justifyContent="space-between">
           <HStack space={4} alignItems="center">
-            <Avatar
-              // source={{ uri: userLoggedIn.profilePictureURL }}
-              size={68}
-              shadow="6"
-            />
+            <Avatar source={{ uri: avatarImageURL }} size={68} shadow="6" />
             <VStack>
-              {/* <Heading>{userLoggedIn.name}</Heading> */}
-              {/* <Text>{userLoggedIn.phoneNumber}</Text> */}
+              <Heading>{valueToShare.name}</Heading>
+              <Text>{phoneNumber}</Text>
             </VStack>
           </HStack>
           <IconButton
