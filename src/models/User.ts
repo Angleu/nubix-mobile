@@ -1,11 +1,22 @@
 import { AccountType } from './Account';
+import { ContactType } from './Contact';
 
 export type UserType = {
   id: string;
-  name: string;
+  createdAt: Date;
+  isVerified: boolean;
   phoneNumber: string;
-  profilePictureURL: string;
-  accounts: AccountType[];
+  email: string;
+  nif: string;
+  firstName: string;
+  lastName: string;
+  avatarImageURL?: string;
+  sex: string;
+  birthDate: Date;
+  accounts: ReadonlyArray<AccountType>;
+  contacts: Array<ContactType>;
+  address: {
+    country: string;
+    city: string;
+  };
 };
-
-export type UserInfoType = Omit<UserType, 'accounts'>;

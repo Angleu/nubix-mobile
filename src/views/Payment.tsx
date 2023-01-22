@@ -1,16 +1,18 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import { Box, Button, HStack, Icon, Text, VStack } from 'native-base';
+import { Box, Button, HStack, Icon, Image, Text, VStack } from 'native-base';
 import React from 'react';
 import Swiper from 'react-native-swiper';
 
+import bankLogo from '../../assets/images/adaptive-icon.png';
 import Container from '../components/layout/Container';
 import Header from '../components/layout/Header';
+import { useUser } from '../hooks';
 import { MainStackScreenProps } from '../routes/types';
 import { formatMoney } from '../utils/formatter';
-import { userLoggedIn } from '../utils/mocks/users';
 import { androidRippleEffect } from '../utils/theme/style';
 
 const Payment = ({ navigation }: MainStackScreenProps<'Payment'>) => {
+  const { accounts } = useUser().user;
   return (
     <Container>
       <Header heading="Pagamento" />
@@ -24,12 +26,12 @@ const Payment = ({ navigation }: MainStackScreenProps<'Payment'>) => {
           <Box w="4" h="2" bg="primary.100" borderRadius="full" m="1" />
         }
       >
-        {userLoggedIn.accounts.map(({ accountNumber, balance, currency }) => (
+        {accounts.map(({ number_account, balance, coin }) => (
           <Box
-            key={accountNumber}
+            key={number_account}
             mt={12}
             mx={2}
-            bg="primary.50"
+            bg="white"
             px="10"
             py="16"
             rounded="3xl"
@@ -39,7 +41,7 @@ const Payment = ({ navigation }: MainStackScreenProps<'Payment'>) => {
               <VStack>
                 <Text
                   fontFamily="body"
-                  color="white"
+                  color="primary.100"
                   fontSize="sm"
                   fontWeight="medium"
                 >
@@ -49,17 +51,12 @@ const Payment = ({ navigation }: MainStackScreenProps<'Payment'>) => {
                   fontFamily="body"
                   fontSize="xl"
                   fontWeight="bold"
-                  color="white"
+                  color="primary.100"
                 >
-                  {formatMoney(balance, currency)}
+                  {formatMoney(balance, coin === 'AOA' ? 'Kzs' : '$')}
                 </Text>
               </VStack>
-              <Icon
-                as={<MaterialIcons />}
-                name="credit-card"
-                size="5xl"
-                color="white"
-              />
+              <Image w={10} h={10} source={bankLogo} alt="Nubix Bank" />
             </HStack>
           </Box>
         ))}

@@ -1,5 +1,6 @@
 import { FormControl, Input as NInput, Text } from 'native-base';
 import React, { FC } from 'react';
+import { Noop } from 'react-hook-form';
 import { KeyboardTypeOptions } from 'react-native';
 
 type Props = {
@@ -7,9 +8,13 @@ type Props = {
   label: string;
   value: string;
   onChangeText: (value: string) => void;
+  onBlur?: Noop;
   keyboardType?: KeyboardTypeOptions;
   secureText?: boolean;
   required?: boolean;
+  disabled?: boolean;
+  placeholder?: string;
+  leftElement?: JSX.Element | JSX.Element[];
 };
 
 const Input: FC<Props> = ({
@@ -17,27 +22,39 @@ const Input: FC<Props> = ({
   errorMessage,
   value,
   onChangeText,
+  onBlur,
   secureText = false,
   keyboardType = 'default',
-  required = true,
+  placeholder = '',
+  disabled = false,
+  leftElement,
 }) => {
   return (
-    <FormControl isRequired={required} isInvalid={!!errorMessage} mb="4">
+    <FormControl isInvalid={!!errorMessage} mb="4">
       <FormControl.Label>
         <Text fontSize="sm" color="light.500">
           {label}
         </Text>
       </FormControl.Label>
       <NInput
+        leftElement={leftElement}
+        onBlur={onBlur}
+        _ios={{
+          py: '3',
+        }}
         _focus={{
           bg: 'white',
           borderColor: 'primary.100',
         }}
         fontSize="md"
+        isDisabled={disabled}
         secureTextEntry={secureText}
         keyboardType={keyboardType}
         value={value}
         onChangeText={onChangeText}
+        placeholder={placeholder}
+        autoCapitalize={keyboardType === 'email-address' ? 'none' : 'words'}
+        cursorColor="primary.100"
       />
       <FormControl.ErrorMessage>{errorMessage}</FormControl.ErrorMessage>
     </FormControl>

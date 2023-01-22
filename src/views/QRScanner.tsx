@@ -14,8 +14,15 @@ import { StyleSheet } from 'react-native';
 
 import { MainStackScreenProps } from '../routes/types';
 
+type QRTransferDetails = {
+  name: string;
+  phoneNumber: string;
+  iban: string;
+  avatar?: string;
+};
+
 export default function ScannerQR({
-  navigation: { goBack },
+  navigation: { goBack, navigate },
 }: MainStackScreenProps<'QRScanner'>) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
@@ -30,7 +37,18 @@ export default function ScannerQR({
 
   const handleBarCodeScanned = ({ data }) => {
     setScanned(true);
-    alert(`${data} has been scanned!`);
+    // setTransferDetails(data);
+    const { iban, name, phoneNumber, avatar } = JSON.parse(
+      data
+    ) as QRTransferDetails;
+    navigate('TransferValue', {
+      destination: {
+        account: [{ coin: 'AOA', IBAN: iban }],
+        avatar,
+        name,
+        telephone: phoneNumber,
+      },
+    });
   };
 
   if (hasPermission === null) {

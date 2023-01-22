@@ -1,40 +1,48 @@
-import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
-import { Box, HStack, Icon, IconButton, Text, VStack } from 'native-base';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import {
+  Box,
+  HStack,
+  Icon,
+  IconButton,
+  Image,
+  Text,
+  VStack,
+} from 'native-base';
 import React, { FC } from 'react';
 
-import { CurrencyLiteral } from '../models/Account';
+import bankLogo from '../../assets/images/adaptive-icon.png';
 import { formatMoney } from '../utils/formatter';
 import { androidRippleEffect } from '../utils/theme/style';
 
 type Props = {
-  currency: CurrencyLiteral;
+  coin: string;
   balance: number;
   onShare: () => void;
 };
 
-const Card: FC<Props> = ({ balance, currency, onShare }) => {
+const Card: FC<Props> = ({ balance, coin, onShare }) => {
   return (
-    <Box mt={5} mx="2" bg="primary.50" px="10" py="8" rounded="3xl" shadow="8">
-      <HStack justifyContent="space-between" mb={8}>
+    <Box mt={5} mx="2" bg="white" px="10" py="6" rounded="3xl" shadow="8">
+      <HStack>
         <VStack>
+          <Image w={10} h={10} source={bankLogo} alt="Nubix Bank" />
           <Text
             fontFamily="body"
-            color="white"
+            color="primary.100"
             fontSize="sm"
             fontWeight="medium"
           >
             Balanço Total
           </Text>
-          <Text fontFamily="body" fontSize="xl" fontWeight="bold" color="white">
-            {formatMoney(balance, currency)}
+          <Text
+            fontFamily="body"
+            fontSize="xl"
+            fontWeight="bold"
+            color="primary.100"
+          >
+            {formatMoney(balance, coin === 'AOA' ? 'Kzs' : '$')}
           </Text>
         </VStack>
-        <Icon
-          as={<MaterialIcons />}
-          name="credit-card"
-          size="5xl"
-          color="white"
-        />
       </HStack>
       <HStack justifyContent="flex-end">
         <IconButton
@@ -48,9 +56,9 @@ const Card: FC<Props> = ({ balance, currency, onShare }) => {
           }
           android_ripple={androidRippleEffect}
           _pressed={{
-            bg: 'primary.50',
+            bg: 'light.50',
           }}
-          _icon={{ color: 'white', size: '2xl' }}
+          _icon={{ color: 'primary.100', size: '2xl' }}
           onPress={onShare}
         />
       </HStack>

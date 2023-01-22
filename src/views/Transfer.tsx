@@ -5,13 +5,15 @@ import React from 'react';
 import ContactsSearch from '../components/ContactsSearch';
 import Container from '../components/layout/Container';
 import Header from '../components/layout/Header';
+import { useUser } from '../hooks';
 import { MainStackScreenProps } from '../routes/types';
 import { formatMoney } from '../utils/formatter';
-import { userLoggedIn } from '../utils/mocks/users';
 
 export default function Transfer({
   navigation: { navigate },
 }: MainStackScreenProps<'Transfer'>) {
+  const { accounts } = useUser().user;
+
   return (
     <Container>
       <Header
@@ -54,8 +56,8 @@ export default function Transfer({
           }}
         >
           {formatMoney(
-            userLoggedIn.accounts[0].balance,
-            userLoggedIn.accounts[0].currency
+            accounts[0].balance,
+            accounts[0].coin === 'AOA' ? 'Kzs' : '$'
           )}
         </Text>
       </Center>

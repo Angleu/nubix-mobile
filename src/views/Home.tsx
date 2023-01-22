@@ -1,21 +1,38 @@
-import { Box, HStack } from 'native-base';
-import React from 'react';
+import { Box, HStack, Spinner } from 'native-base';
+import React, { useRef } from 'react';
 import { Share } from 'react-native';
 import Swiper from 'react-native-swiper';
+import { useQuery } from 'react-query';
 
+import { getAllAccountsFromUser } from '../api/account';
+import { getAllTransactions } from '../api/transaction';
 import Card from '../components/Card';
 import HomeLink from '../components/HomeLink';
 import Container from '../components/layout/Container';
 import HomeHeader from '../components/layout/HomeHeader';
 import RecentActivities from '../components/RecentActivities';
-import allActivities from '../utils/mocks/activities';
-import { userLoggedIn } from '../utils/mocks/users';
+import { useUser } from '../hooks';
+import { createShareableMessage } from '../utils/formatter';
 
 export default function Home() {
+  const { user } = useUser();
+  const { accounts, firstName, lastName, phoneNumber } = user;
+
+  const transactionsQuery = useQuery(
+    'transactions',
+    async () => await getAllTransactions(accounts[0].number_account)
+  );
+  const accountsQuery = useQuery('accounts', async () =>
+    getAllAccountsFromUser(user)
+  );
+
+  const selectedAccount = useRef(accounts[0]);
+
   return (
     <Container>
       <HomeHeader />
       <Swiper
+        onIndexChanged={(index) => (selectedAccount.current = accounts[index])}
         loop={false}
         dot={<Box w="2" h="2" bg="gray.100" borderRadius="full" m="1" />}
         activeDot={
@@ -23,21 +40,31 @@ export default function Home() {
         }
         bounces
       >
-        {userLoggedIn.accounts.map((account) => (
-          <Card
-            {...account}
-            key={account.accountNumber}
-            onShare={() =>
-              Share.share(
-                {
-                  title: 'Detalhes de Conta',
-                  message: `Nome: ${userLoggedIn.name}\nIBAN: ${account.iban}\nNúmero de Telefone: ${userLoggedIn.phoneNumber}`,
-                },
-                { dialogTitle: 'Detalhes de Conta' }
-              )
-            }
-          />
-        ))}
+        {accountsQuery.isLoading ? (
+          <Box mt={5} mx="2" px="10" py="6">
+            <Spinner color="primary.100" size="lg" />
+          </Box>
+        ) : (
+          accountsQuery.data.map((account) => (
+            <Card
+              {...account}
+              key={account.number_account}
+              onShare={() =>
+                Share.share(
+                  {
+                    title: 'Detalhes de Conta',
+                    message: createShareableMessage({
+                      name: `${firstName} ${lastName}`,
+                      phoneNumber: phoneNumber,
+                      iban: account.IBAN,
+                    }),
+                  },
+                  { dialogTitle: 'Detalhes de Conta' }
+                )
+              }
+            />
+          ))
+        )}
       </Swiper>
       <HStack mt="0" justifyContent="center" space="12">
         <HomeLink
@@ -47,9 +74,20 @@ export default function Home() {
         />
         <HomeLink iconName="inbox" text="Depositar" to="Deposit" />
         <HomeLink iconName="credit-card-outline" text="Pagar" to="Payment" />
-        <HomeLink iconName="bank-transfer-in" text="Receber" to="Receive" />
+        <HomeLink
+          iconName="bank-transfer-in"
+          text="Receber"
+          to="Receive"
+          routeParams={{
+            accountToReceive: selectedAccount.current,
+          }}
+        />
       </HStack>
-      <RecentActivities data={allActivities} />
+      {transactionsQuery.isLoading ? (
+        <Spinner color="primary.100" size="lg" />
+      ) : (
+        <RecentActivities data={transactionsQuery.data.reverse()} />
+      )}
     </Container>
   );
 }

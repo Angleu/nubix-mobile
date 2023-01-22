@@ -1,4 +1,4 @@
-import { Button, FlatList, HStack, Text, VStack } from 'native-base';
+import { Button, Center, FlatList, HStack, Text, VStack } from 'native-base';
 import React, { FC } from 'react';
 
 import { TransactionType } from '../../models/Transaction';
@@ -21,6 +21,7 @@ const RecentActivities: FC<Props> = ({ data }) => {
           Atividades Recentes
         </Text>
         <Button
+          isDisabled={data.length === 0}
           variant="link"
           p="0"
           _text={{
@@ -34,6 +35,13 @@ const RecentActivities: FC<Props> = ({ data }) => {
         </Button>
       </HStack>
       <FlatList
+        ListEmptyComponent={() => (
+          <Center mt="1/3">
+            <Text fontFamily="body" color="primary.100" fontSize="lg">
+              Não existem transações feitas
+            </Text>
+          </Center>
+        )}
         data={data}
         mt={2}
         renderItem={({ item }) => <ActivityItem activity={item} />}

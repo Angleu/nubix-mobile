@@ -7,23 +7,27 @@ import {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 
+import { AccountType } from '../models/Account';
+import { ContactType } from '../models/Contact';
 import { TransactionType } from '../models/Transaction';
-import { UserInfoType } from '../models/User';
 
 export type MainStackParamListType = {
   HomeTab: undefined;
   Transfer: undefined;
   TransferConfirmation: {
-    destination: UserInfoType;
+    destination: ContactType;
     transferAmount: string;
+
     message?: string;
   };
   TransferValue: {
-    destination: UserInfoType;
+    destination: ContactType;
   };
   Payment: undefined;
   NFCPayment: undefined;
-  Receive: undefined;
+  Receive: {
+    accountToReceive: AccountType;
+  };
   Deposit: undefined;
   AnalyticsIncome: undefined;
   AnalyticsExpense: undefined;
@@ -41,8 +45,19 @@ export type MainStackNavigationProps<T extends keyof MainStackParamListType> =
 
 // Auth Native Stack
 export type AuthStackParamListType = {
-  Login: undefined;
-  SignUp: undefined;
+  Login: {
+    errorMessage?: string;
+    signUpSuccess?: boolean;
+  };
+  SignUpStepOne: undefined;
+  SignUpStepTwo: {
+    email: string;
+    phoneNumber: string;
+  };
+  SignUpStepThree: {
+    email: string;
+    phoneNumber: string;
+  };
 };
 
 export type AuthStackScreenProps<T extends keyof AuthStackParamListType> =
