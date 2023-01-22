@@ -57,7 +57,31 @@ const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
   });
 
   const onSubmit = async ({ email, password }: LoginFormType) => {
-    await signIn(email as string, password as string, rememberUser);
+    try {
+      await signIn(email as string, password as string, rememberUser);
+    } catch (error) {
+      if (error.message === 'User undefined') {
+        const { email, telephone } = error.cause;
+        Alert.alert(
+          'Cadastro não finalizado',
+          'Termine o cadastro para prosseguir com o login'
+        );
+        push('SignUpStepTwo', {
+          email,
+          phoneNumber: telephone,
+        });
+      } else if (error.message === 'Address undefined') {
+        const { email, telephone } = error.cause;
+        Alert.alert(
+          'Cadastro não finalizado',
+          'Termine o cadastro para prosseguir com o login'
+        );
+        push('SignUpStepThree', {
+          email,
+          phoneNumber: telephone,
+        });
+      }
+    }
   };
 
   return (

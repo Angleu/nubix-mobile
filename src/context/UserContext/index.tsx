@@ -4,7 +4,7 @@ import {
   ReactNode,
   useCallback,
   useEffect,
-  useState,
+  useState
 } from 'react';
 
 import { authenticate } from '../../api/login';
@@ -36,11 +36,19 @@ export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
     password: string,
     rememberUser = false
   ) {
-    setIsLoading(true);
-    const userLoggedIn = await authenticate(emailOrPhoneNumber, password);
-    setUser(userLoggedIn);
-    if (rememberUser) await storeUser(emailOrPhoneNumber, password);
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      const userLoggedIn = await authenticate(emailOrPhoneNumber, password);
+      setUser(userLoggedIn);
+      if (rememberUser) await storeUser(emailOrPhoneNumber, password);
+    } catch (error) {
+      if (error.message === 'User undefined' || error.message === 'Address undefined') {
+        setIsLoading(false);
+        throw error;
+      }
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   async function updateUserData() {

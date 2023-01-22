@@ -61,6 +61,14 @@ export async function authenticate(
 
 async function transformUser(user: AuthenticationResponseType) {
   const { email, isVerified, telephone, user: _user, created_at } = user;
+  if (!_user) {
+    throw new Error('User undefined', {
+      cause: {
+        email,
+        telephone,
+      },
+    });
+  }
   const {
     avatar,
     name,
@@ -69,9 +77,18 @@ async function transformUser(user: AuthenticationResponseType) {
     NIF,
     birth_day,
     sex,
-    Address: { city, country },
+    Address,
     Account,
   } = _user;
+  if (!Address) {
+    throw new Error('Address undefined', {
+      cause: {
+        email,
+        telephone,
+      },
+    });
+  }
+  const { city, country } = Address;
 
   const phoneNumbers = await(await fetchAllUserContacts())
     .flatMap(({ phoneNumbers }) => phoneNumbers)
