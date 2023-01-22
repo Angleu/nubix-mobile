@@ -29,7 +29,7 @@ import loginSchema, { LoginFormType } from '../../utils/validation/loginSchema';
 
 const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
   const params = route.params;
-  const { push } = navigation;
+  const { push, navigate } = navigation;
 
   const [rememberUser, setRememberUser] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
@@ -66,7 +66,7 @@ const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
           'Cadastro não finalizado',
           'Termine o cadastro para prosseguir com o login'
         );
-        push('SignUpStepTwo', {
+        navigate('SignUpStepTwo', {
           email,
           phoneNumber: telephone,
         });
@@ -76,10 +76,12 @@ const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
           'Cadastro não finalizado',
           'Termine o cadastro para prosseguir com o login'
         );
-        push('SignUpStepThree', {
+        navigate('SignUpStepThree', {
           email,
           phoneNumber: telephone,
         });
+      } else {
+        Alert.alert('Erro no login', error.message);
       }
     }
   };

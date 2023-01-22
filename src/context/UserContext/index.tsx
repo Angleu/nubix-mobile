@@ -37,13 +37,17 @@ export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
     rememberUser = false
   ) {
     try {
-      setIsLoading(true);
       const userLoggedIn = await authenticate(emailOrPhoneNumber, password);
       setUser(userLoggedIn);
       if (rememberUser) await storeUser(emailOrPhoneNumber, password);
     } catch (error) {
-      if (error.message === 'User undefined' || error.message === 'Address undefined') {
+      if (
+        error.message === 'User undefined' ||
+        error.message === 'Address undefined'
+      ) {
         setIsLoading(false);
+        throw error;
+      } else {
         throw error;
       }
     } finally {
