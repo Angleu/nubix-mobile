@@ -2,6 +2,7 @@ import { Button, Center, FlatList, HStack, Text, VStack } from 'native-base';
 import React, { FC } from 'react';
 
 import { TransactionType } from '../../models/Transaction';
+import ActivityItem from './_ActivityItem';
 
 type Props = {
   data: TransactionType[];
@@ -43,8 +44,7 @@ const RecentActivities: FC<Props> = ({ data }) => {
         )}
         data={data}
         mt={2}
-        renderItem={({ item }) => <Text key={item.IBANF}>{item.type}</Text>}
-        // renderItem={({ item }) => <ActivityItem activity={item} />}
+        renderItem={({ item }) => <ActivityItem activity={item} />}
       />
     </VStack>
   );

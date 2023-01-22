@@ -5,6 +5,7 @@ import { AccountType } from '../../models/Account';
 import { ContactType } from '../../models/Contact';
 import { UserType } from '../../models/User';
 import axios from '../config';
+import { getAllTransactions } from '../transaction';
 import {
   AuthenticationRequestType,
   AuthenticationResponseType,
@@ -100,6 +101,12 @@ async function transformUser(user: AuthenticationResponseType) {
     contacts: registeredContacts,
     createdAt: new Date(created_at),
   };
+  for (let i = 0; i < transformedUser.accounts.length; i++) {
+    const transactions = await getAllTransactions(
+      transformedUser.accounts[i].number_account
+    );
+    transformedUser.accounts[i].Transaction = [...transactions];
+  }
   return transformedUser;
 }
 

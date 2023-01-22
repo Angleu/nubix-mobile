@@ -1,4 +1,11 @@
-import { createContext, FC, ReactNode, useEffect, useState } from 'react';
+import {
+  createContext,
+  FC,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 
 import { authenticate } from '../../api/login';
 import { UserType } from '../../models/User';
@@ -12,16 +19,17 @@ export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<UserType>(undefined);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const loginStoredUser = async () => {
-      const storedUser = await getUser();
-      if (storedUser) {
-        const { emailOrPhoneNumber, password } = storedUser;
-        await signIn(emailOrPhoneNumber, password);
-      }
-    };
-    loginStoredUser();
+  const loginStoredUser = useCallback(async () => {
+    const storedUser = await getUser();
+    if (storedUser) {
+      const { emailOrPhoneNumber, password } = storedUser;
+      await signIn(emailOrPhoneNumber, password);
+    }
   }, []);
+
+  useEffect(() => {
+    loginStoredUser();
+  }, [loginStoredUser]);
 
   async function signIn(
     emailOrPhoneNumber: string,
@@ -40,6 +48,10 @@ export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
     }
   }
 
+  async function updateUserData() {
+    await loginStoredUser();
+  }
+
   function logout() {
     clearUser()
       .then(() => setUser(undefined))
@@ -52,6 +64,7 @@ export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
     user,
     isLoading,
     isAuthenticated: !!user,
+    updateUserData,
   };
 
   return (

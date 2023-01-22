@@ -1,4 +1,4 @@
-import { MaterialIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { Avatar, HStack, Icon, Text, VStack } from 'native-base';
 import React, { FC } from 'react';
@@ -15,13 +15,6 @@ type Props = {
 const ActivityItem: FC<Props> = ({ activity }) => {
   const navigation = useNavigation<MainStackNavigationProps<'HomeTab'>>();
 
-  // const displayName =
-  //   activity.type === 'receive'
-  //     ? activity.origin.name
-  //     : activity.type === 'payment'
-  //     ? activity.entityName
-  //     : activity.destination.name;
-
   return (
     <TouchableOpacity
       onPress={() => {
@@ -35,7 +28,7 @@ const ActivityItem: FC<Props> = ({ activity }) => {
           {activity.type === 'receive' ? (
             <>
               <Avatar
-                // source={{ uri: activity.origin.profilePictureURL }}
+                source={{ uri: activity.user_destine.avatar }}
                 bg="white"
                 p={2}
                 mx={1}
@@ -44,11 +37,7 @@ const ActivityItem: FC<Props> = ({ activity }) => {
             </>
           ) : (
             <Icon
-              as={
-                // activity.type === 'payment' ? <MaterialIcons /> : <Ionicons />
-                <MaterialIcons />
-              }
-              // name={activity.type === 'payment' ? 'payments' : 'paper-plane'}
+              as={Ionicons}
               name="paper-plane"
               color="primary.100"
               size="3xl"
@@ -62,8 +51,7 @@ const ActivityItem: FC<Props> = ({ activity }) => {
               fontSize="lg"
               color="coolGray.700"
             >
-              {/* {displayName} */}
-              Test 101
+              {activity.user_destine.name}
             </Text>
             <Text
               fontFamily="body"
@@ -77,7 +65,7 @@ const ActivityItem: FC<Props> = ({ activity }) => {
           </VStack>
         </HStack>
         <Text fontFamily="body" fontWeight="bold" fontSize="lg" color="black">
-          {formatMoney(activity.amount, 'Kzs')}
+          {formatMoney(activity.amount, activity.coin === 'AOA' ? 'Kzs' : '$')}
         </Text>
       </HStack>
     </TouchableOpacity>

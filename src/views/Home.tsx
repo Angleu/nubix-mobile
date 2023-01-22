@@ -63,7 +63,7 @@ export default function Home() {
           }}
         />
       </HStack>
-      <RecentActivities data={selectedAccount.current.Transaction} />
+      <RecentActivities data={selectedAccount.current.Transaction.reverse()} />
     </Container>
   );
 }

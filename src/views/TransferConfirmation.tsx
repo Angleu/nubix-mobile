@@ -15,7 +15,8 @@ const TransferConfirmation = ({
 }: MainStackScreenProps<'TransferConfirmation'>) => {
   const { destination, transferAmount, message } = route.params;
 
-  const { accounts } = useUser().user;
+  const { user, updateUserData } = useUser();
+  const { accounts } = user;
   const accountNumber = accounts[0].number_account;
 
   const [isSuccessful, setSuccessful] = useState(false);
@@ -32,6 +33,7 @@ const TransferConfirmation = ({
       });
       console.log(response);
       setSuccessful(true);
+updateUserData();
     } catch (error) {
       console.error(error);
       Alert.alert('Erro na Transferência');

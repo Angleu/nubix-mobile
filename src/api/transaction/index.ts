@@ -1,9 +1,12 @@
+import { TransactionType } from '../../models/Transaction';
 import axios from '../config';
 import { CreateTransactionRequestType } from './type';
 
-export async function getAllTransactions(phoneNumber: string) {
+export async function getAllTransactions(accountNumber: string) {
   try {
-    const response = await axios.get(`/account/transaction/${phoneNumber}`);
+    const response = await axios.get<TransactionType[]>(
+      `/account/transaction/${accountNumber}`
+    );
     return response.data;
   } catch (error) {
     throw new Error(error.message);

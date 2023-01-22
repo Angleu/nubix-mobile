@@ -7,7 +7,7 @@ import {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 
-import { Old_AccountType } from '../models/Account';
+import { AccountType } from '../models/Account';
 import { ContactType } from '../models/Contact';
 import { TransactionType } from '../models/Transaction';
 
@@ -26,7 +26,7 @@ export type MainStackParamListType = {
   Payment: undefined;
   NFCPayment: undefined;
   Receive: {
-    accountToReceive: Old_AccountType;
+    accountToReceive: AccountType;
   };
   Deposit: undefined;
   AnalyticsIncome: undefined;
