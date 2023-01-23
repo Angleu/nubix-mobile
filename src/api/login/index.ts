@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import * as Contacts from 'expo-contacts';
 
 import { AccountType } from '../../models/Account';
@@ -55,7 +55,9 @@ export async function authenticate(
     const user = transformUser(response.data);
     return user;
   } catch (error) {
-    throw new Error(error.message);
+    if (error instanceof AxiosError) {
+     throw new Error('Utilizador não existe');
+    }
   }
 }
 
@@ -73,7 +75,7 @@ async function transformUser(user: AuthenticationResponseType) {
     Account,
   } = _user;
 
-  const phoneNumbers = await(await fetchAllUserContacts())
+  const phoneNumbers = (await fetchAllUserContacts())
     .flatMap(({ phoneNumbers }) => phoneNumbers)
     .map((phoneNumber) => {
       return phoneNumber.replace('+244', '');

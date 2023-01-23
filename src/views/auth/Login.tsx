@@ -57,7 +57,11 @@ const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
   });
 
   const onSubmit = async ({ email, password }: LoginFormType) => {
-    await signIn(email as string, password as string, rememberUser);
+    try {
+      await signIn(email as string, password as string, rememberUser);
+    } catch (error) {
+      Alert.alert('Erro no login', error.message);
+    }
   };
 
   return (

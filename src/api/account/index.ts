@@ -3,6 +3,8 @@ import axios from '../config';
 import {
   CreateAccountRequestType,
   CreateAccountResponseType,
+  DepositCardRequestType as DepositRequestType,
+  DepositCardResponseType,
   GetAccountResponseType,
 } from './types';
 
@@ -20,7 +22,7 @@ export async function getAccount(iban: string) {
 export async function getAllAccountsFromUser(user: UserType) {
   const { accounts } = user;
   try {
-    const updatedAccounts = [];
+    const updatedAccounts: GetAccountResponseType[] = [];
     const ibans = accounts.map((account) => account.IBAN);
     for (let i = 0; i < ibans.length; i++) {
       const iban = ibans[i];
@@ -42,5 +44,32 @@ export async function createAccount(account: CreateAccountRequestType) {
     return response.data;
   } catch (error) {
     throw new Error(error.message);
+  }
+}
+
+export async function depositCard(depositDetails: DepositRequestType) {
+  try {
+    const response = await axios.post<DepositCardResponseType>(
+      '/account/deposit/card',
+      depositDetails
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error('Erro ao efetuar o depósito');
+  }
+}
+
+export async function deposit(
+  accountNumber: string,
+  depositDetails: DepositRequestType
+) {
+  try {
+    const response = await axios.post<GetAccountResponseType>(
+      `/account/deposit/${accountNumber}`,
+      depositDetails
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error('Erro ao efetuar o depósito');
   }
 }
