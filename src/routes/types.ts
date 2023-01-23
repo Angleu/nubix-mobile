@@ -39,6 +39,7 @@ export type MainStackParamListType = {
   DepositProviderCreditCard: {
     amount: string;
     currency: string;
+    accountToReceive: AccountType;
   };
   DepositProviderBank: {
     amount: string;

@@ -22,5 +22,4 @@ export type DepositCardResponseType = {
   cancel: string;
 };
 
-
 export type CreateAccountResponseType = GetAccountResponseType;
