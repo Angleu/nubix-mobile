@@ -3,6 +3,9 @@ import React from 'react';
 
 import {
   Deposit,
+  DepositProvider,
+  DepositProviderBank,
+  DepositProviderCreditCard,
   Details,
   ExpenseAnalytics,
   IncomeAnalytics,
@@ -24,9 +27,15 @@ const MainRoute = () => {
     <MainStack.Navigator screenOptions={{ headerShown: false }}>
       <MainStack.Screen name="HomeTab" component={BottomTabRoute} />
       <MainStack.Screen name="Deposit" component={Deposit} />
-      <MainStack.Screen name="DepositProvider" component={Deposit} />
-      <MainStack.Screen name="DepositProviderBank" component={Deposit} />
-      <MainStack.Screen name="DepositProviderCreditCard" component={Deposit} />
+      <MainStack.Screen name="DepositProvider" component={DepositProvider} />
+      <MainStack.Screen
+        name="DepositProviderBank"
+        component={DepositProviderBank}
+      />
+      <MainStack.Screen
+        name="DepositProviderCreditCard"
+        component={DepositProviderCreditCard}
+      />
       <MainStack.Screen name="Payment" component={Payment} />
       <MainStack.Screen name="Receive" component={ReceiveMoney} />
       <MainStack.Screen name="Transfer" component={Transfer} />
