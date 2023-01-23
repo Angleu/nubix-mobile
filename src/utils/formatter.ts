@@ -26,3 +26,10 @@ type ShareableMessageParamType = {
 export function createShareableMessage(userInfo: ShareableMessageParamType) {
   return `Nome: ${userInfo.name}\nIBAN: ${userInfo.iban}\nNúmero de Telefone: ${userInfo.phoneNumber}`;
 }
+
+export function createShareableAccountDetails(
+  beneficiary: string,
+  iban: string
+) {
+  return `Nome: ${beneficiary}\nIBAN: ${iban}`;
+}

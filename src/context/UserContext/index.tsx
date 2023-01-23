@@ -17,7 +17,6 @@ export default UserContext;
 
 export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<UserType>(undefined);
-  const [isLoading, setIsLoading] = useState(false);
 
   const loginStoredUser = useCallback(async () => {
     const storedUser = await getUser();
@@ -36,11 +35,9 @@ export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
     password: string,
     rememberUser = false
   ) {
-    setIsLoading(true);
     const userLoggedIn = await authenticate(emailOrPhoneNumber, password);
     setUser(userLoggedIn);
     if (rememberUser) await storeUser(emailOrPhoneNumber, password);
-    setIsLoading(false);
   }
 
   async function updateUserData() {
@@ -55,7 +52,6 @@ export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
     signIn,
     logout,
     user,
-    isLoading,
     isAuthenticated: !!user,
     updateUserData,
   };

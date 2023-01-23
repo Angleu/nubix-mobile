@@ -1,18 +1,9 @@
-import { Center, Spinner } from 'native-base';
-
 import { useUser } from '../hooks';
 import AuthRoute from './AuthRoute';
 import MainRoute from './MainRoute';
 
 const RootRoute = () => {
-  const { isAuthenticated, isLoading } = useUser();
-
-  if (isLoading)
-    return (
-      <Center flex={1}>
-        <Spinner color="primary.100" size="lg" />
-      </Center>
-    );
+  const { isAuthenticated } = useUser();
 
   if (isAuthenticated) return <MainRoute />;
   return <AuthRoute />;

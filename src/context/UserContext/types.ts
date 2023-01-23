@@ -9,6 +9,5 @@ export type UserContextType = {
   logout: () => void;
   user?: UserType;
   isAuthenticated: boolean;
-  isLoading: boolean;
   updateUserData: () => Promise<void>;
 };
