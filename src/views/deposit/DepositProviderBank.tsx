@@ -10,7 +10,7 @@ import {
   IconButton,
   Text,
   useToast,
-  VStack
+  VStack,
 } from 'native-base';
 import React, { FC } from 'react';
 import { Share } from 'react-native';
@@ -35,7 +35,7 @@ const DepositProviderBank: FC<MainStackScreenProps<'DepositProviderBank'>> = ({
   async function copyToClipboard(value: string) {
     await Clipboard.setStringAsync(value);
     toast.show({
-      description: "Valor copiado",
+      description: 'Valor copiado',
     });
   }
 
