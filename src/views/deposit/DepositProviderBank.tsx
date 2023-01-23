@@ -1,4 +1,6 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import * as Clipboard from 'expo-clipboard';
+import iban from 'iban';
 import {
   Button,
   Divider,
@@ -7,14 +9,17 @@ import {
   Icon,
   IconButton,
   Text,
-  VStack,
+  useToast,
+  VStack
 } from 'native-base';
 import React, { FC } from 'react';
+import { Share } from 'react-native';
 
 import Container from '../../components/layout/Container';
 import Header from '../../components/layout/Header';
 import { useUser } from '../../hooks';
 import { MainStackScreenProps } from '../../routes/types';
+import { createShareableAccountDetails } from '../../utils/formatter';
 import { androidRippleEffect } from '../../utils/theme/style';
 
 const DepositProviderBank: FC<MainStackScreenProps<'DepositProviderBank'>> = ({
@@ -22,6 +27,18 @@ const DepositProviderBank: FC<MainStackScreenProps<'DepositProviderBank'>> = ({
 }) => {
   const { accountToReceive } = route.params;
   const { firstName, lastName } = useUser().user;
+  const toast = useToast();
+
+  const fullName = `${firstName} ${lastName}`;
+  const formattedIban = iban.printFormat(accountToReceive.IBAN);
+
+  async function copyToClipboard(value: string) {
+    await Clipboard.setStringAsync(value);
+    toast.show({
+      description: "Valor copiado",
+    });
+  }
+
   return (
     <Container>
       <Header heading="Depósito" />
@@ -33,7 +50,15 @@ const DepositProviderBank: FC<MainStackScreenProps<'DepositProviderBank'>> = ({
       <HStack mt="12" mb="4" justifyContent="space-between">
         <Text fontSize="md">Detalhes da conta</Text>
         <Button
-          onPress={() => {}}
+          onPress={() =>
+            Share.share(
+              {
+                title: 'Detalhes da Conta',
+                message: createShareableAccountDetails(fullName, formattedIban),
+              },
+              { dialogTitle: 'Detalhes da Conta' }
+            )
+          }
           variant="link"
           p="0"
           _text={{ fontSize: 'md', color: 'primary.100', fontWeight: 'bold' }}
@@ -45,7 +70,7 @@ const DepositProviderBank: FC<MainStackScreenProps<'DepositProviderBank'>> = ({
         <HStack justifyContent="space-between" alignItems="center">
           <VStack space="2">
             <Text fontWeight="bold">Beneficiário</Text>
-            <Text color="primary.100">{`${firstName} ${lastName}`}</Text>
+            <Text color="primary.100">{fullName}</Text>
           </VStack>
           <IconButton
             borderRadius="full"
@@ -55,7 +80,7 @@ const DepositProviderBank: FC<MainStackScreenProps<'DepositProviderBank'>> = ({
               bg: 'muted.100',
             }}
             _icon={{ color: 'primary.100' }}
-            onPress={() => {}}
+            onPress={() => copyToClipboard(fullName)}
             icon={<Icon as={MaterialCommunityIcons} name="content-copy" />}
           />
         </HStack>
@@ -63,7 +88,7 @@ const DepositProviderBank: FC<MainStackScreenProps<'DepositProviderBank'>> = ({
         <HStack justifyContent="space-between" alignItems="center">
           <VStack space="2">
             <Text fontWeight="bold">IBAN</Text>
-            <Text color="primary.100">{accountToReceive.IBAN}</Text>
+            <Text color="primary.100">{formattedIban}</Text>
           </VStack>
           <IconButton
             borderRadius="full"
@@ -73,7 +98,7 @@ const DepositProviderBank: FC<MainStackScreenProps<'DepositProviderBank'>> = ({
               bg: 'muted.100',
             }}
             _icon={{ color: 'primary.100' }}
-            onPress={() => {}}
+            onPress={() => copyToClipboard(formattedIban)}
             icon={<Icon as={MaterialCommunityIcons} name="content-copy" />}
           />
         </HStack>
