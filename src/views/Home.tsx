@@ -28,6 +28,11 @@ export default function Home() {
 
   const selectedAccount = useRef(accounts[0]);
 
+  async function handleRefresh() {
+    await transactionsQuery.refetch();
+    await accountsQuery.refetch();
+  }
+
   return (
     <Container>
       <HomeHeader />
@@ -93,7 +98,11 @@ export default function Home() {
       {transactionsQuery.isLoading ? (
         <Spinner color="primary.100" size="lg" />
       ) : (
-        <RecentActivities data={transactionsQuery.data.reverse()} />
+        <RecentActivities
+          data={transactionsQuery.data}
+          onRefresh={handleRefresh}
+          maxToShow={5}
+        />
       )}
     </Container>
   );
