@@ -33,6 +33,7 @@
     "expo-location": "~15.0.1",
     "expo-network": "~5.0.0",
     "expo-status-bar": "~1.4.2",
+    "iban": "^0.0.14",
     "intl": "^1.2.5",
     "lottie-react-native": "5.1.4",
     "native-base": "^3.4.25",
