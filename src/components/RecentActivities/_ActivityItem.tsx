@@ -1,6 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { format } from 'date-fns';
 import { Avatar, HStack, Icon, Text, VStack } from 'native-base';
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
@@ -46,7 +45,7 @@ const ActivityItem: FC<Props> = ({ activity }) => {
             />
           )}
 
-          <VStack space={2}>
+          <VStack>
             <Text
               fontFamily="body"
               fontWeight="bold"
@@ -58,16 +57,16 @@ const ActivityItem: FC<Props> = ({ activity }) => {
             <Text
               fontFamily="body"
               fontWeight="normal"
-              fontSize="lg"
+              fontSize="md"
               color="coolGray.700"
             >
-              {format(new Date(activity.data_transaction), 'dd/MM/yyyy hh:mm')}
+              {formatMoney(
+                activity.amount,
+                activity.coin === 'AOA' ? 'Kzs' : '$'
+              )}
             </Text>
           </VStack>
         </HStack>
-        <Text fontFamily="body" fontWeight="bold" fontSize="lg" color="black">
-          {formatMoney(activity.amount, activity.coin === 'AOA' ? 'Kzs' : '$')}
-        </Text>
       </HStack>
     </TouchableOpacity>
   );
