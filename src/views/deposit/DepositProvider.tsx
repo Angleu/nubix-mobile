@@ -22,11 +22,16 @@ const DepositProvider: FC<MainStackScreenProps<'DepositProvider'>> = ({
 
       <VStack space="8" mt="16">
         <TouchableOpacity
+          disabled={params.currency === 'AOA'}
           onPress={() =>
             navigation.navigate('DepositProviderCreditCard', params)
           }
         >
-          <HStack space="5" alignItems="center">
+          <HStack
+            space="5"
+            alignItems="center"
+            opacity={params.currency === 'AOA' ? 30 : 100}
+          >
             <Box
               p="3"
               borderRadius="full"

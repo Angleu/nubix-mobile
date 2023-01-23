@@ -11,4 +11,16 @@ export type CreateAccountRequestType = {
   numberPhone: string;
 };
 
+export type DepositCardRequestType = {
+  amount: number;
+  currency: string;
+};
+
+export type DepositCardResponseType = {
+  url: string;
+  success: string;
+  cancel: string;
+};
+
+
 export type CreateAccountResponseType = GetAccountResponseType;

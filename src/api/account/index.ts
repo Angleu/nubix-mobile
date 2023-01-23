@@ -3,6 +3,8 @@ import axios from '../config';
 import {
   CreateAccountRequestType,
   CreateAccountResponseType,
+  DepositCardRequestType,
+  DepositCardResponseType,
   GetAccountResponseType,
 } from './types';
 
@@ -42,5 +44,17 @@ export async function createAccount(account: CreateAccountRequestType) {
     return response.data;
   } catch (error) {
     throw new Error(error.message);
+  }
+}
+
+export async function depositCard(depositDetails: DepositCardRequestType) {
+  try {
+    const response = await axios.post<DepositCardResponseType>(
+      '/account/deposit/card',
+      depositDetails
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error('Erro ao efetuar o depósito');
   }
 }
