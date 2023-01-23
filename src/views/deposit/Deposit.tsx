@@ -57,7 +57,7 @@ const Deposit: FC<MainStackScreenProps<'Deposit'>> = ({
 
   return (
     <Container>
-      <Header heading="Deposito" />
+      <Header heading="Depósito" />
 
       <Heading fontSize="3xl" mt="2">
         Adicionar Dinheiro

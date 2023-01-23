@@ -24,7 +24,7 @@ const DepositProviderBank: FC<MainStackScreenProps<'DepositProviderBank'>> = ({
   const { firstName, lastName } = useUser().user;
   return (
     <Container>
-      <Header heading="Deposito" />
+      <Header heading="Depósito" />
 
       <Heading fontSize="2xl" mt="2">
         Transferência Bancária

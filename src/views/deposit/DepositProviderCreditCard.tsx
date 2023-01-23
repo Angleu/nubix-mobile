@@ -10,7 +10,7 @@ const DepositProviderCreditCard: FC<
 > = () => {
   return (
     <Container>
-      <Header heading="Deposito" />
+      <Header heading="Depósito" />
 
       <Heading fontSize="3xl" mt="2">
         Cartão de Crédito

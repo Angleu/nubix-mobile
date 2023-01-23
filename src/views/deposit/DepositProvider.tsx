@@ -14,7 +14,7 @@ const DepositProvider: FC<MainStackScreenProps<'DepositProvider'>> = ({
   const { params } = route;
   return (
     <Container>
-      <Header heading="Deposito" />
+      <Header heading="Depósito" />
 
       <Heading fontSize="3xl" mt="2">
         Selecionar Origem
