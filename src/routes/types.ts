@@ -34,6 +34,7 @@ export type MainStackParamListType = {
   DepositProvider: {
     amount: string;
     currency: string;
+    accountToReceive: AccountType;
   };
   DepositProviderCreditCard: {
     amount: string;
@@ -42,6 +43,7 @@ export type MainStackParamListType = {
   DepositProviderBank: {
     amount: string;
     currency: string;
+    accountToReceive: AccountType;
   };
   AnalyticsIncome: undefined;
   AnalyticsExpense: undefined;

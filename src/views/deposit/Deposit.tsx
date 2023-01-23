@@ -21,9 +21,8 @@ const Deposit: FC<MainStackScreenProps<'Deposit'>> = ({
   navigation,
   route,
 }) => {
-  const {
-    accountToReceive: { IBAN },
-  } = route.params;
+  const { accountToReceive } = route.params;
+  const { IBAN } = accountToReceive;
 
   const { isLoading, data: account } = useQuery(['balance', IBAN], () =>
     getAccount(IBAN)
@@ -52,6 +51,7 @@ const Deposit: FC<MainStackScreenProps<'Deposit'>> = ({
     navigation.navigate('DepositProvider', {
       amount,
       currency,
+      accountToReceive,
     });
   }
 
