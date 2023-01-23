@@ -28,7 +28,21 @@ export type MainStackParamListType = {
   Receive: {
     accountToReceive: AccountType;
   };
-  Deposit: undefined;
+  Deposit: {
+    accountToReceive: AccountType;
+  };
+  DepositProvider: {
+    amount: string;
+    currency: string;
+  };
+  DepositProviderCreditCard: {
+    amount: string;
+    currency: string;
+  };
+  DepositProviderBank: {
+    amount: string;
+    currency: string;
+  };
   AnalyticsIncome: undefined;
   AnalyticsExpense: undefined;
   Details: {

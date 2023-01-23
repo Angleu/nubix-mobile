@@ -20,7 +20,7 @@ export async function getAccount(iban: string) {
 export async function getAllAccountsFromUser(user: UserType) {
   const { accounts } = user;
   try {
-    const updatedAccounts = [];
+    const updatedAccounts: GetAccountResponseType[] = [];
     const ibans = accounts.map((account) => account.IBAN);
     for (let i = 0; i < ibans.length; i++) {
       const iban = ibans[i];

@@ -72,7 +72,14 @@ export default function Home() {
           text="Transferir"
           to="Transfer"
         />
-        <HomeLink iconName="inbox" text="Depositar" to="Deposit" />
+        <HomeLink
+          iconName="inbox"
+          text="Depositar"
+          to="Deposit"
+          routeParams={{
+            accountToReceive: selectedAccount.current,
+          }}
+        />
         <HomeLink iconName="credit-card-outline" text="Pagar" to="Payment" />
         <HomeLink
           iconName="bank-transfer-in"

@@ -24,6 +24,9 @@ const MainRoute = () => {
     <MainStack.Navigator screenOptions={{ headerShown: false }}>
       <MainStack.Screen name="HomeTab" component={BottomTabRoute} />
       <MainStack.Screen name="Deposit" component={Deposit} />
+      <MainStack.Screen name="DepositProvider" component={Deposit} />
+      <MainStack.Screen name="DepositProviderBank" component={Deposit} />
+      <MainStack.Screen name="DepositProviderCreditCard" component={Deposit} />
       <MainStack.Screen name="Payment" component={Payment} />
       <MainStack.Screen name="Receive" component={ReceiveMoney} />
       <MainStack.Screen name="Transfer" component={Transfer} />
