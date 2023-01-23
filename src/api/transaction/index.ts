@@ -18,10 +18,13 @@ export async function createTransaction(
   data: CreateTransactionRequestType
 ) {
   try {
-    const response = await axios.post(`/account/transaction/${accountNumber}`, {
-      ...data,
-      reference: '',
-    });
+    const response = await axios.post<TransactionType>(
+      `/account/transaction/${accountNumber}`,
+      {
+        ...data,
+        reference: '',
+      }
+    );
     return response.data;
   } catch (error) {
     throw new Error(error.message);
