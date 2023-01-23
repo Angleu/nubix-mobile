@@ -5,7 +5,7 @@ export type TransactionType = {
   description: string;
   id_transaction: string;
   reference: string;
-  type: 'send' | 'receive';
+  type: 'send' | 'receive' | 'deposit';
   user_destine: {
     name: string;
     telephone: string;
