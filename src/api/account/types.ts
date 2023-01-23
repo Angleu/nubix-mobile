@@ -22,4 +22,16 @@ export type DepositCardResponseType = {
   cancel: string;
 };
 
+export type SaveReceiptResponseType = {
+  data: string;
+  operacao: string;
+  destinatario: string;
+  IBAN: string;
+  montante: string;
+  transacao: string;
+  produzido: string;
+  dataCriacao: string;
+  dataModificacao: string;
+};
+
 export type CreateAccountResponseType = GetAccountResponseType;

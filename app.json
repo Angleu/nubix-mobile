@@ -12,6 +12,12 @@
         {
           "photosPermission": "O aplicativo acessa as suas fotos para alterar a sua foto de perfil."
         }
+      ],
+      [
+        "expo-document-picker",
+        {
+          "iCloudContainerEnvironment": "Production"
+        }
       ]
     ],
     "splash": {

@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 import { UserType } from '../../models/User';
 import axios from '../config';
 import {
@@ -6,6 +8,7 @@ import {
   DepositCardRequestType as DepositRequestType,
   DepositCardResponseType,
   GetAccountResponseType,
+  SaveReceiptResponseType,
 } from './types';
 
 export async function getAccount(iban: string) {
@@ -71,5 +74,36 @@ export async function deposit(
     return response.data;
   } catch (error) {
     throw new Error('Erro ao efetuar o depósito');
+  }
+}
+
+export async function saveReceipt(fileUri: string) {
+  try {
+    const uri =
+      Platform.OS === 'android' ? fileUri : fileUri.replace('file://', '');
+    const filename = fileUri.split('/').pop();
+    const match = /\.(\w+)$/.exec(filename as string);
+    const ext = match?.[1];
+    const type = match ? `image/${match[1]}` : `image`;
+    const fileData = new FormData();
+    fileData.append('comprovativo-express', {
+      uri,
+      name: `file.${ext}`,
+      type,
+    } as never);
+    const response = await axios.post<SaveReceiptResponseType>(
+      '/comprovativo/validacao/multicaixa-express',
+      fileData,
+      {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Não é possível enviar o comprovativo');
   }
 }
