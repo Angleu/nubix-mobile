@@ -27,7 +27,7 @@ const TransferConfirmation = ({
 }: MainStackScreenProps<'TransferConfirmation'>) => {
   const { destination, transferAmount, message } = route.params;
 
-  const { user, updateUserData } = useUser();
+  const { user } = useUser();
   const { accounts } = user;
   const accountNumber = accounts[0].number_account;
 
