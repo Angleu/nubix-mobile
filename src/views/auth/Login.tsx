@@ -91,6 +91,7 @@ const Login: FC<AuthStackScreenProps<'Login'>> = ({ route, navigation }) => {
               value={value}
               onBlur={onBlur}
               onChangeText={onChange}
+              keyboardType="email-address"
               errorMessage={errors?.email?.message}
               leftElement={
                 <Icon
