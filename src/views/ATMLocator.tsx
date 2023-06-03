@@ -1,10 +1,13 @@
+import { View } from 'react-native';
 import React from 'react';
-import { Text, View } from 'react-native';
+import MapView from 'react-native-maps';
 
 const ATMLocator = () => {
   return (
     <View>
-      <Text>ATMLocator</Text>
+      <MapView style={{ width: '100%', height: '100%' }} 
+        
+      />
     </View>
   );
 };
