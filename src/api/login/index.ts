@@ -56,7 +56,7 @@ export async function authenticate(
     return user;
   } catch (error) {
     if (error instanceof AxiosError) {
-     throw new Error('Utilizador não existe');
+      throw new Error('Utilizador não existe');
     }
   }
 }

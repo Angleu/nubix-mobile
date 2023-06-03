@@ -20,4 +20,3 @@ export { default as Transfer } from './Transfer';
 export { default as TransferConfirmation } from './TransferConfirmation';
 export { default as TransferValue } from './TransferValue';
 export { default as Wallet } from './Wallet';
-
