@@ -1,7 +1,8 @@
 import { Button } from 'native-base';
 import React from 'react';
-import { androidRippleEffect } from '../../utils/theme/style';
 import { GestureResponderEvent } from 'react-native';
+
+import { androidRippleEffect } from '../../utils/theme/style';
 
 // import { Container } from './styles';
 interface IButtom {

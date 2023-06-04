@@ -1,18 +1,17 @@
-import React from 'react';
-import { Avatar, Text, View, HStack, Pressable } from 'native-base';
-import MapView from 'react-native-maps';
-import { MainStackScreenProps } from '../../routes/types';
+import { Avatar, HStack, Pressable,Text, View } from 'native-base';
 import { ArrowCircleLeft } from 'phosphor-react-native';
+import React from 'react';
+import MapView from 'react-native-maps';
+
 import { useUser } from '../../hooks';
+import { MainStackScreenProps } from '../../routes/types';
 
 const FindPost: React.FC = ({
-  route,
   navigation,
 }: MainStackScreenProps<'FindPost'>) => {
   //   const { latitude, longitude, search } = route.params;
   const {
     user: { avatarImageURL },
-    logout,
   } = useUser();
   return (
     <View flex={1}>

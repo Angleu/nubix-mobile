@@ -1,9 +1,10 @@
 import { useNavigation } from '@react-navigation/native';
-import { Button, Text, View, VStack } from 'native-base';
+import { Text, View, VStack } from 'native-base';
 import { XCircle } from 'phosphor-react-native';
-import React, { useEffect, useRef, useState } from 'react';
-import { GestureResponderEvent, Pressable } from 'react-native';
+import React, { useState } from 'react';
+import { Pressable } from 'react-native';
 import MapView from 'react-native-maps';
+
 import Buttom from '../../components/button/Buttom';
 import {
   MainBottomTabScreenProps,
@@ -18,15 +19,18 @@ const ATMLocator = ({
   const { coords } = route.params;
   const { push } = useNavigation<MainStackNavigationProps<'FindPost'>>();
   const [state, setState] = useState('');
-  useEffect(() => {
+  // useEffect(() => {
 
-  }, [state]);
-  function handlePressDeposit(event: GestureResponderEvent) {
+  // }, [state]);
+  function handlePressDeposit() {
     setState('deposit');
-    push('FindPost')
+    console.log(state)
+    push('FindPost');
   }
-  function handlePressWitdhraw(event: GestureResponderEvent) {
+  function handlePressWitdhraw() {
     setState('witdhraw');
+    console.log(state)
+
   }
   return (
     <View flex={1}>
@@ -72,7 +76,7 @@ const ATMLocator = ({
         </Text>
         <VStack space={6} width="full">
           <Buttom text="Depositar" onPress={handlePressDeposit} />
-          <Buttom outline text="Levantamento" />
+          <Buttom outline text="Levantamento" onPress={handlePressWitdhraw} />
         </VStack>
       </VStack>
     </View>

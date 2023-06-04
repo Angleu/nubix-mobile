@@ -17,9 +17,9 @@ import {
   TransferConfirmation,
   TransferValue,
 } from '../views';
+import FindPost from '../views/ATMLocator/FindPost';
 import BottomTabRoute from './BottomTabRoute';
 import { MainStackParamListType } from './types';
-import FindPost from '../views/ATMLocator/FindPost';
 
 const MainStack = createNativeStackNavigator<MainStackParamListType>();
 
