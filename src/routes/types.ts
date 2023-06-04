@@ -6,13 +6,11 @@ import {
   NativeStackNavigationProp,
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
-import {LocationObject} from 'expo-location';
+import { LocationObject } from 'expo-location';
 
 import { AccountType } from '../models/Account';
 import { ContactType } from '../models/Contact';
 import { TransactionType } from '../models/Transaction';
-
-
 
 export type MainStackParamListType = {
   HomeTab: undefined;
@@ -55,6 +53,11 @@ export type MainStackParamListType = {
     transaction: TransactionType;
   };
   QRScanner: undefined;
+  FindPost: {
+    search: string;
+    latitude: string;
+    longitude: string;
+  };
 };
 
 export type MainStackScreenProps<T extends keyof MainStackParamListType> =

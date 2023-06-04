@@ -19,6 +19,7 @@ import {
 } from '../views';
 import BottomTabRoute from './BottomTabRoute';
 import { MainStackParamListType } from './types';
+import FindPost from '../views/ATMLocator/FindPost';
 
 const MainStack = createNativeStackNavigator<MainStackParamListType>();
 
@@ -49,6 +50,7 @@ const MainRoute = () => {
       <MainStack.Screen name="AnalyticsIncome" component={IncomeAnalytics} />
       <MainStack.Screen name="Details" component={Details} />
       <MainStack.Screen name="QRScanner" component={QRScanner} />
+      <MainStack.Screen name="FindPost" component={FindPost} />
     </MainStack.Navigator>
   );
 };
