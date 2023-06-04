@@ -103,7 +103,7 @@ const DepositProviderBank: FC<MainStackScreenProps<'DepositProviderBank'>> = ({
     <Container>
       <Header heading="Depósito" />
 
-      <Heading fontSize="2xl" mt="2">
+      <Heading fontSize="2xl" mt="2" textAlign={'center'}>
         Transferência Bancária
       </Heading>
 
