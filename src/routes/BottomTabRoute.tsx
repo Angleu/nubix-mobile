@@ -8,7 +8,6 @@ import { Platform } from 'react-native';
 import { Analytics, ATMLocator, Home, Wallet } from '../views';
 import { MainBottomTabParamListType } from './types';
 
-
 const BottomTab = createBottomTabNavigator<MainBottomTabParamListType>();
 
 const BottomTabRoute = () => {
