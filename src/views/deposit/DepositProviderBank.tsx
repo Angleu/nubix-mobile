@@ -64,7 +64,7 @@ const DepositProviderBank: FC<MainStackScreenProps<'DepositProviderBank'>> = ({
       const doc = await DocumentPicker.getDocumentAsync({
         type: 'application/pdf',
       });
-      const { montante } = await saveReceipt(doc.uri);
+      const { montante } = await saveReceipt(doc.type);
       const money = montante
         .replace(/\.|,|Kz/g, '')
         .trim()
