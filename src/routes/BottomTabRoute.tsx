@@ -1,12 +1,12 @@
 import { Entypo, MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import * as Location from 'expo-location';
 import { Box, useTheme } from 'native-base';
+import { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
 
 import { Analytics, ATMLocator, Home, Wallet } from '../views';
 import { MainBottomTabParamListType } from './types';
-import { useEffect, useState } from 'react';
-import * as Location from 'expo-location';
 
 
 const BottomTab = createBottomTabNavigator<MainBottomTabParamListType>();
@@ -20,13 +20,13 @@ const BottomTabRoute = () => {
   const [errorMsg, setErrorMsg] = useState(null);
   useEffect(() => {
     (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
+      const { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         setErrorMsg('Permission to access location was denied');
         return;
       }
 
-      let location = await Location.getCurrentPositionAsync({});
+      const location = await Location.getCurrentPositionAsync({});
       setLocation(location);
     })();
   }, []);

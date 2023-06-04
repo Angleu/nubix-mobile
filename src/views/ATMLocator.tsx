@@ -1,10 +1,10 @@
+import { useNavigation } from '@react-navigation/native';
+import { Button, Text, View,VStack } from 'native-base';
+import { XCircle } from 'phosphor-react-native';
 import React from 'react';
 import { Pressable } from 'react-native';
 import MapView from 'react-native-maps';
-import { XCircle } from 'phosphor-react-native';
 
-import { useNavigation } from '@react-navigation/native';
-import { Button, Text, VStack, View } from 'native-base';
 import { androidRippleEffect } from '../utils/theme/style';
 
 const ATMLocator = (props) => {

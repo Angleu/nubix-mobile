@@ -6,12 +6,11 @@ import {
   NativeStackNavigationProp,
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
+import {LocationObject} from 'expo-location';
 
 import { AccountType } from '../models/Account';
 import { ContactType } from '../models/Contact';
 import { TransactionType } from '../models/Transaction';
-
-import {LocationObject} from 'expo-location';
 
 
 

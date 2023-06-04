@@ -1,8 +1,9 @@
+import * as Location from 'expo-location';
 import { useEffect, useState } from 'react';
+
 import { useUser } from '../hooks';
 import AuthRoute from './AuthRoute';
 import MainRoute from './MainRoute';
-import * as Location from 'expo-location';
 
 const RootRoute = () => {
   const { isAuthenticated } = useUser();
@@ -10,7 +11,7 @@ const RootRoute = () => {
 
   useEffect(() => {
     (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
+      const { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         setErrorMsg('Permission to access location was denied');
         return;
