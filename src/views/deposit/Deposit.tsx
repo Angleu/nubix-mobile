@@ -63,7 +63,7 @@ const Deposit: FC<MainStackScreenProps<'Deposit'>> = ({
         Adicionar Dinheiro
       </Heading>
 
-      <Text mt="8" fontSize="2xl"> 
+      <Text mt="8" fontSize="2xl">
         Saldo Disponível
       </Text>
       {isLoading ? (
