@@ -7,7 +7,7 @@ import MainRoute from './MainRoute';
 
 const RootRoute = () => {
   const { isAuthenticated } = useUser();
-  const [errorMsg, setErrorMsg] = useState(null);
+  const [, setErrorMsg] = useState(null);
 
   useEffect(() => {
     (async () => {

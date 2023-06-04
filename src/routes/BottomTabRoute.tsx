@@ -16,7 +16,7 @@ const BottomTabRoute = () => {
   const [location, setLocation] = useState<Location.LocationObject | null>(
     null
   );
-  const [errorMsg, setErrorMsg] = useState(null);
+  const [, setErrorMsg] = useState(null);
   useEffect(() => {
     (async () => {
       const { status } = await Location.requestForegroundPermissionsAsync();
