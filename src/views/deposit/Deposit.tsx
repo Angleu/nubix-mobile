@@ -59,11 +59,11 @@ const Deposit: FC<MainStackScreenProps<'Deposit'>> = ({
     <Container>
       <Header heading="Depósito" />
 
-      <Heading fontSize="3xl" mt="2">
+      <Heading fontSize="3xl" mt="2" textAlign={'center'}>
         Adicionar Dinheiro
       </Heading>
 
-      <Text mt="8" fontSize="2xl">
+      <Text mt="8" fontSize="2xl"> 
         Saldo Disponível
       </Text>
       {isLoading ? (

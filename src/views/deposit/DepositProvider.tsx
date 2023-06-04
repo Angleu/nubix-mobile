@@ -16,7 +16,7 @@ const DepositProvider: FC<MainStackScreenProps<'DepositProvider'>> = ({
     <Container>
       <Header heading="Depósito" />
 
-      <Heading fontSize="3xl" mt="2">
+      <Heading fontSize="3xl" mt="2" textAlign={'center'}>
         Selecionar Origem
       </Heading>
 
