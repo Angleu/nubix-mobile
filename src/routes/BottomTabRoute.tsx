@@ -5,11 +5,31 @@ import { Platform } from 'react-native';
 
 import { Analytics, ATMLocator, Home, Wallet } from '../views';
 import { MainBottomTabParamListType } from './types';
+import { useEffect, useState } from 'react';
+import * as Location from 'expo-location';
+
 
 const BottomTab = createBottomTabNavigator<MainBottomTabParamListType>();
 
 const BottomTabRoute = () => {
   const { colors } = useTheme();
+
+  const [location, setLocation] = useState<Location.LocationObject | null>(
+    null
+  );
+  const [errorMsg, setErrorMsg] = useState(null);
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, []);
 
   const activeColor = colors.primary[50];
   const inactiveColor = colors.muted[300];
@@ -99,6 +119,7 @@ const BottomTabRoute = () => {
       <BottomTab.Screen
         name="ATMLocator"
         component={ATMLocator}
+        initialParams={location}
         options={{
           tabBarIcon: ({ color, focused }) => (
             <>
@@ -116,6 +137,7 @@ const BottomTabRoute = () => {
               )}
             </>
           ),
+          tabBarStyle: { display: 'none' },
         }}
       />
     </BottomTab.Navigator>

@@ -11,6 +11,10 @@ import { AccountType } from '../models/Account';
 import { ContactType } from '../models/Contact';
 import { TransactionType } from '../models/Transaction';
 
+import {LocationObject} from 'expo-location';
+
+
+
 export type MainStackParamListType = {
   HomeTab: undefined;
   Transfer: undefined;
@@ -88,7 +92,7 @@ export type MainBottomTabParamListType = {
   Home: undefined;
   Analytics: undefined;
   Wallets: undefined;
-  ATMLocator: undefined;
+  ATMLocator: LocationObject;
 };
 
 export type MainBottomTabScreenProps<
