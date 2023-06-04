@@ -24,13 +24,12 @@ const ATMLocator = ({
   // }, [state]);
   function handlePressDeposit() {
     setState('deposit');
-    console.log(state)
+    console.log(state);
     push('FindPost');
   }
   function handlePressWitdhraw() {
     setState('witdhraw');
-    console.log(state)
-
+    console.log(state);
   }
   return (
     <View flex={1}>

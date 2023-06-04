@@ -1,4 +1,4 @@
-import { Avatar, HStack, Pressable,Text, View } from 'native-base';
+import { Avatar, HStack, Pressable, Text, View } from 'native-base';
 import { ArrowCircleLeft } from 'phosphor-react-native';
 import React from 'react';
 import MapView from 'react-native-maps';
