@@ -11,7 +11,7 @@ const DURATION = 400;
 const FindPost: React.FC = ({
   navigation, route
 }: MainStackScreenProps<'FindPost'>) => {
-    const { latitude, longitude, search } = route.params;
+    const { latitude, longitude } = route.params;
   const {
     user: { avatarImageURL },
   } = useUser();
