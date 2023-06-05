@@ -55,8 +55,8 @@ export type MainStackParamListType = {
   QRScanner: undefined;
   FindPost: {
     search: string;
-    latitude: string;
-    longitude: string;
+    latitude: number;
+    longitude: number;
   };
 };
 

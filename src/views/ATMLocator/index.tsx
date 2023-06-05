@@ -3,13 +3,14 @@ import { Text, View, VStack } from 'native-base';
 import { XCircle } from 'phosphor-react-native';
 import React, { useState } from 'react';
 import { Pressable } from 'react-native';
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 
 import Buttom from '../../components/button/Buttom';
 import {
   MainBottomTabScreenProps,
   MainStackNavigationProps,
 } from '../../routes/types';
+import { SharedElement } from 'react-navigation-shared-element';
 
 const ATMLocator = ({
   route,
@@ -25,7 +26,11 @@ const ATMLocator = ({
   function handlePressDeposit() {
     setState('deposit');
     console.log(state);
-    push('FindPost');
+    push('FindPost', {
+      latitude: coords.latitude,
+      longitude: coords.longitude,
+      search: state,
+    });
   }
   function handlePressWitdhraw() {
     setState('witdhraw');
@@ -45,15 +50,24 @@ const ATMLocator = ({
         <XCircle size={52} color="#000" />
       </Pressable>
       <View flex={1} rounded={'full'} shadow={6} borderBottomRadius={'3xl'}>
+        {/* <SharedElement id="map"> */}
         <MapView
           style={{ flex: 1 }}
           initialRegion={{
             latitude: coords.latitude,
             longitude: coords.longitude,
-            latitudeDelta: 0.2,
-            longitudeDelta: 0.2,
+            latitudeDelta: 0.9,
+            longitudeDelta: 0.9,
           }}
-        />
+        >
+          <Marker
+            coordinate={{
+              latitude: coords.latitude,
+              longitude: coords.longitude,
+            }}
+          />
+        </MapView>
+        {/* </SharedElement> */}
       </View>
       <VStack
         alignItems="center"
