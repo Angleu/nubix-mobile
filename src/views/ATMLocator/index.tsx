@@ -4,8 +4,8 @@ import { XCircle } from 'phosphor-react-native';
 import React, { useState } from 'react';
 import { Pressable } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
-// import { SharedElement } from 'react-navigation-shared-element';
 
+// import { SharedElement } from 'react-navigation-shared-element';
 import Buttom from '../../components/button/Buttom';
 import {
   MainBottomTabScreenProps,

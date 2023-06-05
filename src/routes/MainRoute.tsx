@@ -22,12 +22,11 @@ import BottomTabRoute from './BottomTabRoute';
 import { MainStackParamListType } from './types';
 // import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 
-
 const MainStack = createNativeStackNavigator<MainStackParamListType>();
 
 const MainRoute = () => {
   return (
-    <MainStack.Navigator  screenOptions={{ headerShown: false }}>
+    <MainStack.Navigator screenOptions={{ headerShown: false }}>
       <MainStack.Screen name="HomeTab" component={BottomTabRoute} />
       <MainStack.Screen name="Deposit" component={Deposit} />
       <MainStack.Screen name="DepositProvider" component={DepositProvider} />

@@ -9,9 +9,10 @@ import { MainStackScreenProps } from '../../routes/types';
 
 const DURATION = 400;
 const FindPost: React.FC = ({
-  navigation, route
+  navigation,
+  route,
 }: MainStackScreenProps<'FindPost'>) => {
-    const { latitude, longitude } = route.params;
+  const { latitude, longitude } = route.params;
   const {
     user: { avatarImageURL },
   } = useUser();
@@ -19,21 +20,21 @@ const FindPost: React.FC = ({
   return (
     <View flex={1}>
       <Animateble.View
-      style={{
-        flex: 1,
-        position:'absolute',
-        width:'100%',
-        zIndex: 10,
-        padding: 24
-      }}
-      animation='fadeInUp'
-      delay={DURATION}
+        style={{
+          flex: 1,
+          position: 'absolute',
+          width: '100%',
+          zIndex: 10,
+          padding: 24,
+        }}
+        animation="fadeInUp"
+        delay={DURATION}
         // flex={1}
         // position={'absolute'}
         // width={'full'}
         // zIndex={10}
         // padding={'6'}
-      > 
+      >
         <HStack
           justifyContent={'space-between'}
           alignItems={'center'}
@@ -53,12 +54,13 @@ const FindPost: React.FC = ({
           <Avatar source={{ uri: avatarImageURL }} shadow={4} />
         </HStack>
       </Animateble.View>
-      <MapView style={{ width: '100%', height: '100%' }} 
+      <MapView
+        style={{ width: '100%', height: '100%' }}
         initialRegion={{
           latitude,
           longitude,
           latitudeDelta: 5.5,
-          longitudeDelta: 5.5
+          longitudeDelta: 5.5,
         }}
       />
     </View>
