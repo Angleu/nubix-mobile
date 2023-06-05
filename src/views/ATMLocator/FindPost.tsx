@@ -1,12 +1,11 @@
 import { Avatar, HStack, Pressable, Text, View } from 'native-base';
 import { ArrowCircleLeft } from 'phosphor-react-native';
 import React from 'react';
+import * as Animateble from 'react-native-animatable';
 import MapView from 'react-native-maps';
 
 import { useUser } from '../../hooks';
 import { MainStackScreenProps } from '../../routes/types';
-
-import * as Animateble from 'react-native-animatable';
 
 const DURATION = 400;
 const FindPost: React.FC = ({
