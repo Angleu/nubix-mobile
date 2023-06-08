@@ -116,7 +116,7 @@ const Profile: React.FC<MainStackScreenProps<'Profile'>> = ({ navigation }) => {
         <VStack mt="10">
           {links.map(({ link, title }) => (
             <TouchableOpacity
-              activeOpacity={0.4}
+            activeOpacity={0.4}
               key={title}
               onPress={() => navigateTo(link)}
               style={styles.link}
