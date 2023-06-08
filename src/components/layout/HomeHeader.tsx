@@ -13,10 +13,9 @@ import React from 'react';
 import { useUser } from '../../hooks';
 import { MainStackScreenProps } from '../../routes/types';
 
-const HomeHeader = ({ route, navigation }: MainStackScreenProps<'Profile'>) => {
+const HomeHeader = ({  navigation }: MainStackScreenProps<'Profile'>) => {
   const {
     user: { firstName, lastName, avatarImageURL },
-    logout,
   } = useUser();
   const fullName = `${firstName} ${lastName}`;
 
