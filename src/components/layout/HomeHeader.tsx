@@ -13,7 +13,7 @@ import React from 'react';
 import { useUser } from '../../hooks';
 import { MainStackScreenProps } from '../../routes/types';
 
-const HomeHeader = ({  navigation }: MainStackScreenProps<'Profile'>) => {
+const HomeHeader = ({ navigation }: MainStackScreenProps<'Profile'>) => {
   const {
     user: { firstName, lastName, avatarImageURL },
   } = useUser();
