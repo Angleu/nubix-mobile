@@ -1,14 +1,15 @@
-import React from 'react';
 import { Avatar, Button, Icon, Text, View } from 'native-base';
-import Header from '../components/layout/Header';
-import { StatusBar } from 'react-native';
-import { useUser } from '../hooks';
 import {
   ArrowRight,
   Bookmark,
   MapPin,
   ShareNetwork,
 } from 'phosphor-react-native';
+import React from 'react';
+import { StatusBar } from 'react-native';
+
+import Header from '../components/layout/Header';
+import { useUser } from '../hooks';
 
 // import { Container } from './styles';
 

@@ -12,8 +12,8 @@ import Container from '../components/layout/Container';
 import HomeHeader from '../components/layout/HomeHeader';
 import RecentActivities from '../components/RecentActivities';
 import { useUser } from '../hooks';
-import { createShareableMessage } from '../utils/formatter';
 import { MainStackScreenProps } from '../routes/types';
+import { createShareableMessage } from '../utils/formatter';
 
 export default function Home({
   route,

@@ -18,9 +18,9 @@ import {
   TransferValue,
 } from '../views';
 import FindPost from '../views/ATMLocator/FindPost';
+import Profile from '../views/Profile';
 import BottomTabRoute from './BottomTabRoute';
 import { MainStackParamListType } from './types';
-import Profile from '../views/Profile';
 // import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 
 const MainStack = createNativeStackNavigator<MainStackParamListType>();
