@@ -1,4 +1,4 @@
-import { Ionicons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { Box, Heading, HStack, Icon, IconButton } from 'native-base';
 import React, { FC } from 'react';
@@ -12,17 +12,17 @@ type Props = {
 const Header: FC<Props> = ({ heading, RightIcon, canGoBack = true }) => {
   const { goBack } = useNavigation();
   return (
-    <HStack pt={5} justifyContent="space-between" alignItems="center">
+    <HStack justifyContent="space-between" alignItems="center">
       {canGoBack ? (
         <IconButton
           borderRadius="full"
           _pressed={{
             bg: 'light.50',
           }}
-          icon={<Icon as={<Ionicons name="arrow-back-circle-outline" />} />}
+          icon={<Icon as={<AntDesign name="arrowleft" />} />}
           _icon={{
             color: 'dark.50',
-            size: '4xl',
+            size: 'lg',
           }}
           onPress={goBack}
         />
@@ -32,7 +32,7 @@ const Header: FC<Props> = ({ heading, RightIcon, canGoBack = true }) => {
       <Heading
         fontFamily="heading"
         fontSize="xl"
-        color="dark.50"
+        color="primary.100"
         fontWeight="bold"
       >
         {heading}
