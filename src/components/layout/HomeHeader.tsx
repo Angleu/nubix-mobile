@@ -11,13 +11,19 @@ import {
 import React from 'react';
 
 import { useUser } from '../../hooks';
+import { MainStackScreenProps } from '../../routes/types';
 
-const HomeHeader = () => {
+const HomeHeader = ({ route, navigation }: MainStackScreenProps<'Profile'>) => {
   const {
     user: { firstName, lastName, avatarImageURL },
     logout,
   } = useUser();
   const fullName = `${firstName} ${lastName}`;
+
+  function handlePres() {
+    navigation.push('Profile');
+    // logout()
+  }
   return (
     <HStack pt={5} justifyContent="space-between" alignItems="center">
       <VStack space={4}>
@@ -34,7 +40,7 @@ const HomeHeader = () => {
         </Text>
       </VStack>
       <HStack alignItems="center" space={5}>
-        <Pressable onPress={logout}>
+        <Pressable onPress={handlePres}>
           {avatarImageURL ? (
             <Avatar
               source={{

@@ -13,8 +13,12 @@ import HomeHeader from '../components/layout/HomeHeader';
 import RecentActivities from '../components/RecentActivities';
 import { useUser } from '../hooks';
 import { createShareableMessage } from '../utils/formatter';
+import { MainStackScreenProps } from '../routes/types';
 
-export default function Home() {
+export default function Home({
+  route,
+  navigation,
+}: MainStackScreenProps<'Profile'>) {
   const { user } = useUser();
   const { accounts, firstName, lastName, phoneNumber } = user;
 
@@ -35,7 +39,7 @@ export default function Home() {
 
   return (
     <Container>
-      <HomeHeader />
+      <HomeHeader navigation={navigation} route={route} />
       <Swiper
         onIndexChanged={(index) => (selectedAccount.current = accounts[index])}
         loop={false}

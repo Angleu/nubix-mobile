@@ -20,6 +20,7 @@ import {
 import FindPost from '../views/ATMLocator/FindPost';
 import BottomTabRoute from './BottomTabRoute';
 import { MainStackParamListType } from './types';
+import Profile from '../views/Profile';
 // import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 
 const MainStack = createNativeStackNavigator<MainStackParamListType>();
@@ -52,6 +53,7 @@ const MainRoute = () => {
       <MainStack.Screen name="Details" component={Details} />
       <MainStack.Screen name="QRScanner" component={QRScanner} />
       <MainStack.Screen name="FindPost" component={FindPost} />
+      <MainStack.Screen name="Profile" component={Profile} />
     </MainStack.Navigator>
   );
 };

@@ -58,6 +58,7 @@ export type MainStackParamListType = {
     latitude: number;
     longitude: number;
   };
+  Profile: undefined;
 };
 
 export type MainStackScreenProps<T extends keyof MainStackParamListType> =
