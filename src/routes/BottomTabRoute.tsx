@@ -5,7 +5,7 @@ import { Box, useTheme } from 'native-base';
 import { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
 
-import { Analytics, ATMLocator, Home, Wallet } from '../views';
+import { ATMLocator, Home, Wallet } from '../views';
 import { MainBottomTabParamListType } from './types';
 
 const BottomTab = createBottomTabNavigator<MainBottomTabParamListType>();
