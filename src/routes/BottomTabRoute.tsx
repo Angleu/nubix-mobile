@@ -71,7 +71,7 @@ const BottomTabRoute = () => {
           ),
         }}
       />
-      <BottomTab.Screen
+      {/* <BottomTab.Screen
         name="Analytics"
         component={Analytics}
         options={{
@@ -92,7 +92,7 @@ const BottomTabRoute = () => {
             </>
           ),
         }}
-      />
+      /> */}
       <BottomTab.Screen
         name="Wallets"
         component={Wallet}
