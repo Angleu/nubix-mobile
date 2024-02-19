@@ -7,7 +7,7 @@ import {
   useFonts,
 } from '@expo-google-fonts/poppins';
 import { NavigationContainer } from '@react-navigation/native';
-import React,{ useEffect }  from 'react';
+import React, { useEffect } from 'react';
 import { LogBox, Platform } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
@@ -23,7 +23,9 @@ if (Platform.OS === 'android') {
 
 export default function App() {
   useEffect(() => {
-    LogBox.ignoreLogs(['In React 18, SSRProvider is not necessary and is a noop. You can remove it from your app.']);
+    LogBox.ignoreLogs([
+      'In React 18, SSRProvider is not necessary and is a noop. You can remove it from your app.',
+    ]);
   }, []);
   const [fontsLoaded] = useFonts({
     Poppins_700Bold,
